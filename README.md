@@ -76,7 +76,7 @@ Un projet en local utilisant Vue.js, contenant :
 Question complémentaire : prenez le temps de comparer ce premier usage de Vue.js à vos réalisations précédentes avec Javascript. Comment aurait-on pu procéder pour réaliser les mêmes fonctionnalités avec du Javascript "vanilla" ? Avec jQuery ? Quel est l'apport de Vue.js par rapport à ces alternatives ?  
 
 
-[1]: https://codepen.io/romainpetit/pen/rRjYdPjQuery
+[1]: https://codepen.io/romainpetit/pen/rRjYdP
 [2]: https://codepen.io/romainpetit/pen/jJyaKx
 [3]: https://codepen.io/sdras/pen/8dff4c085a5dcf52ea04d4b06d68b409
 [4]: https://codepen.io/romainpetit/pen/XGpzyw
