@@ -146,7 +146,8 @@ Nous voulons déclarer une route `/villes` avec la liste des villes.
 
 ```
 new Vue({
-  router
+  router,
+  render: h => h(App)
 }).$mount("#app");
 ```
 
