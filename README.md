@@ -138,7 +138,7 @@ Vue.use(VueRouter)
 
 ##### 4.2) Configuration.
 
-Nous voulons déclarer une route `/liste` avec la liste des villes.
+Nous voulons déclarer une route `/villes` avec la liste des villes.
 
 - Déclarez votre tableau de routes dans le fichier `index.js` du répertoire `router` en faisant référence au composant créé auparavant.
 
