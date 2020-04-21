@@ -203,7 +203,7 @@ Pour rendre paramétrable une fonction il faut ajouter des paramètres. Pour ren
 
 - Dans un premier temps, appelez le composant `City` dans le composant `CitiesList`. Vous devriez donc avoir la même page aux urls `/villes` et `/ville`.
 
-- Ajoutez le fait que le composant `Ville` a 4 props qui s'appellent `name`, `weather`, `temperature`, et `updatedAt`, supprimez les données du `data` du composant `City`, puis ajoutez les dans le composant `CitiesList`.
+- Ajoutez le fait que le composant `City` a 4 props qui s'appellent `name`, `weather`, `temperature`, et `updatedAt`, supprimez les données du `data` du composant `City`, puis ajoutez les dans le composant `CitiesList`.
 
 * Modifiez le composant `CitiesList` pour passer les props `name`, `weather`, `temperature`, et `updatedAt`.
 
@@ -250,7 +250,7 @@ Pour rendre paramétrable une fonction il faut ajouter des paramètres. Pour ren
 Un timestamp complet n'est pas agréable à lire, encore moins répété dans une liste.
 La librairie `timeago.js` nous permet de formatter les dates pour afficher un temps relatif, plus parlant.
 
-➡️ Ajoutez la libraire à votre projet avec npm pour afficher la valeur de `checkedAt` avec un temps relatif.
+➡️ Ajoutez la libraire à votre projet avec npm pour afficher la valeur de `updatedAt` avec un temps relatif.
 
 https://github.com/hustcc/timeago.js
 
