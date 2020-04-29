@@ -348,3 +348,71 @@ Vue.js nous permet de déclencher des actions (ou _hooks_) à certains moments p
 - Faites en sorte d'afficher un texte `requête en cours` si jamais la requête est en cours et une erreur en rouge si jamais la requête produit une erreur.
 
 ➡️**Faites un commit avec un message explicite**
+
+### 8) Affichage sur une carte interactive
+
+Maintenant, essayons de visualiser les différentes données météo des villes sur une carte, chacune avec un marqueur.
+
+##### 8.1) Ajout d'un composant dédié
+
+Ajoutez tout d'abord un nouveau composant `CitiesMap` à votre projet. Associez-lui une route dans la configuration du router (`/carte` par exemple).
+
+##### 8.2) Fond de carte
+
+Pour générer une carte interactive, nous allons utiliser la librairie Mapbox GL couplée à un fond de carte. Pour intégrer cette carte au sein de votre application, il vous faudra :
+- Récupérer l'adresse du serveur de tuiles, qui va générer le fond de carte (à demander auprès du formateur / de la formatrice)
+- Installer le package [mapbox-gl](https://www.mapbox.com/install/js/bundler-install/) en suivant les instructions fournies
+- Installer le package [vue-mapbox-gl](https://github.com/phegman/vue-mapbox-gl) en suivant les instructions fournies
+- Ne pas oublier l'étape qui consiste à modifier (ou créer) le fichier `vue.config.js` à la racine du projet
+ 
+➡️ Affichez une carte dans votre composant `CitiesMap`. Attention, le CSS relatif à votre carte devra être ajouté dans un scope étendu, par exemple directement dans le `<style></style>` de votre composant App.vue.  
+
+Prenez le temps de jouer sur les paramètres du composant `mapbox` pour les comprendre et ajuster votre carte au besoin.
+
+➡️**Faites un commit avec un message explicite**
+
+##### 8.3) Ajouter les marqueurs
+
+Vous allez à présent ajouter un marqueur sur la carte pour chacune des villes récupérées via l'API.
+Pour cela :
+- Récupérez la liste des données météo dans un tableau `cities` de votre composant `CitiesMap` (comme vous l'avez fait pour `CitiesList`) 
+- En bouclant sur la liste de résultats, affichez des marqueurs en exploitant les coordonnées GPS fournies pour chaque ville dans l'API OpenWeatherMap
+
+➡️ Pour afficher un marqueur sur la carte, vous pourrez utiliser l'évènement `map-load` mis à disposition par `vue-mapbox-gl`, ainsi qu'un appel similaire à l'exemple suivant :
+```js
+export default {
+  ...,
+  methods: {
+    loaded(map) {
+      var el = document.createElement('div');
+      el.className = 'marker';
+      
+      new mapboxgl.Marker(el)
+        .setLngLat([6.0925617, 45.8910906])
+        .addTo(map);
+    },
+    ...
+  }
+}
+```
+ 
+Comme précédemment, le code CSS du marqueur devra être ajouté dans le style de votre composant `App.vue`. Pour le moment, utilisez un rendu commun à tous les marqueurs, par exemple :
+```css
+#map .marker {
+  border: 2px solid rgba(255, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+```
+
+##### 8.4) Afficher les données météo
+
+Maintenant que chaque ville est représentée par un marqueur sur la carte, vous allez pouvoir remplacer ces marqueurs par un pictogramme représentant la météo directement sur la carte.
+
+A l'aide de code CSS et des informations récupérées dans l'API, affichez pour chaque ville un marqueur qui représentera la météo de la ville (soleil, nuages, pluie...); 
+
+➡️**Faites un commit avec un message explicite**
+
+
