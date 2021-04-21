@@ -139,8 +139,8 @@ Pour rendre paramétrable une fonction il faut ajouter des paramètres. Pour ren
     {
       id: 2,
       name: 'Produit 2',
-      temperature: 34.95,
-      weather: 'Descriptif produit 2',
+      price: 34.95,
+      description: 'Descriptif produit 2',
       updatedAt: new Date()
     }
   ]
