@@ -4,7 +4,7 @@
 En préambule de ce module, familiarisez-vous avec le concept de Single Page Application (SPA). L'objectif est de répondre aux questions suivantes :
 * Quand et pourquoi ce type d'applications a vu le jour ?
 * Quels sont les avantages et inconvénients de cette approche ?
-* Quels sont les principaux frameworks utilisés pour développer des "SPA" en 2020 ? 
+* Quels sont les principaux frameworks utilisés pour développer des "SPA" en 2021 ? 
 
 **Livrables**
 1. Un schéma simplifié illustrant le fonctionnement d'une SPA
