@@ -36,7 +36,9 @@ Vérifier que la version de Vue CLI installée est au moins la version 4 :
 
 `vue --version`
 
-Dans un premier temps, Vue CLI ne sera pas utilisé dans la phase de découverte proposée ci-dessous. Il sera cependant utile pour créer vos projets Vue.js lors des phases suivantes. Il vous permettra également de démarrer un serveur de développement pour tester vos projets en local.  
+Dans un premier temps, Vue CLI ne sera pas utilisé pour découvrir le framework. Il sera cependant utile pour créer vos projets Vue.js lors des phases suivantes. Il vous permettra également de démarrer un serveur de développement pour tester vos projets en local.
+
+**Attention, bien que vous ayez exécuté la commande "vue" ci-dessus, il s'agit ici de Vue CLI, l'outil en ligne de commande Vue. Cet outil vient en complément du framework Vue.js, que nous allons utiliser juste après dans sa version 2, la plus utilisée à ce jour.** 
 
 ## Découverte de Vue.js
 Pour commencer, nous allons prendre en main Vue.js en le chargeant, simplement dans notre page, comme une librairie externe, comme on le fait pour jQuery.
@@ -55,7 +57,7 @@ Pour commencer, nous allons prendre en main Vue.js en le chargeant, simplement d
 
 _Utilisez vos Vue Devtools pour comprendre le fonctionnement des exemples Vue. Codepen Tip : Pour activer le mode vue pleine page, remplacez le chemin “/pen/…” par “/debug/…” dans l’URL des exemples. Cette vue vous permettra de lancer les Vue Devtools sur la page._
 
-* Chargez la librairie Vue depuis un fichier externe, comme vous le feriez pour jQuery (utilisation d’un CDN)
+* Chargez la librairie Vue.js (en version **2.x**) depuis un fichier externe, comme vous le feriez pour jQuery (utilisation d’un CDN)
 * Créez directement dans un fichier HTML votre première application Vue. 
 * Rendez votre application réactive : affichez du texte qui sera renseigné en Javascript, dans l'objet data de Vue.
 * Modifiez la valeur de votre data en Javascript dans la console de votre DevTools.
@@ -85,14 +87,22 @@ Question complémentaire : prenez le temps de comparer ce premier usage de Vue.j
 
 
 ## Un premier projet Vue.js
-Vous allez maintenant créer un projet Vue.js plus complet, dont l'objectif sera d'afficher les relevés météo de villes au format liste et sur une carte interactive.
+Vous allez maintenant créer un projet Vue.js basé sur un cas d'usage plus réaliste. Vous allez pouvoir choisir entre :  
+1. Une application web qui affiche les relevés météo de villes au format liste et sur une carte interactive.
+2. Une version SPA de votre dispositif de vente en ligne (projet fil rouge)
+
+Vous êtes libre de choisir entre les 2 déroulés, sachant que :
+* Les 2 choix vous permettrons de valider les compétences Campus skills
+* Les 2 projets sont à mener en autonomie (pas de travail en îlot). Pour le projet fil rouge, il est préférable que l'API développée lors du module Laravel soit opérationnelle pour faciliter vos développements.
+
+Si vous choisissez l'option 1, vous pouvez continuer à dérouler ce support. Si vous choisissez l'option 2, basculez sur le support [fil rouge](FIL_ROUGE.md)
 
 ### Création du projet
 Pour créer votre projet, vous allez cette fois utiliser Vue CLI. À partir du répertoire parent souhaité pour votre projet, exécutez la commande :
 
 `vue create NOM_PROJET`
 
-Si des questions vous sont posées, choisissez les options par défaut.
+Si des questions vous sont posées, choisissez les options par défaut (sélectionnez bien **Vue.js version 2**).
 
 Une fois le projet créé, prenez le temps de passer en revue les fichiers et dossiers créés dans votre répertoire projet. Quels sont ceux que vous connaissez ? Quelle est leur fonction ?
 
@@ -101,9 +111,9 @@ Une fois le projet créé, prenez le temps de passer en revue les fichiers et do
 
 ### 2) Écran d'accueil.
 
-Dans un premier temps, nous voulons changer l'écran d'accueil : ce dernier va permettre d'accéder à la liste des données météo des villes.
+Dans un premier temps, nous voulons changer l'écran d'accueil : ce dernier va comporter un lien qui permettra d'accéder à la liste des données météo des villes.
 
-Faites les modifications nécessaires.
+- Faites les modifications nécessaires sur la page d'accueil qui a été générée automatiquement
 
 - Ajoutez dans votre composant App la méthode `onListClick` qui se contentera pour l'instant de faire une [alerte](https://developer.mozilla.org/fr/docs/Web/API/Window/alert) pour marquer le fait qu'un utilisateur a cliqué dessus.
 
