@@ -1,5 +1,9 @@
 # Module JS / SPA - Vue.js
 
+---
+#### Info formateurs / formatrices : la branche "main" de ce dépôt est désormais basée sur la version 3 de Vue.js. Le support utilisant la version 2 a été archivé dans la branche v2.
+---
+
 ## Préambule
 En préambule de ce module, familiarisez-vous avec le concept de Single Page Application (SPA). L'objectif est de répondre aux questions suivantes :
 * Quand et pourquoi ce type d'applications a vu le jour ?
@@ -121,7 +125,7 @@ Nous voulons préparer l'écran de la liste des villes. En Vue.js chaque écran 
 
 Vous avez peut-être remarqué que votre projet comporte à la fois un dossier `views` et un dossier `components`. Quelle est la différence entre ces 2 emplacements ? 
 
-➡️**Commiter dans git avec un message explicite, par exemple "fin étape 3" ou même "Ajout composant CitiesList"**
+➡️ **Commiter dans git avec un message explicite, par exemple "fin étape 3" ou même "Ajout composant CitiesList"**
 
 ### 4) Mise en place d'un routeur.
 
@@ -204,7 +208,7 @@ Notes :
 - Pour afficher la date, la méthode [toLocaleString()](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleString) de `Date()` devrait vous aider.
 - On a déclaré une route mais pas donné de lien explicite dans l'application pour y accéder, mais vous pouvez directement [changer l'url du navigateur](http://localhost:XXXX/ville).
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 ##### 5.2) Passage de props au composant City.
 
@@ -221,7 +225,7 @@ Pour rendre paramétrable une fonction il faut lui ajouter des arguments. Pour r
 
 À ce stade, vous devriez avoir la même chose qu'avant en terme de rendu, néanmoins nous sommes prêts à faire notre liste de villes car nous avons un composant `City` qui est désormais paramétrable grâce aux props !
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 ### 6) Création d'une liste.
 
@@ -256,7 +260,7 @@ Pour rendre paramétrable une fonction il faut lui ajouter des arguments. Pour r
 
 ➡️ Modifiez un peu le style pour que les éléments de la liste soient mieux visibles.
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 ##### 6.1) Mise en forme des dates
 Un timestamp complet n'est pas agréable à lire, encore moins répété dans une liste.
@@ -274,7 +278,7 @@ https://github.com/hustcc/timeago.js
 
 **Bonus :** Quelle alternative à `timeago.js` pourrait-on utiliser dans le projet pour afficher le temps relatif ? 
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 ### 7) Récupérer les données via une API externe.
 
@@ -355,7 +359,7 @@ Vue.js nous permet de déclencher des actions (ou _hooks_) à certains moments p
 
 - Faites en sorte d'afficher un texte `requête en cours` si jamais la requête est en cours et une erreur en rouge si jamais la requête produit une erreur.
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 ### 8) Affichage sur une carte interactive
 
@@ -376,7 +380,7 @@ Pour générer une carte interactive, nous allons utiliser la librairie Leaflet 
 
 Prenez le temps de jouer sur les paramètres du composant `l-map` pour les comprendre et ajuster votre carte au besoin.
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 ##### 8.3) Ajouter les marqueurs
 
@@ -405,6 +409,6 @@ Maintenant que chaque ville est représentée par un marqueur sur la carte, vous
 
 A l'aide de code CSS et des informations récupérées dans l'API, affichez pour chaque ville un marqueur qui représentera la météo de la ville (soleil, nuages, pluie...); 
 
-➡️**Faites un commit avec un message explicite**
+➡️ **Faites un commit avec un message explicite**
 
 
