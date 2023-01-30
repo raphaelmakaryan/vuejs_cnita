@@ -66,6 +66,7 @@ _Utilisez vos Vue Devtools pour comprendre le fonctionnement des exemples Vue. C
 ### Ressources
 * Un "playground" sur le site jsfiddle : https://jsfiddle.net/yyx990803/2ke1ab0z/ 
 * Les exemples interactifs proposés sur le site officiel Vue.js (__comme indiqué plus haut, on utilisera l'API "Options" ainsi que le rendu "HTML" ici__) : https://vuejs.org/examples/#hello-world
+* Ressource complète sur le framework : https://worldline.github.io/vuejs-training/fr/
 
 
 ### Livrables
