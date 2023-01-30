@@ -4,7 +4,7 @@
 En préambule de ce module, familiarisez-vous avec le concept de Single Page Application (SPA). L'objectif est de répondre aux questions suivantes :
 * Quand et pourquoi ce type d'applications a vu le jour ?
 * Quels sont les avantages et inconvénients de cette approche ?
-* Quels sont les principaux frameworks utilisés pour développer des "SPA" en 2021 ? 
+* Quels sont les principaux frameworks utilisés pour développer des "SPA" de nos jours ? 
 
 **Livrables**
 1. Un schéma simplifié illustrant le fonctionnement d'une SPA
@@ -18,30 +18,26 @@ En préambule de ce module, familiarisez-vous avec le concept de Single Page App
 
 ## Mise en place des outils de développement Vue.js
 Tout comme de nombreux frameworks web, Vue.js propose des outils permettant de faciliter le développement. 
-Nous allons ici mettre en place ces outils dans votre environnement de développement.
+Nous allons ici découvrir ces outils dans votre environnement de développement.
 
-### Extension de navigateur web - Vue DevTools
+### Extension de navigateur web - _Vue DevTools_ pour debugger
 Installez l'extension Vue DevTools pour votre navigateur web en suivant les instructions : https://github.com/vuejs/vue-devtools
- 
-### Outil en ligne de commande Vue - Vue CLI
-Installez l'outil `vue-cli` avec NPM :
 
-`npm install --global @vue/cli`
-
-Question : Rappelez ce qu'est NPM et pourquoi nous utilisons l'option `--global` ici ?
-
-Votre réponse :
-
-Vérifier que la version de Vue CLI installée est au moins la version 4 :
-
-`vue --version`
-
-Dans un premier temps, Vue CLI ne sera pas utilisé pour découvrir le framework. Il sera cependant utile pour créer vos projets Vue.js lors des phases suivantes. Il vous permettra également de démarrer un serveur de développement pour tester vos projets en local.
-
-**Attention, bien que vous ayez exécuté la commande "vue" ci-dessus, il s'agit ici de Vue CLI, l'outil en ligne de commande Vue. Cet outil vient en complément du framework Vue.js, que nous allons utiliser juste après dans sa version 2, la plus utilisée à ce jour.** 
+### Outil de build - _Vite_ pour générer le livrable 
+Vite est l'outil préconisé par Vue.js pour générer les livrables de votre application Vue.js, à la fois dans votre environnement de développement puis pour le déploiement en production.
+Vite sera installé en même temps que Vue.js, il n'est pas utile de l'installer pour le moment.
+Prenez en revanche un moment pour vous familiariser avec cet outil, dont l'usage n'est pas limité à Vue.js :
+- Documentation officielle : https://vitejs.dev/guide/
+- Article d'introduction Vite et Vue.js : https://blog.ninja-squad.com/2022/02/23/debuter-avec-vite-et-vue/  
+- Vidéo : https://grafikart.fr/tutoriels/javascript-vite-1351
 
 ## Découverte de Vue.js
 Pour commencer, nous allons prendre en main Vue.js en le chargeant, simplement dans notre page, comme une librairie externe, comme on le fait pour jQuery.
+
+#### IMPORTANT - À LIRE AVANT DE COMMENCER ####
+
+* __Dans tout le module, la version de Vue.js à utiliser sera la version 3. Lorsque vous consultez un support en ligne, assurez-vous que la version utilisée est la bonne car les ressources utilisant Vue.js version 2 sont encore nombreuses.__
+* __Vue 3 propose 2 syntaxes : l'API "Options" et l'API "Composition". Nous utiliserons dans ce module l'API "Options", c'est donc celle-ci qu'il faudra choisir à chaque fois que le choix se présentera à vous.__ 
 
 ### Objectifs
 * Constater la différence de logique entre jQuery et Vue.js
@@ -57,15 +53,15 @@ Pour commencer, nous allons prendre en main Vue.js en le chargeant, simplement d
 
 _Utilisez vos Vue Devtools pour comprendre le fonctionnement des exemples Vue. Codepen Tip : Pour activer le mode vue pleine page, remplacez le chemin “/pen/…” par “/debug/…” dans l’URL des exemples. Cette vue vous permettra de lancer les Vue Devtools sur la page._
 
-* Chargez la librairie Vue.js (en version **2.x**) depuis un fichier externe, comme vous le feriez pour jQuery (utilisation d’un CDN)
+* Chargez la librairie Vue.js (en version **3.x**) depuis un fichier externe, comme vous le feriez pour jQuery (utilisation d’un CDN)
 * Créez directement dans un fichier HTML votre première application Vue. 
 * Rendez votre application réactive : affichez du texte qui sera renseigné en Javascript, dans l'objet data de Vue.
 * Modifiez la valeur de votre data en Javascript dans la console de votre DevTools.
 * Modifiez la valeur de votre data dans l'extension Vue DevTools.
 
 ### Ressources
-* Le guide de démarrage du site web Vue.js est très complet, à jour et en français : https://fr.vuejs.org/v2/guide/index.html
-* Les exemples interactifs proposés sur ce même site : https://fr.vuejs.org/v2/examples/index.html
+* Un "playground" sur le site jsfiddle : https://jsfiddle.net/yyx990803/2ke1ab0z/ 
+* Les exemples interactifs proposés sur le site officiel Vue.js (__comme indiqué plus haut, on utilisera l'API "Options" ainsi que le rendu "HTML" ici__) : https://vuejs.org/examples/#hello-world
 
 
 ### Livrables
@@ -87,22 +83,20 @@ Question complémentaire : prenez le temps de comparer ce premier usage de Vue.j
 
 
 ## Un premier projet Vue.js
-Vous allez maintenant créer un projet Vue.js basé sur un cas d'usage plus réaliste. Vous allez pouvoir choisir entre :  
-1. Une application web qui affiche les relevés météo de villes au format liste et sur une carte interactive.
-2. Une version SPA de votre dispositif de vente en ligne (projet fil rouge)
+Vous allez maintenant créer un projet Vue.js basé sur un cas d'usage plus réaliste. Vous allez concevoir et développer 
+une application web qui affiche les relevés météo de villes au format liste et sur une carte interactive.
 
-Vous êtes libre de choisir entre les 2 déroulés, sachant que :
-* Les 2 choix vous permettrons de valider les compétences Campus skills
-* Les 2 projets sont à mener en autonomie (pas de travail en îlot). Pour le projet fil rouge, il est préférable que l'API développée lors du module Laravel soit opérationnelle pour faciliter vos développements.
-
-Si vous choisissez l'option 1, vous pouvez continuer à dérouler ce support. Si vous choisissez l'option 2, basculez sur le support [fil rouge](FIL_ROUGE.md)
+Ce projet est à mener en autonomie, des points collectifs seront organisés par les formateurs afin de revoir les notions importantes abordées au cours du module.
 
 ### Création du projet
-Pour créer votre projet, vous allez cette fois utiliser Vue CLI. À partir du répertoire parent souhaité pour votre projet, exécutez la commande :
+Pour ce projet, vous allez démarrer avec un environnement complet Vue.js intégrant notamment l'outil Vite vu en introduction.
+Commencez par créer le projet via la commande :
 
-`vue create NOM_PROJET`
+`npm init vue@latest`
 
-Si des questions vous sont posées, choisissez les options par défaut (sélectionnez bien **Vue.js version 2**).
+Au cours de la création du projet, plusieurs questions vont vous être posées.
+Dans le cadre du module, nous n'utiliserons __pas__ JSX ni Typescript. Veillez donc bien à désactiver ces options.
+Pour les autres options, vous pouvez utiliser les valeurs proposées par défaut.
 
 Une fois le projet créé, prenez le temps de passer en revue les fichiers et dossiers créés dans votre répertoire projet. Quels sont ceux que vous connaissez ? Quelle est leur fonction ?
 
@@ -113,7 +107,7 @@ Une fois le projet créé, prenez le temps de passer en revue les fichiers et do
 
 Dans un premier temps, nous voulons changer l'écran d'accueil : ce dernier va comporter un lien qui permettra d'accéder à la liste des données météo des villes.
 
-- Faites les modifications nécessaires sur la page d'accueil qui a été générée automatiquement
+- Faites les modifications nécessaires sur la page d'accueil qui a été générée automatiquement en enlevant les contenus ajoutés par défaut
 
 - Ajoutez dans votre composant App la méthode `onListClick` qui se contentera pour l'instant de faire une [alerte](https://developer.mozilla.org/fr/docs/Web/API/Window/alert) pour marquer le fait qu'un utilisateur a cliqué dessus.
 
@@ -121,9 +115,11 @@ Dans un premier temps, nous voulons changer l'écran d'accueil : ce dernier va c
 
 Nous voulons préparer l'écran de la liste des villes. En Vue.js chaque écran est un composant : pour cet écran, il nous faudra donc 1 nouveau composant.
 
-- Créez donc un fichier `CitiesList.vue`. Le template de ce composant sera très simple dans un premier temps, par exemple un simple titre H1 contenant 'Météo - Liste des villes' est suffisant.
+- Créez donc un fichier `CitiesList.vue` dans le dossier `views` de votre projet. Le template de ce composant sera très simple dans un premier temps, par exemple un simple titre H1 contenant 'Météo - Liste des villes' est suffisant.
 
-- Faites en sorte d'ajouter ce composant Vue.js au template de votre app.
+- Faites en sorte d'ajouter ce composant Vue.js au template de votre app afin de l'afficher.
+
+Vous avez peut-être remarqué que votre projet comporte à la fois un dossier `views` et un dossier `components`. Quelle est la différence entre ces 2 emplacements ? 
 
 ➡️**Commiter dans git avec un message explicite, par exemple "fin étape 3" ou même "Ajout composant CitiesList"**
 
@@ -134,31 +130,37 @@ Nous devons avoir la possibilité de naviguer d'une page à l'autre, sans rechar
 
 C'est la même chose qu'avec le framework Laravel, sauf qu'ici le routeur est côté client : nous devons définir nos routes côté client et avoir moyen d'en changer.
 
-Cela tombe bien, Vue.js a un routeur tout prêt que nous allons utiliser, [vue-router](https://router.vuejs.org/fr/)
+Cela tombe bien, Vue.js a un routeur tout prêt que nous allons utiliser, [vue-router](https://router.vuejs.org/). Si vous avez sélectionné les options par défaut
+lors de la création de votre projet, vue-router a déjà dû être installé. Si ça n'est pas le cas, installez-le via la commande décrite ci-dessous.
 
 ##### 4.1) Installation.
 
-Faites l'installation avec npm comme décrite dans la documentation. N'oubliez pas d'ajouter après l'installation ces deux lignes :
+Si nécessaire, faites l'installation de vue-router avec npm comme décrite dans la documentation.
+N'oubliez pas d'indiquer à votre application qu'elle doit utiliser le routeur :
 
 ```
-import VueRouter from 'vue-router'
+...
+const router = createRouter(...);
 
-Vue.use(VueRouter)
+const app = createApp(App);
+app.use(router);
+app.mount('#app')
 ```
 
 ##### 4.2) Configuration.
 
 Nous voulons déclarer une route `/villes` avec la liste des villes.
 
-- Déclarez votre tableau de routes dans le fichier `index.js` du répertoire `router` en faisant référence au composant créé auparavant.
+- Déclarez ou mettez à jour votre tableau de routes dans le fichier `index.js` du répertoire `router` en faisant référence au composant créé auparavant.
 
-- Initialisez l'objet router de Vue contenant ces routes et injectez-le dans la création de l'app Vue, votre code doit ressembler à :
+- Assurez-vous que le router utilisé par votre app est bien initialisé avec le tableau de routes :
 
 ```
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount("#app");
+const router = createRouter({
+  ...
+  routes: [ // vos routes doivent figurer ici ]
+  ...
+})
 ```
 
 - Supprimez maintenant le composant `CitiesList` du template de notre composant `App.vue`.
@@ -174,7 +176,7 @@ Pour l'utiliser nous devons utiliser les deux composants fournis par VueRouter :
 - `<router-view></router-view>` affiche le contenu de la route correspondant au composant spécifié dans la déclaration.
 - `<router-link to="" ></router-link>` permet de passer d'une page à l'autre.
 
-Ajoutez donc `<router-view></router-view>` à la fin du template de notre composant `App.vue` et utilisez `<router-link to="NOM_ROUTE" ></router-link>` pour passer d'une page à l'autre dans le même composant.
+Ajoutez donc `<router-view></router-view>` à la fin du template de notre composant `App.vue` et utilisez `<router-link to="/CHEMIN_ROUTE" ></router-link>` pour passer d'une page à l'autre dans le même composant.
 
 ### 5) Création d'un composant pour représenter la météo d'une ville.
 
@@ -182,7 +184,7 @@ A ce stade, la liste de villes est vide, il n'y a donc pas de navigation possibl
 
 ##### 5.1) Composant statique dans une nouvelle route.
 
-Créez dans un premier temps une nouvelle route `'/ville'` qui va représenter un nouveau composant à créer, `City.vue`.
+Créez dans un premier temps une nouvelle route `'/ville'` qui va représenter un nouveau composant à créer, `City.vue`. Veillez cette fois à créer ce composant dans le dossier `components` de votre projet. 
 
 Ce composant aura comme `data` l'objet javascript suivant :
 
@@ -200,7 +202,7 @@ Vous être libre de choisir le rendu du composant, à partir du moment où il ex
 Notes :
 
 - Pour afficher la date, la méthode [toLocaleString()](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date/toLocaleString) de `Date()` devrait vous aider.
-- On a déclaré une route mais pas donné de lien explicite dans l'application pour y accéder, mais vous pouvez directement [changer l'url du navigateur](http://localhost:8080/#/ville).
+- On a déclaré une route mais pas donné de lien explicite dans l'application pour y accéder, mais vous pouvez directement [changer l'url du navigateur](http://localhost:XXXX/ville).
 
 ➡️**Faites un commit avec un message explicite**
 
@@ -208,14 +210,14 @@ Notes :
 
 Nous avançons bien ! Notre dernier composant va nous aider à construire l'écran comprenant la liste de nos villes. Mais aujourd'hui il a une limite : on ne peut pas définir le nom ni le statut de notre ville sans toucher au code, il faut trouver un moyen de paramétrer notre composant. Pour cela nous allons utiliser la notion de props dans Vue.js.
 
-Pensez aux props comme aux paramètres d'une fonction :
-Pour rendre paramétrable une fonction il faut ajouter des paramètres. Pour rendre paramétrable un composant, il faut ajouter des props.
+Pensez aux props comme aux arguments d'une fonction :
+Pour rendre paramétrable une fonction il faut lui ajouter des arguments. Pour rendre paramétrable un composant, il faut ajouter des props.
 
-- Dans un premier temps, appelez le composant `City` dans le composant `CitiesList`. Vous devriez donc avoir la même page aux urls `/villes` et `/ville`.
+- Dans un premier temps, appelez le composant `City` dans le composant `CitiesList`. Il vous faudra pour cela déclarer l'utilisation de `City` dans le composant `CitiesList` via la clé `components`. Vous devriez donc avoir la même page aux urls `/villes` et `/ville`.
 
-- Ajoutez le fait que le composant `City` a 4 props qui s'appellent `name`, `weather`, `temperature`, et `updatedAt`, supprimez les données du `data` du composant `City`, puis ajoutez les dans le composant `CitiesList`.
+- Ajoutez le fait que le composant `City` a 4 props qui s'appellent `name`, `weather`, `temperature`, et `updatedAt`, supprimez les clés correspondantes du `data` du composant `City` qui ne seront plus utiles désormais
 
-* Modifiez le composant `CitiesList` pour passer les props `name`, `weather`, `temperature`, et `updatedAt`.
+* Modifiez le composant `CitiesList` pour passer les props `name`, `weather`, `temperature`, et `updatedAt` afin d'afficher les mêmes informations que précédemment
 
 À ce stade, vous devriez avoir la même chose qu'avant en terme de rendu, néanmoins nous sommes prêts à faire notre liste de villes car nous avons un composant `City` qui est désormais paramétrable grâce aux props !
 
@@ -270,6 +272,8 @@ https://github.com/hustcc/timeago.js
 
 **Votre réponse :**
 
+**Bonus :** Quelle alternative à `timeago.js` pourrait-on utiliser dans le projet pour afficher le temps relatif ? 
+
 ➡️**Faites un commit avec un message explicite**
 
 ### 7) Récupérer les données via une API externe.
@@ -311,20 +315,14 @@ https://api.openweathermap.org/data/2.5/find?lat=45.758&lon=4.765&cnt=20&cluster
 
 Quel est le format de retour de l'API ? Quels sont les champs qui vont vous permettre de récupérer les données météo recherchées ? 
 
-##### 7.1) Installation d'une librairie permettant de faire des appels HTTP.
+##### 7.1) Faire des appels HTTP vers une API depuis l'application
 
-Pour pouvoir faire des appels à une API, Vue.js préconise l'utilisation de la librairie [axios](https://github.com/axios/axios).
+Pour pouvoir faire des appels à une API, le Javascript met à disposition l'API [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-Prenez toujours le temps d'analyser cette librairie sur github, qu'est ce qui vous inspire confiance ? Ayez le réflexe de chercher la librairie sur [npm](https://www.npmjs.com/package/axios) pour notamment voir le nombre de téléchargements.
+- Prenez connaissance de l'API fetch 
+- Familiarisez-vous avec son utilisation via le [tutoriel MDN](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data)  
 
-- Installez la librairie avec npm.
-- Prenez connaissance du [tutoriel Vue.js pour utiliser axios dans une application Vue.js](https://vuejs.org/v2/cookbook/using-axios-to-consume-apis.html)  
-
-➡️**Faites un commit avec un message explicite**
-
-##### 7.2) Utilisation dans le projet.
-
-Au préalable, (re)lisez le guide MDN sur les promesses en Javascript, car ces dernières vont être importantes pour la suite. [Guide MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses).
+Au passage, (re)lisez le guide MDN sur les promesses en Javascript, car ces dernières vont être importantes pour la suite. [Guide MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses).
 Nous allons afficher la liste des données météo des villes provenant de cette [URL](https://api.openweathermap.org/data/2.5/find?lat=45.758&lon=4.765&cnt=20&cluster=yes&lang=fr&units=metric&APPID=VOTRE_CODE_DACCES). Attention, veillez à bien indiquer votre code d'accès OpenWeatherMap dans l'URL fournie.
 
 Comme vous avez pu le voir, une promesse a plusieurs états :
@@ -351,9 +349,9 @@ data: function() {
 
 Avant d'aller plus loin, il faut choisir quand lancer la requête. La solution communément admise est de dire : "Quand le composant est créé, lance la requête".
 
-Vue.js nous permet de déclencher des actions (ou _hooks_) à certains moments précis de la vie d'un composant. La liste est disponible [ici](https://fr.vuejs.org/v2/api/index.html#Options-Cycle-de-vie-des-hooks). Celui qui nous intéresse est le `created`.
+Vue.js nous permet de déclencher des actions (ou _hooks_) à certains moments précis de la vie d'un composant. La liste est disponible [ici](https://vuejs.org/guide/essentials/lifecycle.html). Celui qui nous intéresse est le `created`.
 
-- Ajoutez donc l'appel http avec axios permettant d'afficher la liste des données météo des villes.
+- Ajoutez donc l'appel http permettant d'afficher la liste des données météo des villes.
 
 - Faites en sorte d'afficher un texte `requête en cours` si jamais la requête est en cours et une erreur en rouge si jamais la requête produit une erreur.
 
@@ -369,15 +367,14 @@ Ajoutez tout d'abord un nouveau composant `CitiesMap` à votre projet. Associez-
 
 ##### 8.2) Fond de carte
 
-Pour générer une carte interactive, nous allons utiliser la librairie Mapbox GL couplée à un fond de carte. Pour intégrer cette carte au sein de votre application, il vous faudra :
-- Récupérer l'adresse du serveur de tuiles, qui va générer le fond de carte (à demander auprès du formateur / de la formatrice)
-- Installer le package [mapbox-gl](https://www.mapbox.com/install/js/bundler-install/) en suivant les instructions fournies
-- Installer le package [vue-mapbox-gl](https://github.com/phegman/vue-mapbox-gl) en suivant les instructions fournies
-- Ne pas oublier l'étape qui consiste à modifier (ou créer) le fichier `vue.config.js` à la racine du projet
+Pour générer une carte interactive, nous allons utiliser la librairie Leaflet couplée à un fond de carte. Pour intégrer cette carte au sein de votre application, il vous faudra :
+- Installer le package [vue-leaflet](https://github.com/vue-leaflet/vue-leaflet) en suivant les instructions fournies
+- Importer les composants et la feuille de style CSS Leaflet au sein de votre application, comme indiqué dans le dépôt de `vue-leaflet`
+- (optionnel) Choisir [un fond de carte public compatible avec Leaflet](https://leaflet-extras.github.io/leaflet-providers/preview/) selon vos préférences
  
-➡️ Affichez une carte dans votre composant `CitiesMap`. Attention, le CSS relatif à votre carte devra être ajouté dans un scope étendu, par exemple directement dans le `<style></style>` de votre composant App.vue.  
+➡️ Affichez une carte dans votre composant `CitiesMap`.  
 
-Prenez le temps de jouer sur les paramètres du composant `mapbox` pour les comprendre et ajuster votre carte au besoin.
+Prenez le temps de jouer sur les paramètres du composant `l-map` pour les comprendre et ajuster votre carte au besoin.
 
 ➡️**Faites un commit avec un message explicite**
 
@@ -388,34 +385,19 @@ Pour cela :
 - Récupérez la liste des données météo dans un tableau `cities` de votre composant `CitiesMap` (comme vous l'avez fait pour `CitiesList`) 
 - En bouclant sur la liste de résultats, affichez des marqueurs en exploitant les coordonnées GPS fournies pour chaque ville dans l'API OpenWeatherMap
 
-➡️ Pour afficher un marqueur sur la carte, vous pourrez utiliser l'évènement `map-load` mis à disposition par `vue-mapbox-gl`, ainsi qu'un appel similaire à l'exemple suivant :
-```js
-export default {
-  ...,
-  methods: {
-    loaded(map) {
-      var el = document.createElement('div');
-      el.className = 'marker';
-      
-      new mapboxgl.Marker(el)
-        .setLngLat([6.0925617, 45.8910906])
-        .addTo(map);
-    },
-    ...
-  }
-}
+➡️ Pour afficher un marqueur sur la carte, vous pourrez utiliser le composant `l-marker` :
+```html
+<l-marker :lat-lng="[45.45, 3.5]"></l-marker>
 ```
  
-Comme précédemment, le code CSS du marqueur devra être ajouté dans le style de votre composant `App.vue`. Pour le moment, utilisez un rendu commun à tous les marqueurs, par exemple :
+Le code CSS du marqueur pourra être ajouté dans le style de votre composant `CitiesMap`. Pour le moment, utilisez un rendu commun à tous les marqueurs, sous la forme :
 ```css
-#map .marker {
-  border: 2px solid rgba(255, 0, 0, 0.5);
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
+#map :deep(.leaflet-marker-icon) {
+  /* vos styles ici */
 }
 ```
+
+➡️ Que signifie le sélecteur `deep` ci-dessus ? Pourquoi est-il nécessaire dans le cas présent ? 
 
 ##### 8.4) Afficher les données météo
 
