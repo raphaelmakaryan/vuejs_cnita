@@ -29,14 +29,21 @@ Installez l'extension Vue DevTools pour votre navigateur web en suivant les inst
 
 ### Outil de build - _Vite_ pour générer le livrable 
 Vite est l'outil préconisé par Vue.js pour générer les livrables de votre application Vue.js, à la fois dans votre environnement de développement puis pour le déploiement en production.
-Vite sera installé en même temps que Vue.js, il n'est pas utile de l'installer pour le moment.
-Prenez en revanche un moment pour vous familiariser avec cet outil, dont l'usage n'est pas limité à Vue.js :
+Vite sera installé en même temps que Vue.js dans les prochains exercices, cependant, son usage n'est pas limité à Vue.js.
+Prenez un moment pour vous familiariser avec cet outil grâce aux ressources qui suivent (notamment la vidéo qui est très complète).
+
+**Livrables :**
+- Un projet Vite sur votre machine contenant:
+  - Un import d'une fonction javascript provenant d'un nouveau fichier
+  - Du style CSS utilisant le préprocesseur SASS
+  - Un dossier de `build` contenant vos fichiers minifiés et prêts pour la production
+
+**Ressources :**
 - Documentation officielle : https://vitejs.dev/guide/
 - Article d'introduction Vite et Vue.js : https://blog.ninja-squad.com/2022/02/23/debuter-avec-vite-et-vue/  
 - Vidéo : https://grafikart.fr/tutoriels/javascript-vite-1351
 
 ## Découverte de Vue.js
-Pour commencer, nous allons prendre en main Vue.js en le chargeant, simplement dans notre page, comme une librairie externe, comme on le fait pour jQuery.
 
 #### IMPORTANT - À LIRE AVANT DE COMMENCER ####
 
@@ -44,48 +51,30 @@ Pour commencer, nous allons prendre en main Vue.js en le chargeant, simplement d
 * __Vue 3 propose 2 syntaxes : l'API "Options" et l'API "Composition". Nous utiliserons dans ce module l'API "Options", c'est donc celle-ci qu'il faudra choisir à chaque fois que le choix se présentera à vous.__ 
 
 ### Objectifs
-* Constater la différence de logique entre jQuery et Vue.js
 * Prendre en main les outils de développement de Vue.js
 * Découvrir Vue.js avec des fonctionnalités simples
 * Stocker la donnée de sa page dans l'objet data de Vue
 
 ### Consignes
-* Découvrez les différences entre jQuery et Vue.js en comparant ces exemples simples sur codepen (cliquez sur les liens) :
-  * Capturer un texte entré dans un champ de saisie : [jQuery][1] | [Vue.js][2]
-  * Ajouter / Enlever une classe sur un élément : [jQuery][3] | [Vue.js][4]
-  * Afficher / Cacher un élément au clic sur un bouton : [jQuery][5] | [Vue.js][6]
 
-_Utilisez vos Vue Devtools pour comprendre le fonctionnement des exemples Vue. Codepen Tip : Pour activer le mode vue pleine page, remplacez le chemin “/pen/…” par “/debug/…” dans l’URL des exemples. Cette vue vous permettra de lancer les Vue Devtools sur la page._
-
-* Chargez la librairie Vue.js (en version **3.x**) depuis un fichier externe, comme vous le feriez pour jQuery (utilisation d’un CDN)
-* Créez directement dans un fichier HTML votre première application Vue. 
-* Rendez votre application réactive : affichez du texte qui sera renseigné en Javascript, dans l'objet data de Vue.
-* Modifiez la valeur de votre data en Javascript dans la console de votre DevTools.
+A l'aide du [playground officiel de VueJs](https://play.vuejs.org/#eNp9UcFqAyEQ/RWZUwthl5JbWAJtyaE9tKXN0Yu4k42pq6JjuhDy71U3m+QQIqLje2+GN+MBnp2r9hFhAQ1h77QgXHLDWLN9Wq4VeWzqFHHT1Fd0egbplaMS4+CsJ9biRkRN7JDTW0Hi4bGEjHmk6M1I5DXex3ylI+2mPpWDGVCQ1mxUV+2CNclWyeIgbe+URv/pSFkTOCymehyE1vbvvWDkI84mXG5R/t7Ad2HIGIcvjwH9HjmcORK+Qxrp1c8HDik+k71to07qO+Q3Bqtj9jjKXqJpk+0rXXH71ueZKdOtw2ogNGFqKhstgyl6DulvXu+0frE7r+bTQOH4DyiRmfk=) :
+* Rendez votre application réactive : affichez dans le titre du texte qui sera renseigné en Javascript, dans l'objet data de Vue.
 * Modifiez la valeur de votre data dans l'extension Vue DevTools.
-
-### Ressources
-* Un "playground" sur le site jsfiddle : https://jsfiddle.net/yyx990803/2ke1ab0z/ 
-* Les exemples interactifs proposés sur le site officiel Vue.js (__comme indiqué plus haut, on utilisera l'API "Options" ainsi que le rendu "HTML" ici__) : https://vuejs.org/examples/#hello-world
-* Ressource complète sur le framework : https://worldline.github.io/vuejs-training/fr/
-
-
-### Livrables
-Un projet en local utilisant Vue.js, contenant :
 * Un champ input permettant de mettre à jour le contenu d’une balise H1
 * Un champ input permettant de mettre à jour le contenu d’une balise H1 au clic sur un bouton. Attention, pas seulement quand l'input perd le focus ! 
 * Une checkbox permettant d’ajouter la classe "red" aux H1 et H2 quand elle est cochée
 * Une checkbox pour afficher / masquer une image
 
-Question complémentaire : prenez le temps de comparer ce premier usage de Vue.js à vos réalisations précédentes avec Javascript. Comment aurait-on pu procéder pour réaliser les mêmes fonctionnalités avec du Javascript "vanilla" ? Avec jQuery ? Quel est l'apport de Vue.js par rapport à ces alternatives ?  
+Question complémentaire : prenez le temps de comparer ce premier usage de Vue.js à vos réalisations précédentes avec Javascript. Comment aurait-on pu procéder pour réaliser les mêmes fonctionnalités avec du Javascript "vanilla" ? Quel est l'intérêt de Vue.js par rapport à du vanilla ?  
 
+*Vue.js est aussi utilisable comme une librairie externe, en le chargeant simplement dans notre page [comme montré sur ce jsfiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/).*
 
-[1]: https://codepen.io/romainpetit/pen/rRjYdP
-[2]: https://codepen.io/romainpetit/pen/jJyaKx
-[3]: https://codepen.io/sdras/pen/8dff4c085a5dcf52ea04d4b06d68b409
-[4]: https://codepen.io/romainpetit/pen/XGpzyw
-[5]: https://codepen.io/romainpetit/pen/mgGGQx
-[6]: https://codepen.io/romainpetit/pen/MxJmOm
-
+### Ressources
+* Les exemples interactifs proposés sur le site officiel Vue.js (__comme indiqué plus haut, on utilisera l'API "Options" ainsi que le rendu "HTML" ici__) : https://vuejs.org/examples/#hello-world
+* Ressource complète sur le framework : https://worldline.github.io/vuejs-training/fr/
+* https://codepen.io/romainpetit/pen/jJyaKx
+* https://codepen.io/romainpetit/pen/XGpzyw
+* https://codepen.io/romainpetit/pen/MxJmOm
 
 ## Un premier projet Vue.js
 Vous allez maintenant créer un projet Vue.js basé sur un cas d'usage plus réaliste. Vous allez concevoir et développer 
