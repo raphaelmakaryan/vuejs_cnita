@@ -36,7 +36,7 @@ Prenez un moment pour vous familiariser avec cet outil grâce aux ressources qui
 - Un projet Vite sur votre machine contenant:
   - Un import d'une fonction javascript provenant d'un nouveau fichier
   - Du style CSS utilisant le préprocesseur SASS
-  - Un dossier de `build` contenant vos fichiers minifiés et prêts pour la production
+  - Un dossier `dist` contenant vos fichiers minifiés et prêts pour la production (après avoir lancé la commande de build)
 
 **Ressources :**
 - Documentation officielle : https://vitejs.dev/guide/
