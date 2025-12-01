@@ -1,5 +1,5 @@
 <script>
-import Header from "../components/all/Header.vue";
+import Header from "../components/Header.vue";
 
 export default {
   name: 'Home',
@@ -9,7 +9,7 @@ export default {
     }
   },
   components: {
-    Header,
+    Header
   }
 };
 </script>
@@ -29,6 +29,7 @@ export default {
       </div>
     </div>
   </section>
+
 </template>
 
 <style scoped>

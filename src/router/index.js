@@ -1,7 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
 import Home from '../views/Home.vue';
-import City from '../views/CitiestList.vue';
+import CitiestList from '../views/CitiestList.vue';
+import City from "@/components/City.vue";
 
 
 const routes = [
@@ -10,7 +11,11 @@ const routes = [
     component: Home,
   },
   {
-    path: '/city',
+    path: '/villes',
+    component: CitiestList,
+  },
+  {
+    path: '/ville',
     component: City,
   },
 ]

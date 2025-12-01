@@ -20,7 +20,7 @@ export default {
             <router-link to="/" class="nav-link">Accueil</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/city" class="nav-link">Villes</router-link>
+            <router-link to="/villes" class="nav-link">Listes des villes</router-link>
           </li>
         </ul>
       </div>

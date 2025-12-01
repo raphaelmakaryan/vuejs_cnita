@@ -1,10 +1,20 @@
 <script>
-import Header from "../components/all/Header.vue";
+import Header from "@/components/Header.vue";
+import City from "@/components/City.vue";
 
 export default {
-  name: 'City',
+  name: 'CitiestList',
+  data() {
+    return {
+      name: 'Ma ville',
+      weather: 'Peu nuageux',
+      temperature: 20.55,
+      updatedAt: new Date()
+    }
+  },
   components: {
     Header,
+    City
   }
 };
 </script>
