@@ -1,4 +1,5 @@
 <script>
+import {format} from 'timeago.js';
 import Header from "@/components/Header.vue";
 import City from "@/components/City.vue";
 
@@ -12,14 +13,14 @@ export default {
           name: 'Ville 1',
           weather: 'Ensoleillé',
           temperature: 22.0,
-          updatedAt: new Date()
+          updatedAt: format(new Date())
         },
         {
           id: 2,
           name: 'Ville 2',
           weather: 'Peu nuageux',
           temperature: 19.5,
-          updatedAt: new Date()
+          updatedAt: format(new Date())
         }
       ]
     }
