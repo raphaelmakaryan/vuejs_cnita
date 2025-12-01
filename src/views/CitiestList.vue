@@ -15,11 +15,16 @@ export default {
   methods: {
     format,
     requestAPI() {
+      let requestCity = document.getElementById("requestCity")
+      let resultCity = document.getElementById("resultCity")
       fetch("https://api.openweathermap.org/data/2.5/find?lat=45.758&lon=4.765&cnt=20&cluster=yes&lang=fr&units=metric&APPID=952ad6f7aff642444bb40b79e0afce96")
         .then(response => response.json())
         .then(data => {
-          console.log(data)
-          this.cities = data.list;
+          setTimeout(() => {
+            requestCity.style.display = "none";
+            resultCity.style.display = "block";
+            this.cities = data.list;
+          }, "1000");
         })
     }
   },
@@ -41,7 +46,12 @@ export default {
         <h1 class="fs-1">Listes des villes</h1>
       </div>
     </div>
-    <div class="row">
+    <div class="row" id="requestCity" style="display: block;">
+      <div class="col-12 my-5">
+        <h2 class="fs-2 text-center fst-italic">Requete en cours</h2>
+      </div>
+    </div>
+    <div class="row" id="resultCity" style="display: none;">
       <div class="col-12">
         <div class="table-responsive">
           <table class="table">
