@@ -21,10 +21,12 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@vitejs/plugin-vue": "^6.0.2",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vue/eslint-config-prettier": "^10.2.0",
     "eslint": "^9.39.1",
     "eslint-plugin-vue": "~10.5.1",
     "globals": "^16.5.0",
+    "leaflet": "^1.9.4",
     "prettier": "3.6.2",
     "vite": "^7.2.4",
     "vite-plugin-vue-devtools": "^8.0.5"
