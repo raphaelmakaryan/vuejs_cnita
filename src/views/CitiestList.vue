@@ -7,23 +7,24 @@ export default {
   name: 'CitiestList',
   data() {
     return {
-      cities: [
-        {
-          id: 1,
-          name: 'Ville 1',
-          weather: 'Ensoleillé',
-          temperature: 22.0,
-          updatedAt: format(new Date())
-        },
-        {
-          id: 2,
-          name: 'Ville 2',
-          weather: 'Peu nuageux',
-          temperature: 19.5,
-          updatedAt: format(new Date())
-        }
-      ]
+      cities: [],
+      loading: false,
+      error: null,
     }
+  },
+  methods: {
+    format,
+    requestAPI() {
+      fetch("https://api.openweathermap.org/data/2.5/find?lat=45.758&lon=4.765&cnt=20&cluster=yes&lang=fr&units=metric&APPID=952ad6f7aff642444bb40b79e0afce96")
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.cities = data.list;
+        })
+    }
+  },
+  mounted() {
+    this.requestAPI();
   },
   components: {
     Header,
@@ -46,9 +47,9 @@ export default {
           v-for="city in cities"
           :key="city.id"
           :name="city.name"
-          :weather="city.weather"
-          :temperature="city.temperature"
-          :updatedAt="city.updatedAt"
+          :weather="city.weather[0].description"
+          :temperature="city.main.temp"
+          :updatedAt="format(new Date())"
         />
       </div>
     </div>
