@@ -43,14 +43,28 @@ export default {
     </div>
     <div class="row">
       <div class="col-12">
-        <City
-          v-for="city in cities"
-          :key="city.id"
-          :name="city.name"
-          :weather="city.weather[0].description"
-          :temperature="city.main.temp"
-          :updatedAt="format(new Date())"
-        />
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">ville</th>
+              <th scope="col">temps</th>
+              <th scope="col">temperature</th>
+              <th scope="col">date</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <City
+              v-for="city in cities"
+              :key="city.id"
+              :name="city.name"
+              :weather="city.weather[0].description"
+              :temperature="city.main.temp"
+              :updatedAt="format(new Date())"
+            />
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
