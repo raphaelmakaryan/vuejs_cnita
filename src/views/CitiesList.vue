@@ -1,8 +1,8 @@
 <script>
 import {format} from 'timeago.js';
-import Header from "@/components/Header.vue";
+import HeaderMain from "@/components/HeaderMain.vue";
 import City from "@/components/City.vue";
-import WeatherAPI from "@/components/weatherAPI.vue";
+import WeatherAPI from "@/components/API/weatherAPI.vue";
 import {toRaw} from "vue";
 
 export default {
@@ -32,7 +32,7 @@ export default {
   },
   components: {
     WeatherAPI,
-    Header,
+    Header: HeaderMain,
     City
   },
   async mounted() {

@@ -8,16 +8,16 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import Header from "@/components/Header.vue";
+import HeaderMain from "@/components/HeaderMain.vue";
 import L from "leaflet";
 import {LGeoJson, LMap, LTileLayer} from "@vue-leaflet/vue-leaflet";
 import {toRaw} from "vue";
-import WeatherAPI from "@/components/weatherAPI.vue";
+import WeatherAPI from "@/components/API/weatherAPI.vue";
 
 export default {
   name: 'CitiesMap',
   components: {
-    Header,
+    Header: HeaderMain,
     LMap,
     LTileLayer,
     LGeoJson,

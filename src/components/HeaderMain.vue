@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Header"
+  name: "HeaderMain"
 }
 </script>
 
@@ -15,7 +15,7 @@ export default {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <a class="navbar-brand" href="#">Hidden brand</a>
+          <a class="navbar-brand" href="#">myWebsiteOnVueJS</a>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <router-link to="/" class="nav-link">Accueil</router-link>
@@ -25,6 +25,9 @@ export default {
             </li>
             <li class="nav-item">
               <router-link to="/carte" class="nav-link">Carte</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/judgement" class="nav-link">Judgement</router-link>
             </li>
           </ul>
         </div>
