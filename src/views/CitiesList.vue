@@ -2,9 +2,11 @@
 import {format} from 'timeago.js';
 import Header from "@/components/Header.vue";
 import City from "@/components/City.vue";
+import WeatherAPI from "@/components/weatherAPI.vue";
+import {toRaw} from "vue";
 
 export default {
-  name: 'CitiestList',
+  name: 'CitiesList',
   data() {
     return {
       cities: [],
@@ -14,26 +16,28 @@ export default {
   },
   methods: {
     format,
-    requestAPI() {
-      let requestCity = document.getElementById("requestCity")
-      let resultCity = document.getElementById("resultCity")
-      fetch("https://api.openweathermap.org/data/2.5/find?lat=45.758&lon=4.765&cnt=20&cluster=yes&lang=fr&units=metric&APPID=952ad6f7aff642444bb40b79e0afce96")
-        .then(response => response.json())
-        .then(data => {
-          setTimeout(() => {
-            requestCity.style.display = "none";
-            resultCity.style.display = "block";
-            this.cities = data.list;
-          }, "1000");
-        })
+    async getData() {
+      this.cities = toRaw(await WeatherAPI.mounted())
+    },
+    displayData() {
+      const requestCity = document.getElementById("requestCity")
+      const resultCity = document.getElementById("resultCity")
+      if (Object.keys(this.cities).length >= 4) {
+        setTimeout(() => {
+          requestCity.style.display = "none";
+          resultCity.style.display = "block";
+        }, "1000");
+      }
     }
   },
-  mounted() {
-    this.requestAPI();
-  },
   components: {
+    WeatherAPI,
     Header,
     City
+  },
+  async mounted() {
+    await this.getData();
+    await this.displayData();
   }
 };
 </script>
