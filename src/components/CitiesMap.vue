@@ -1,7 +1,15 @@
+<template>
+  <Header/>
+  <section class="d-flex align-items-center flex-column">
+    <div id="mapContainer" style="height:600px; width:800px"></div>
+  </section>
+</template>
+
 <script>
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header.vue";
-import {LMap, LTileLayer} from "@vue-leaflet/vue-leaflet";
+import L from "leaflet";
+import {LGeoJson, LMap, LTileLayer} from "@vue-leaflet/vue-leaflet";
 
 export default {
   name: 'CitiesMap',
@@ -9,29 +17,27 @@ export default {
     Header,
     LMap,
     LTileLayer,
+    LGeoJson,
   },
   data() {
     return {
-      zoom: 2,
-      showMap: true
+      map: null
     };
   },
-}
+  mounted() {
+    this.map = L.map("mapContainer").setView([51.959, -8.623], 12);
+    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
+  },
+  beforeDestroy() {
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+};
 </script>
 
-<template>
-  <Header/>
-  <div style="height:600px; width:800px">
-    <l-map ref="map" v-model:zoom="zoom" :center="[47.41322, -1.219482]">
-      <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        layer-type="base"
-        name="OpenStreetMap"
-      ></l-tile-layer>
-    </l-map>
-  </div>
-</template>
-
 <style scoped>
-
 </style>
