@@ -1,8 +1,6 @@
 <script>
 import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
-import VerificationConnected from "@/components/judgement/VerificationConnected.vue";
-
 
 export default {
   name: "LoginJudgement",
@@ -27,21 +25,15 @@ export default {
       if (data.status) {
         alert(data.detail);
       } else {
+        alert("Vous êtes connecté !");
         this.saveData(data);
+        window.location.reload();
       }
     },
     async saveData(data) {
       this.$cookies.set("tokenUser", data.token, data.ttl)
-    },
-    async verificationLogin(canCome) {
-      await VerificationConnected().mounted(canCome);
-    },
-    debugCookie() {
-      console.log(this.$cookies.get("tokenUser"));
+      this.$cookies.set("idUser", data.token, data.ttl)
     }
-  },
-  async mounted() {
-    await this.verificationLogin(false);
   }
 }
 </script>

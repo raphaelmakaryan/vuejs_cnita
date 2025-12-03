@@ -12,6 +12,8 @@ import CastJudgement from "@/views/judgement/CastJudgement.vue";
 import ListJudgement from "@/views/judgement/ListJudgement.vue";
 import UserJudgement from "@/views/judgement/UserJudgement.vue";
 import LoginJudgement from "@/views/judgement/Login.vue";
+import VueCookies from "vue-cookies";
+import ProfilJudgement from "@/views/judgement/user/Profil.vue";
 
 
 const routes = [
@@ -62,13 +64,34 @@ const routes = [
   },
   {
     path: '/judgement/login',
+    name: 'LoginJudgement',
     component: LoginJudgement,
+  },
+  {
+    path: '/judgement/profil',
+    name: 'ProfilJudgement',
+    component: ProfilJudgement,
   },
 ]
 
 const index = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+
+index.beforeEach((to, from, next) => {
+  const token = VueCookies.get('tokenUser')
+  const userId = VueCookies.get("idUser")
+  const cantComeNotConnected = ["ProfilJudgement"]
+  const cantComeConnected = ["LoginJudgement"]
+  if (cantComeNotConnected.includes(to.name) && !token && !userId) {
+    return next('/login')
+  }
+  if (cantComeConnected.includes(to.name) && token && userId) {
+    return next('/judgement/profil')
+  }
+  next()
 })
 
 export default index

@@ -1,6 +1,13 @@
 <script>
+import VueCookies from "vue-cookies";
+
 export default {
-  name: "HeaderJudgement"
+  name: "HeaderJudgement",
+  computed: {
+    VueCookies() {
+      return VueCookies
+    }
+  }
 }
 </script>
 
@@ -30,8 +37,11 @@ export default {
             <li class="nav-item">
               <router-link to="/" class="nav-link">Accueil du site</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')">
               <router-link to="/judgement/login" class="nav-link">Se connecter</router-link>
+            </li>
+            <li class="nav-item" v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')">
+              <router-link to="/judgement/profil" class="nav-link">Profil</router-link>
             </li>
           </ul>
         </div>
