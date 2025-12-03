@@ -19,16 +19,16 @@ export default {
   methods: {
     format,
     async getUser() {
-      this.user = toRaw(await JudgementAPI.mounted(`users/${this.valueIdUser}`))
+      this.user = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}`, ""))
     },
     async getList() {
-      this.list = toRaw(await JudgementAPI.mounted(`users/${this.valueIdUser}/collections`))
+      this.list = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/collections`, ""))
     },
     async getRating() {
-      this.rating = toRaw(await JudgementAPI.mounted(`users/${this.valueIdUser}/ratings`))
+      this.rating = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/ratings`, ""))
     },
     async getReviews() {
-      this.review = toRaw(await JudgementAPI.mounted(`users/${this.valueIdUser}/reviews`))
+      this.review = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/reviews`, ""))
     }
   },
   async mounted() {

@@ -18,14 +18,14 @@ export default {
   methods: {
     format,
     async getDetailMovie() {
-      this.movie = toRaw(await JudgementAPI.mounted(`movies/${this.valueIdMovie}/`))
+      this.movie = toRaw(await JudgementAPI.mounted("GET", `movies/${this.valueIdMovie}`, ""))
     },
     async getListsMovie() {
-      let data = toRaw(await JudgementAPI.mounted(`movies/${this.valueIdMovie}/custom_list_entries?page=1&itemsPerPage=30`))
+      let data = toRaw(await JudgementAPI.mounted("GET", `movies/${this.valueIdMovie}/custom_list_entries?page=1&itemsPerPage=30`, ""))
       this.lists = data.member
     },
     async getRatingMovie() {
-      let data = toRaw(await JudgementAPI.mounted(`movies/${this.valueIdMovie}/ratings?page=1&itemsPerPage=30`))
+      let data = toRaw(await JudgementAPI.mounted("GET", `movies/${this.valueIdMovie}/ratings?page=1&itemsPerPage=30`, ""))
       this.ratings = data.member
     },
   },

@@ -30,6 +30,9 @@ export default {
             <li class="nav-item">
               <router-link to="/" class="nav-link">Accueil du site</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/judgement/login" class="nav-link">Se connecter</router-link>
+            </li>
           </ul>
         </div>
       </div>

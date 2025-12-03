@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     async getData() {
-      this.allDataGenres = toRaw(await JudgementAPI.mounted("genres"))
+      this.allDataGenres = toRaw(await JudgementAPI.mounted("GET","genres", ""))
     },
     async getSpecifically() {
       Object.values(this.allDataGenres.member).forEach((item) => {

@@ -17,7 +17,7 @@ export default {
   methods: {
     format,
     async getList() {
-      this.list = toRaw(await JudgementAPI.mounted(`custom_lists/${this.valueIdList}`))
+      this.list = toRaw(await JudgementAPI.mounted("GET", `custom_lists/${this.valueIdList}`, ""))
     }
   },
   async mounted() {
@@ -73,30 +73,31 @@ export default {
     </div>
   </section>
 
-<section class="my-5" v-if="Object.keys(this.list.entries).length > 0">
-  <div class="container border rounded">
-    <div class="row">
-      <div class="col-12">
-        <p class="fs-2 fw-bold mt-3">
-          FILMS AJOUTER
-        </p>
-        <hr>
+  <section class="my-5" v-if="Object.keys(this.list.entries).length > 0">
+    <div class="container border rounded">
+      <div class="row">
+        <div class="col-12">
+          <p class="fs-2 fw-bold mt-3">
+            FILMS AJOUTER
+          </p>
+          <hr>
+        </div>
       </div>
-    </div>
-    <div class="row mt-2 d-flex flex-column flex-md-row align-items-center">
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4" v-for="movie in this.list.entries">
-        <router-link :to="{path: '/judgement/movie/' + movie.movie.id }" class="text-decoration-none">
-          <div class="card my-2" style="width: 18rem;">
-            <img :src="movie.movie.poster" class="card-img-top" :alt="movie.movie.title">
-            <div class="card-body">
-              <h5 class="card-title">{{ movie.movie.title }}</h5>
+      <div class="row mt-2 d-flex flex-column flex-md-row align-items-center">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4" v-for="movie in this.list.entries">
+          <router-link :to="{path: '/judgement/movie/' + movie.movie.id }"
+                       class="text-decoration-none">
+            <div class="card my-2" style="width: 18rem;">
+              <img :src="movie.movie.poster" class="card-img-top" :alt="movie.movie.title">
+              <div class="card-body">
+                <h5 class="card-title">{{ movie.movie.title }}</h5>
+              </div>
             </div>
-          </div>
-        </router-link>
+          </router-link>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </template>
 
 <style scoped>

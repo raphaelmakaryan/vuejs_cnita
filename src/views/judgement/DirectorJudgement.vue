@@ -4,26 +4,26 @@ import {toRaw} from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 
 export default {
-  name: "CastJudgement",
+  name: "DirectorJudgement",
   components: {HeaderJudgement},
   data() {
     return {
-      valueIdCast: this.$route.params.id,
-      cast: [],
+      valueIdDirector: this.$route.params.id,
+      director: [],
       movies: []
     };
   },
   methods: {
-    async getCast() {
-      this.cast = toRaw(await JudgementAPI.mounted(`people/${this.valueIdCast}`))
+    async getDirector() {
+      this.director = toRaw(await JudgementAPI.mounted(`people/${this.valueIdDirector}`, ""))
     },
-    async getMoviesFromCast() {
-      this.movies = toRaw(await JudgementAPI.mounted(`casts/${this.valueIdCast}/movies`))
+    async getMoviesFromDirector() {
+      this.movies = toRaw(await JudgementAPI.mounted(`directors/${this.valueIdDirector}/movies`, ""))
     }
   },
   async mounted() {
-    await this.getCast();
-    await this.getMoviesFromCast();
+    await this.getDirector();
+    await this.getMoviesFromDirector();
   }
 }
 </script>
@@ -31,12 +31,12 @@ export default {
 <template>
   <HeaderJudgement/>
 
-  <section class="my-5" v-if="Object.keys(this.cast).length >= 1">
+  <section class="my-5" v-if="Object.keys(this.director).length >= 1">
     <div class="container border rounded">
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">
-            INFORMATIONS DE L'ACTEUR
+            INFORMATIONS DU DIRECTEUR
           </p>
           <hr>
         </div>
@@ -44,9 +44,9 @@ export default {
       <div class="row mt-2">
         <div class="col-12">
           <p class="fs-6"><span class="text-decoration-underline">
-            Nom de l'acteur :
+            Nom du directeur :
           </span>
-            {{ cast.fullName }}</p>
+            {{ director.fullName }}</p>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">
-            FILMS PRESENT
+            FILMS REALISÉ
           </p>
           <hr>
         </div>

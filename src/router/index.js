@@ -1,16 +1,17 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
 import Home from '../views/Home.vue';
-import CitiesList from '../views/CitiesList.vue';
-import City from "@/components/City.vue";
-import CitiesMap from "@/views/CitiesMap.vue";
-import Judgement from "@/views/Judgement.vue";
-import genreMoviesJudgement from "@/views/GenreMoviesJudgement.vue";
-import MovieJudgement from "@/views/MovieJudgement.vue";
-import DirectorJudgement from "@/views/DirectorJudgement.vue";
-import CastJudgement from "@/views/CastJudgement.vue";
-import ListJudgement from "@/views/ListJudgement.vue";
-import UserJudgement from "@/views/UserJudgement.vue";
+import CitiesList from '../views/others/CitiesList.vue';
+import City from "@/components/others/City.vue";
+import CitiesMap from "@/views/others/CitiesMap.vue";
+import Judgement from "@/views/judgement/Judgement.vue";
+import genreMoviesJudgement from "@/views/judgement/GenreMoviesJudgement.vue";
+import MovieJudgement from "@/views/judgement/MovieJudgement.vue";
+import DirectorJudgement from "@/views/judgement/DirectorJudgement.vue";
+import CastJudgement from "@/views/judgement/CastJudgement.vue";
+import ListJudgement from "@/views/judgement/ListJudgement.vue";
+import UserJudgement from "@/views/judgement/UserJudgement.vue";
+import LoginJudgement from "@/views/judgement/Login.vue";
 
 
 const routes = [
@@ -32,6 +33,7 @@ const routes = [
   },
   {
     path: '/judgement',
+    name: 'HomeJudgement',
     component: Judgement,
   },
   {
@@ -57,6 +59,10 @@ const routes = [
   {
     path: '/judgement/user/:id',
     component: UserJudgement,
+  },
+  {
+    path: '/judgement/login',
+    component: LoginJudgement,
   },
 ]
 

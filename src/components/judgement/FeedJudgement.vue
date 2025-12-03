@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     async getData() {
-      this.feed = toRaw(await JudgementApi.mounted("feed"))
+      this.feed = toRaw(await JudgementApi.mounted("GET", "feed", ""))
       console.log(this.feed);
     },
   },
