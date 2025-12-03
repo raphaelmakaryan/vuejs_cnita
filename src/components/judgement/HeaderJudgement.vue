@@ -15,7 +15,7 @@ export default {
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
           <router-link to="/judgement" class="navbar-brand">
-            <img src="../../../public/logo.png" alt="Logo" width="50"
+            <img src="/logo.png" alt="Logo" width="50"
                  class="d-inline-block align-text-top">
           </router-link>
           <form class="d-flex w-25" role="search">

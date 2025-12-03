@@ -2,20 +2,32 @@
 import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 import {toRaw} from "vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "GenreMoviesJudgement",
-  components: {HeaderJudgement},
+  components: {HeaderJudgement, Pagination},
   data() {
     return {
       valueIdGenre: this.$route.params.id,
       allMovies: [],
+      displayItems: 30,
+      page: 1,
       movies: [],
     };
   },
   methods: {
+    async setupGenre() {
+      this.resetData()
+      await this.getMovies();
+      await this.getSpecifically();
+    },
+    resetData() {
+      this.allMovies = []
+      this.movies = []
+    },
     async getMovies() {
-      this.allMovies = toRaw(await JudgementAPI.mounted(`genres/${this.valueIdGenre}/movies`))
+      this.allMovies = toRaw(await JudgementAPI.mounted(`genres/${this.valueIdGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`))
     },
     async getSpecifically() {
       Object.values(this.allMovies.member).forEach((item) => {
@@ -28,11 +40,15 @@ export default {
           genres: item.genres,
         });
       })
+    },
+    async changePage(value) {
+      this.page = value;
+      document.getElementById("moviesLists").innerHTML = "";
+      await this.setupGenre();
     }
   },
   async mounted() {
-    await this.getMovies();
-    await this.getSpecifically();
+    await this.setupGenre();
   }
 }
 </script>
@@ -48,7 +64,7 @@ export default {
           <hr>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="moviesLists">
         <div class="col-12 my-2 border rounded" v-for="movie in movies">
           <div class="container-fuid">
             <div class="row">
@@ -92,6 +108,13 @@ export default {
       </div>
     </div>
   </section>
+
+  <Pagination
+    :currentPage=this.page
+    :totalPages=Math.round(this.allMovies.totalItems/this.displayItems)
+    :function="changePage"
+  />
+
 
 </template>
 
