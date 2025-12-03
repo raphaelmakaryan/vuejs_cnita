@@ -81,7 +81,9 @@ export default {
             {{ movie.tomatoes ? movie.tomatoes.votes : 0 }} votes</p>
           <p class="fs-6"><span class="text-decoration-underline">Genres :</span> <span class="mx-1"
                                                                                         v-for="genre in movie.genres">
+             <router-link :to="{path: '/judgement/genres/' + genre.id + '/movies'}">
             {{ genre.label }}
+             </router-link>
           </span></p>
         </div>
       </div>
