@@ -18,7 +18,7 @@ export default {
           "email": this.email,
           "password": this.password,
         }
-        await this.status(await JudgementAPI.mounted("POST", `auth`, body));
+        await this.status(await JudgementAPI.mounted("POST", `auth`, body, ""));
       }
     },
     async status(data) {
@@ -32,7 +32,7 @@ export default {
     },
     async saveData(data) {
       this.$cookies.set("tokenUser", data.token, data.ttl)
-      this.$cookies.set("idUser", data.token, data.ttl)
+      this.$cookies.set("idUser", data.user.id, data.ttl)
     }
   }
 }

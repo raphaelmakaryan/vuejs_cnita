@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import VueCookies from "vue-cookies";
 
 export default {
   name: 'JudgementAPI',
@@ -21,32 +22,43 @@ export default {
   }
   */
 
-  async mounted(method, parameter, body) {
-    switch (body) {
-      case "":
-        return await fetch(`${import.meta.env.VITE_BASE_API_JUDGEMENT}${parameter}`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: method,
+  async mounted(method, parameter, body, authorisation) {
+    if (body !== "" && authorisation !== "") {
+      return await fetch(`${import.meta.env.VITE_BASE_API_JUDGEMENT}${parameter}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: method,
+        body: JSON.stringify(body),
+      })
+        .then(response => response.json())
+        .then(async data => {
+          return await data
         })
-          .then(response => response.json())
-          .then(async data => {
-            return await data
-          })
-
-      default:
-        return await fetch(`${import.meta.env.VITE_BASE_API_JUDGEMENT}${parameter}`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: method,
-          body: JSON.stringify(body),
+    } else if (body !== "" && authorisation) {
+      return await fetch(`${import.meta.env.VITE_BASE_API_JUDGEMENT}${parameter}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${authorisation}`,
+        },
+        method: method,
+        body: JSON.stringify(body),
+      })
+        .then(response => response.json())
+        .then(async data => {
+          return await data
         })
-          .then(response => response.json())
-          .then(async data => {
-            return await data
-          })
+    } else {
+      return await fetch(`${import.meta.env.VITE_BASE_API_JUDGEMENT}${parameter}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: method,
+      })
+        .then(response => response.json())
+        .then(async data => {
+          return await data
+        })
     }
   }
 };

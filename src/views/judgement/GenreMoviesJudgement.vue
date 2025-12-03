@@ -27,7 +27,7 @@ export default {
       this.movies = []
     },
     async getMovies() {
-      this.allMovies = toRaw(await JudgementAPI.mounted("GET", `genres/${this.valueIdGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`, ""))
+      this.allMovies = toRaw(await JudgementAPI.mounted("GET", `genres/${this.valueIdGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`, "", ""))
     },
     async getSpecifically() {
       Object.values(this.allMovies.member).forEach((item) => {

@@ -3,9 +3,15 @@ import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
 import {normalizeStyle, toRaw} from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 import {format} from 'timeago.js';
+import VueCookies from "vue-cookies";
 
 export default {
   name: "UserJudgement",
+  computed: {
+    VueCookies() {
+      return VueCookies
+    }
+  },
   components: {HeaderJudgement},
   data() {
     return {
@@ -13,22 +19,68 @@ export default {
       user: [],
       list: [],
       rating: [],
-      review: []
+      review: [],
+      followers: [],
+      follows: [],
+      userConnectedFollow: null,
     };
   },
   methods: {
     format,
     async getUser() {
-      this.user = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}`, ""))
+      this.user = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}`, "", ""))
     },
     async getList() {
-      this.list = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/collections`, ""))
+      this.list = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/collections`, "", ""))
     },
     async getRating() {
-      this.rating = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/ratings`, ""))
+      this.rating = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/ratings`, "", ""))
     },
     async getReviews() {
-      this.review = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/reviews`, ""))
+      this.review = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/reviews`, "", ""))
+    },
+    async getFollowers() {
+      this.followers = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/followers`, "", ""))
+    },
+    async getFollows() {
+      this.follows = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/follows`, "", ""))
+    },
+    async status(data, texte) {
+      if (data.status) {
+        alert(data.detail);
+      } else {
+        alert(texte);
+        window.location.reload();
+      }
+    },
+    async verificationFollow() {
+      if (VueCookies.get('tokenUser') && VueCookies.get('idUser')) {
+        let verification = false
+        let userFollow = toRaw(await JudgementAPI.mounted("GET", `users/${VueCookies.get('idUser')}/follows`, "", ""))
+        console.log("je vais boucler")
+        userFollow.member.forEach(user => {
+          console.log("je boucle")
+            if (user.id === this.valueIdUser) {
+              console.log(user)
+              verification = true
+            }
+          }
+        )
+        this.userConnectedFollow = verification
+      }
+    },
+    async systemFollow(type) {
+      let requestFollow
+      switch (type) {
+        case "follow":
+          requestFollow = toRaw(await JudgementAPI.mounted("POST", `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`, "", VueCookies.get('tokenUser')))
+          await this.status(requestFollow, "Vous l'avez suivis !")
+          break
+        case "unfollow":
+          requestFollow = toRaw(await JudgementAPI.mounted("DELETE", `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`, "", VueCookies.get('tokenUser')))
+          await this.status(requestFollow, "Vous vous etes desabonnez !")
+          break
+      }
     }
   },
   async mounted() {
@@ -36,6 +88,9 @@ export default {
     await this.getList();
     await this.getRating();
     await this.getReviews();
+    await this.getFollowers();
+    await this.getFollows();
+    await this.verificationFollow();
   }
 }
 </script>
@@ -43,6 +98,23 @@ export default {
 <template>
   <HeaderJudgement/>
 
+  <section class="my-5"
+           v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser') && this.userConnectedFollow != null && VueCookies.get('idUser') !== this.valueIdUser">
+    <div class="container">
+      <div class="row">
+        <div class="col-12" v-if=" this.userConnectedFollow">
+          <button type="button" @click="systemFollow('unfollow')" class="btn btn-danger">Se
+            désabonner
+          </button>
+        </div>
+        <div class="col-12" v-else-if="!this.userConnectedFollow">
+          <button type="button" @click="systemFollow('follow')" class="btn btn-success">S'abonner
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <section class="my-5" v-if="Object.keys(this.user).length >= 1">
     <div class="container border rounded">
@@ -72,6 +144,54 @@ export default {
               Derniere mise a jour le :
             </span>
             {{ format(user.updatedAt) }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-5"
+           v-if="Object.keys(this.followers).length >= 1 && this.followers.member.length >= 1">
+    <div class="container border rounded">
+      <div class="row">
+        <div class="col-12">
+          <p class="fs-2 fw-bold mt-3">
+            SUIS
+          </p>
+          <hr>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 d-flex flex-column border rounded p-2 my-2"
+             v-for="follower in this.followers.member">
+          <router-link :to="{path: '/judgement/user/' + follower.id}" class="text-decoration-none">
+            <p class="fs-6 m-0 text-decoration-underline fw-bold text-black">{{
+                follower.username
+              }}</p>
+          </router-link>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-5"
+           v-if="Object.keys(this.follows).length >= 1 && this.follows.member.length >= 1">
+    <div class="container border rounded">
+      <div class="row">
+        <div class="col-12">
+          <p class="fs-2 fw-bold mt-3">
+            ON LE SUIS
+          </p>
+          <hr>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12 d-flex flex-column border rounded p-2 my-2"
+             v-for="follow in this.follows.member">
+          <router-link :to="{path: '/judgement/user/' + follow.id}" class="text-decoration-none">
+            <p class="fs-6 m-0 text-decoration-underline fw-bold text-black">{{
+                follow.username
+              }}</p>
+          </router-link>
         </div>
       </div>
     </div>

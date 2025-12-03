@@ -17,7 +17,7 @@ export default {
   methods: {
     format,
     async getList() {
-      this.list = toRaw(await JudgementAPI.mounted("GET", `custom_lists/${this.valueIdList}`, ""))
+      this.list = toRaw(await JudgementAPI.mounted("GET", `custom_lists/${this.valueIdList}`, "", ""))
     }
   },
   async mounted() {

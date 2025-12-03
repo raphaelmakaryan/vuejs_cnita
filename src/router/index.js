@@ -14,6 +14,7 @@ import UserJudgement from "@/views/judgement/UserJudgement.vue";
 import LoginJudgement from "@/views/judgement/Login.vue";
 import VueCookies from "vue-cookies";
 import ProfilJudgement from "@/views/judgement/user/Profil.vue";
+import AllUser from "@/views/judgement/AllUser.vue";
 
 
 const routes = [
@@ -71,6 +72,10 @@ const routes = [
     path: '/judgement/profil',
     name: 'ProfilJudgement',
     component: ProfilJudgement,
+  },
+  {
+    path: '/judgement/all-users',
+    component: AllUser,
   },
 ]
 

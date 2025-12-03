@@ -16,6 +16,9 @@ export default {
 <template>
   <HeaderJudgement/>
   <GenreJudgement/>
+  <router-link to="/judgement/all-users" class="text-decoration-none">
+    allUser
+  </router-link>
 
 </template>
 

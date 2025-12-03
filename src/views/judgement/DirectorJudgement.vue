@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     async getDirector() {
-      this.director = toRaw(await JudgementAPI.mounted(`people/${this.valueIdDirector}`, ""))
+      this.director = toRaw(await JudgementAPI.mounted("GET", `people/${this.valueIdDirector}`, "", ""))
     },
     async getMoviesFromDirector() {
-      this.movies = toRaw(await JudgementAPI.mounted(`directors/${this.valueIdDirector}/movies`, ""))
+      this.movies = toRaw(await JudgementAPI.mounted("GET", `directors/${this.valueIdDirector}/movies`, "", ""))
     }
   },
   async mounted() {
