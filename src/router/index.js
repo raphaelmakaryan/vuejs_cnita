@@ -9,6 +9,8 @@ import genreMoviesJudgement from "@/views/GenreMoviesJudgement.vue";
 import MovieJudgement from "@/views/MovieJudgement.vue";
 import DirectorJudgement from "@/views/DirectorJudgement.vue";
 import CastJudgement from "@/views/CastJudgement.vue";
+import ListJudgement from "@/views/ListJudgement.vue";
+import UserJudgement from "@/views/UserJudgement.vue";
 
 
 const routes = [
@@ -47,6 +49,14 @@ const routes = [
   {
     path: '/judgement/cast/:id',
     component: CastJudgement,
+  },
+  {
+    path: '/judgement/list/:id',
+    component: ListJudgement,
+  },
+  {
+    path: '/judgement/user/:id',
+    component: UserJudgement,
   },
 ]
 

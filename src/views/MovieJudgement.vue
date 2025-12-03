@@ -105,12 +105,21 @@ export default {
             <div class="row my-2">
               <div class="col-12 d-flex flex-column border rounded my-2"
                    v-for="list in this.lists">
-                <p class="fs-6 m-0 text-decoration-underline fw-bold">{{
-                    list.customList.title
-                  }}</p>
-                <p class="fs-6 m-0"><span class="text-decoration-underline">Crée par : </span>{{
-                    list.customList.user.username
-                  }}</p>
+                <router-link :to="{path: '/judgement/list/' + list.id}">
+                  <p class="fs-6 m-0 text-decoration-underline fw-bold text-black">{{
+                      list.customList.title
+                    }}</p>
+                </router-link>
+
+                <p class="fs-6 m-0 text-black "><span
+                  class="text-decoration-underline me-1">Crée par : </span>
+                  <router-link :to="{path: '/judgement/user/' + list.customList.user.id }"
+                  >{{
+                      list.customList.user.username
+                    }}
+                  </router-link>
+                </p>
+
                 <p class="fs-6 m-0"><span
                   class="text-decoration-underline">Crée le : </span>{{
                     format(list.customList.createdAt)
@@ -138,8 +147,12 @@ export default {
                    v-for="rating in this.ratings">
                 <p class="fs-6 m-0 text-decoration-underline fw-bold">{{ rating.note }} /
                   10</p>
-                <p class="fs-6 m-0"><span class="text-decoration-underline">Voté par : </span>
-                  {{ rating.user.username }}</p>
+                <p class="fs-6 m-0"><span class="text-decoration-underline mx-1">Voté par : </span>
+                  <router-link :to="{path: '/judgement/user/' + rating.user.id }"
+                  >
+                    {{ rating.user.username }}
+                  </router-link>
+                </p>
                 <p class="fs-6 m-0"><span
                   class="text-decoration-underline">Crée le : </span>
                   {{ format(rating.user.createdAt) }}

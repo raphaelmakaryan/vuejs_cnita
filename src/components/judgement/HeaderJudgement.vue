@@ -14,10 +14,10 @@ export default {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
-          <a class="navbar-brand" href="#">
-            <img src="" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            Jugment
-          </a>
+          <router-link to="/judgement" class="navbar-brand">
+            <img src="../../../public/logo.png" alt="Logo" width="50"
+                 class="d-inline-block align-text-top">
+          </router-link>
           <form class="d-flex w-25" role="search">
             <input class="form-control me-2 w-100" type="search" placeholder="Search"
                    aria-label="Search"/>
@@ -25,13 +25,10 @@ export default {
           </form>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <router-link to="/judgement" class="nav-link">Accueil Judgement</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <router-link to="/" class="nav-link">Accueil du site</router-link>
             </li>
           </ul>
         </div>
