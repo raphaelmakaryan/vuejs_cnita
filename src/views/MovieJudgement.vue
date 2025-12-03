@@ -56,7 +56,9 @@ export default {
           </p>
           <p class="fs-6"><span class="text-decoration-underline">Directeurs :</span>
             <span class="mx-1" v-for="director in movie.directors">
-            {{ director.fullName }}
+              <router-link :to="{path: '/judgement/director/' + director.id }">
+              {{ director.fullName }}
+              </router-link>
           </span>
           </p>
           <p class="fs-6"><span class="text-decoration-underline">Acteurs :</span>

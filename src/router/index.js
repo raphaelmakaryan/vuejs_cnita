@@ -7,6 +7,7 @@ import CitiesMap from "@/views/CitiesMap.vue";
 import Judgement from "@/views/Judgement.vue";
 import genreMoviesJudgement from "@/views/GenreMoviesJudgement.vue";
 import MovieJudgement from "@/views/MovieJudgement.vue";
+import DirectorJudgement from "@/views/DirectorJudgement.vue";
 
 
 const routes = [
@@ -37,6 +38,10 @@ const routes = [
   {
     path: '/judgement/movie/:id',
     component: MovieJudgement,
+  },
+  {
+    path: '/judgement/director/:id',
+    component: DirectorJudgement,
   },
 ]
 

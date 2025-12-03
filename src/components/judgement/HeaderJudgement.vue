@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "HeaderJugment"
+  name: "HeaderJudgement"
 }
 </script>
 
