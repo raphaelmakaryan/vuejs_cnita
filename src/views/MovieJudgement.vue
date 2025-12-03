@@ -63,7 +63,9 @@ export default {
           </p>
           <p class="fs-6"><span class="text-decoration-underline">Acteurs :</span>
             <span class="mx-1" v-for="actor in movie.castMembers">
-            {{ actor.fullName }}
+                 <router-link :to="{path: '/judgement/cast/' + actor.id }">{{
+                     actor.fullName
+                   }}</router-link>
           </span>
           </p>
           <p class="fs-6"><span class="text-decoration-underline">Crée au(x) :</span>
