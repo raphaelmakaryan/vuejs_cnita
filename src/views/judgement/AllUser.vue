@@ -15,7 +15,7 @@ export default {
   methods: {
     format,
     async allUsers() {
-      this.users = toRaw(await JudgementAPI.mounted("GET", `users`, "", ""))
+      this.users = toRaw(await JudgementAPI.mounted("GET", `users`, "", undefined, ""))
     }
   },
   async mounted() {

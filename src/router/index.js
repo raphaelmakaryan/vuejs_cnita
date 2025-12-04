@@ -15,6 +15,11 @@ import LoginJudgement from "@/views/judgement/Login.vue";
 import VueCookies from "vue-cookies";
 import ProfilJudgement from "@/views/judgement/user/Profil.vue";
 import AllUser from "@/views/judgement/AllUser.vue";
+import EditProfilJudgement from "@/views/judgement/user/EditProfil.vue";
+import EditCollectionJudgement from "@/views/judgement/user/EditCollection.vue";
+import CreateCollectionJudgement from "@/views/judgement/user/CreateCollection.vue";
+import EditVotesJudgement from "@/views/judgement/user/EditVotes.vue";
+import EditReviewJudgement from "@/views/judgement/user/EditReview.vue";
 
 
 const routes = [
@@ -72,6 +77,31 @@ const routes = [
     path: '/judgement/profil',
     name: 'ProfilJudgement',
     component: ProfilJudgement,
+  },
+  {
+    path: '/judgement/profil/edit',
+    name: 'EditProfilJudgement',
+    component: EditProfilJudgement,
+  },
+  {
+    path: '/judgement/profil/list/:id/edit',
+    name: 'EditCollectionJudgement',
+    component: EditCollectionJudgement,
+  },
+  {
+    path: '/judgement/profil/list/create',
+    name: 'CreateCollectionJudgement',
+    component: CreateCollectionJudgement,
+  },
+  {
+    path: '/judgement/profil/rating/:id/edit',
+    name: 'EditVotesJudgement',
+    component: EditVotesJudgement,
+  },
+  {
+    path: '/judgement/profil/review/:id/edit',
+    name: 'EditReviewJudgement',
+    component: EditReviewJudgement,
   },
   {
     path: '/judgement/all-users',

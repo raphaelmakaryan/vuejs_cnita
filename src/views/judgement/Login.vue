@@ -18,7 +18,7 @@ export default {
           "email": this.email,
           "password": this.password,
         }
-        await this.status(await JudgementAPI.mounted("POST", `auth`, body, ""));
+        await this.status(await JudgementAPI.mounted("POST", `auth`, body, undefined, ""));
       }
     },
     async status(data) {

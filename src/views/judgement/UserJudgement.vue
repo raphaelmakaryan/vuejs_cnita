@@ -4,6 +4,7 @@ import {normalizeStyle, toRaw} from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 import {format} from 'timeago.js';
 import VueCookies from "vue-cookies";
+import Tools from "@/components/others/Tools.vue";
 
 export default {
   name: "UserJudgement",
@@ -15,7 +16,7 @@ export default {
   components: {HeaderJudgement},
   data() {
     return {
-      valueIdUser: this.$route.params.id,
+      valueIdUser: parseInt(this.$route.params.id),
       user: [],
       list: [],
       rating: [],
@@ -31,22 +32,22 @@ export default {
       this.user = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}`, "", ""))
     },
     async getList() {
-      this.list = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/collections`, "", ""))
+      this.list = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/collections`, "", undefined, ""))
     },
     async getRating() {
-      this.rating = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/ratings`, "", ""))
+      this.rating = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/ratings`, "", undefined, ""))
     },
     async getReviews() {
-      this.review = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/reviews`, "", ""))
+      this.review = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/reviews`, "", undefined, ""))
     },
     async getFollowers() {
-      this.followers = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/followers`, "", ""))
+      this.followers = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/followers`, "", undefined, ""))
     },
     async getFollows() {
-      this.follows = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/follows`, "", ""))
+      this.follows = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/follows`, "", undefined, ""))
     },
     async status(data, texte) {
-      if (data.status) {
+      if (data !== null && data.status) {
         alert(data.detail);
       } else {
         alert(texte);
@@ -54,14 +55,11 @@ export default {
       }
     },
     async verificationFollow() {
-      if (VueCookies.get('tokenUser') && VueCookies.get('idUser')) {
+      if (VueCookies.get('tokenUser') && VueCookies.get('idUser') && parseInt(VueCookies.get('idUser')) !== this.valueIdUser) {
         let verification = false
-        let userFollow = toRaw(await JudgementAPI.mounted("GET", `users/${VueCookies.get('idUser')}/follows`, "", ""))
-        console.log("je vais boucler")
+        let userFollow = toRaw(await JudgementAPI.mounted("GET", `users/${VueCookies.get('idUser')}/follows`, "", undefined, ""))
         userFollow.member.forEach(user => {
-          console.log("je boucle")
             if (user.id === this.valueIdUser) {
-              console.log(user)
               verification = true
             }
           }
@@ -73,12 +71,13 @@ export default {
       let requestFollow
       switch (type) {
         case "follow":
-          requestFollow = toRaw(await JudgementAPI.mounted("POST", `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`, "", VueCookies.get('tokenUser')))
+          requestFollow = toRaw(await JudgementAPI.mounted("POST", `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`, "", undefined, VueCookies.get('tokenUser')))
           await this.status(requestFollow, "Vous l'avez suivis !")
           break
         case "unfollow":
-          requestFollow = toRaw(await JudgementAPI.mounted("DELETE", `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`, "", VueCookies.get('tokenUser')))
-          await this.status(requestFollow, "Vous vous etes desabonnez !")
+          alert("Vous vous etes desabonnez !");
+          await JudgementAPI.mounted("DELETE", `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`, "", undefined, VueCookies.get('tokenUser'))
+          window.location.reload();
           break
       }
     }
@@ -99,7 +98,7 @@ export default {
   <HeaderJudgement/>
 
   <section class="my-5"
-           v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser') && this.userConnectedFollow != null && VueCookies.get('idUser') !== this.valueIdUser">
+           v-if=" VueCookies.get('tokenUser') && VueCookies.get('idUser') && this.userConnectedFollow != null && parseInt(VueCookies.get('idUser')) !== this.valueIdUser">
     <div class="container">
       <div class="row">
         <div class="col-12" v-if=" this.userConnectedFollow">
@@ -155,7 +154,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">
-            SUIS
+            FOLLOWERS
           </p>
           <hr>
         </div>
@@ -179,7 +178,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">
-            ON LE SUIS
+            FOLLOW
           </p>
           <hr>
         </div>

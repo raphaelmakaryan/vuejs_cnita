@@ -34,14 +34,14 @@ export default {
             <li class="nav-item">
               <router-link to="/judgement" class="nav-link">Accueil Judgement</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">Accueil du site</router-link>
-            </li>
             <li class="nav-item" v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')">
               <router-link to="/judgement/login" class="nav-link">Se connecter</router-link>
             </li>
             <li class="nav-item" v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')">
               <router-link to="/judgement/profil" class="nav-link">Profil</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Accueil du site</router-link>
             </li>
           </ul>
         </div>
