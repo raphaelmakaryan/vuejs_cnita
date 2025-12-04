@@ -266,7 +266,7 @@ export default {
             </router-link>
             <button type="button"
                     class="btn btn-danger mx-1"
-                    @click="functionDelete(review.id,'ratings', 'Vous avez supprimez la review pour le film : ' +  review.movie.title + '!')">
+                    @click="functionDelete(review.id,'reviews', 'Vous avez supprimez la review pour le film : ' +  review.movie.title + '!')">
               <i class="bi bi-trash"></i>
             </button>
           </div>

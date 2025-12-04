@@ -1,14 +1,6 @@
 # Compte
 
-- supprimer ses votes
-- supprimer ses review
 - feed
-
-# Dans films
-
-- Si co -> pouvoir ajouter une note (verification si existe deja ou pas)
-- Si co -> pouvoir ajouter une review (verification si existe deja ou pas)
-- soucis votes
 
 # Systeme d'authentification
 

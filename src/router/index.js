@@ -20,6 +20,8 @@ import EditCollectionJudgement from "@/views/judgement/user/EditCollection.vue";
 import CreateCollectionJudgement from "@/views/judgement/user/CreateCollection.vue";
 import EditVotesJudgement from "@/views/judgement/user/EditVotes.vue";
 import EditReviewJudgement from "@/views/judgement/user/EditReview.vue";
+import RatingMovieJudgement from "@/views/judgement/RatingMovie.vue";
+import ReviewMovieJudgement from "@/views/judgement/ReviewMovie.vue";
 
 
 const routes = [
@@ -51,6 +53,14 @@ const routes = [
   {
     path: '/judgement/movie/:id',
     component: MovieJudgement,
+  },
+  {
+    path: '/judgement/movie/:id/rating',
+    component: RatingMovieJudgement,
+  },
+  {
+    path: '/judgement/movie/:id/review',
+    component: ReviewMovieJudgement,
   },
   {
     path: '/judgement/director/:id',
