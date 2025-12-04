@@ -4,6 +4,7 @@ import {toRaw} from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 import VueCookies from "vue-cookies";
 import {format} from 'timeago.js';
+import JudgementApi from "@/components/API/JudgementAPI.vue";
 
 export default {
   name: "ProfilJudgement",
@@ -15,6 +16,7 @@ export default {
       review: [],
       followers: [],
       follows: [],
+      feed: []
     }
   },
   methods: {
@@ -48,6 +50,9 @@ export default {
         window.location.reload();
       }
     },
+    async getFeed() {
+      this.feed = toRaw(await JudgementApi.mounted("GET", "feed", "", undefined, VueCookies.get('tokenUser')))
+    }
   },
   components: {HeaderJudgement},
   async mounted() {
@@ -57,6 +62,8 @@ export default {
     await this.getReviews();
     await this.getFollowers();
     await this.getFollows();
+    await this.getFeed()
+    console.log(this.feed)
   }
 }
 </script>
@@ -248,8 +255,9 @@ export default {
         </div>
       </div>
       <div class="row mt-2">
-        <div class="col-12 d-flex flex-row align-items-center justify-content-between p-2 my-2 border"
-             v-for="review in this.review.member">
+        <div
+          class="col-12 d-flex flex-row align-items-center justify-content-between p-2 my-2 border"
+          v-for="review in this.review.member">
           <div>
             <router-link :to="{path: '/judgement/movie/' + review.movie.id}"
                          class="text-decoration-none">
