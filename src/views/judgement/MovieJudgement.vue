@@ -332,7 +332,7 @@ export default {
       </div>
       <div class="row my-2">
         <div class="col-lg-1"></div>
-        <div class="col-10 border rounded m-2" v-if="Object.keys(this.reviewPublic).length >= 1"
+        <div class="col-10 border rounded m-2" v-if="this.reviewPublic.totalItems >= 1"
              id="collectionsMovie">
           <div class="container-fluid">
             <div class="row my-2">

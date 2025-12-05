@@ -4,7 +4,6 @@ import {normalizeStyle, toRaw} from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 import {format} from 'timeago.js';
 import VueCookies from "vue-cookies";
-import Tools from "@/components/others/Tools.vue";
 
 export default {
   name: "UserJudgement",

@@ -22,14 +22,14 @@ export default {
     async getFeed() {
       this.feeds = toRaw(await JudgementApi.mounted("GET", "feed", "", undefined, VueCookies.get('tokenUser')))
     },
-    async linkSpecifically(value) {
+    async linkSpecifically(value, data) {
       switch (value) {
         case "collection":
-          return "/judgement/list/"
+          return "/judgement/list/" + data.data.id
         case "review":
-          return "/judgement/review/"
+          return "/judgement/movie/" + +data.data.movie.id
         case "rating":
-          return "/judgement/rating/"
+          return "/judgement/movie/" + data.data.movie.id
       }
     },
     async typeVerification(value) {
@@ -47,7 +47,7 @@ export default {
           created: format(feed.createdAt),
           user: feed.data.user.username,
           userId: feed.data.user.id,
-          link: await this.linkSpecifically(feed.type.toLowerCase()) + feed.data.id,
+          link: await this.linkSpecifically(feed.type.toLowerCase(), feed),
         })
       }
     },
@@ -72,7 +72,7 @@ export default {
       </div>
       <div class="row my-2">
         <div
-          class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column"
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column"
           v-for="feed in this.feedSpecifically">
           <div class="card" style="width: 18rem;">
             <div class="card-body">

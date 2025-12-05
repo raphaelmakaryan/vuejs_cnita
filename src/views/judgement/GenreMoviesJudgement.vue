@@ -14,6 +14,7 @@ export default {
       displayItems: 30,
       page: 1,
       movies: [],
+      urlNotPoster: 'https://placehold.co/150x237'
     };
   },
   methods: {
@@ -29,17 +30,25 @@ export default {
     async getMovies() {
       this.allMovies = toRaw(await JudgementAPI.mounted("GET", `genres/${this.valueIdGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`, "", undefined, ""))
     },
+    async feedBackPoster(url) {
+      try {
+        const response = await fetch(url, {method: 'HEAD'});
+        return response.ok ? url : this.urlNotPoster;
+      } catch (error) {
+        return this.urlNotPoster;
+      }
+    },
     async getSpecifically() {
-      Object.values(this.allMovies.member).forEach((item) => {
+      for (const item of Object.values(this.allMovies.member)) {
         this.movies.push({
           id: item.id,
+          poster: await this.feedBackPoster(item.poster),
           title: item.title,
           year: item.year,
           rating: item.imdb.rating,
-          poster: item.poster,
           genres: item.genres,
         });
-      })
+      }
     },
     async changePage(value) {
       this.page = value;
@@ -72,7 +81,7 @@ export default {
                 <div class="poster">
                   <div id="posterMovie">
                     <router-link :to="{path: '/judgement/movie/' + movie.id }">
-                      <img :src="movie.poster ? movie.poster : 'https://placehold.co/600x400'"
+                      <img :src="movie.poster ??  this.urlNotPoster"
                            class="img-fluid" :alt="movie.title">
                     </router-link>
                   </div>
