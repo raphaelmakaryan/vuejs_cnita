@@ -1,66 +1,31 @@
 <script>
-import {toRaw} from "vue";
+import { toRaw } from "vue";
 import JudgementApi from "@/components/API/JudgementAPI.vue";
 import VueCookies from "vue-cookies";
-import {format} from "timeago.js";
+import FeedLogic from "./FeedLogic.vue";
 
 export default {
-  name: "FeedJudgement",
-  computed: {
-    VueCookies() {
-      return VueCookies
-    }
-  },
+  name: 'FeedJudgement',
+  components: { FeedLogic },
   data() {
     return {
       feeds: [],
-      feedSpecifically: []
-    }
-  },
-  methods: {
-    format,
-    async getFeed() {
-      this.feeds = toRaw(await JudgementApi.mounted("GET", "feed", "", undefined, VueCookies.get('tokenUser')))
-    },
-    async linkSpecifically(value, data) {
-      switch (value) {
-        case "collection":
-          return "/list/" + data.data.id
-        case "review":
-          return "/movie/" + +data.data.movie.id
-        case "rating":
-          return "/movie/" + data.data.movie.id
-      }
-    },
-    async typeVerification(value) {
-      switch (value) {
-        case "rating":
-          return "un nouveau vote"
-        default:
-          return "une nouvelle " + value
-      }
-    },
-    async getSpecifically() {
-      for (const feed of this.feeds.items) {
-        this.feedSpecifically.push({
-          type: await this.typeVerification(feed.type.toLowerCase()),
-          created: format(feed.createdAt),
-          user: feed.data.user.username,
-          userId: feed.data.user.id,
-          link: await this.linkSpecifically(feed.type.toLowerCase(), feed),
-        })
-      }
-    },
+    };
   },
   async mounted() {
-    //await this.getFeed();
-    //await this.getSpecifically();
+    const response = await JudgementApi.mounted(
+      "GET",
+      "feed",
+      "",
+      undefined,
+      VueCookies.get('tokenUser')
+    );
+    this.feeds = toRaw(response);
   }
-}
+};
 </script>
 
 <template>
-
   <section class="my-5">
     <div class="container">
       <div class="row my-2">
@@ -69,32 +34,12 @@ export default {
           <hr>
         </div>
       </div>
-      <!--
-    <div class="row my-2">
-      <div
-        class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column"
-        v-for="feed in this.feedSpecifically">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">
-              <router-link :to="{path: '/user/' + feed.userId}">{{
-                  feed.user
-                }}
-              </router-link>
-              a crée {{ feed.type }} !
-            </h5>
-            <p class="card-text">Date de creation : {{ feed.created }}</p>
-            <router-link class="btn btn-primary w-100" :to="feed.link">Voir</router-link>
-          </div>
-        </div>
+      <div class="row my-2">
+        <FeedLogic :feedData="this.feeds" />
       </div>
-    </div>
-    -->
     </div>
   </section>
 
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

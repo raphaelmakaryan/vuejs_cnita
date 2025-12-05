@@ -1,10 +1,10 @@
 <script>
-import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
-import JudgementAPI from "@/components/API/JudgementAPI.vue";
+import HeaderJudgement from '@/components/judgement/HeaderJudgement.vue'
+import JudgementAPI from '@/components/API/JudgementAPI.vue'
 
 export default {
-  name: "LoginJudgement",
-  components: {HeaderJudgement},
+  name: 'LoginJudgement',
+  components: { HeaderJudgement },
   data() {
     return {
       email: null,
@@ -15,32 +15,30 @@ export default {
     async login() {
       if (this.email && this.password) {
         let body = {
-          "email": this.email,
-          "password": this.password,
+          email: this.email,
+          password: this.password,
         }
-        await this.status(await JudgementAPI.mounted("POST", `auth`, body, undefined, ""));
+        await this.status(await JudgementAPI.mounted('POST', `auth`, body, undefined, ''))
       }
     },
     async status(data) {
       if (data.status) {
-        alert(data.detail);
+        alert(data.detail)
       } else {
-        alert("Vous êtes connecté !");
-        this.saveData(data);
-        window.location.reload();
+        alert('Vous êtes connecté !')
+        this.saveData(data)
+        window.location.reload()
       }
     },
     async saveData(data) {
-      this.$cookies.set("tokenUser", data.token, data.ttl)
-      this.$cookies.set("idUser", data.user.id, data.ttl)
-    }
-  }
+      this.$cookies.set('tokenUser', data.token, data.ttl)
+      this.$cookies.set('idUser', data.user.id, data.ttl)
+    },
+  },
 }
 </script>
 
 <template>
-  <HeaderJudgement/>
-
   <section class="mt-5">
     <div class="container border rounded">
       <div class="row my-2">
@@ -52,16 +50,26 @@ export default {
         <div class="row my-2">
           <div class="col-12">
             <label for="emailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="emailInput" v-model="email"
-                   placeholder="name@example.com" required>
+            <input
+              type="email"
+              class="form-control"
+              id="emailInput"
+              v-model="email"
+              placeholder="name@example.com"
+              required
+            />
           </div>
         </div>
         <div class="row my-2">
           <div class="col-12">
             <label for="passwordInput" class="form-label">Password</label>
-            <input type="passwordInput" class="form-control" id="passwordInput"
-                   v-model="password"
-                   required>
+            <input
+              type="passwordInput"
+              class="form-control"
+              id="passwordInput"
+              v-model="password"
+              required
+            />
           </div>
         </div>
         <div class="row my-4">
@@ -72,10 +80,6 @@ export default {
       </form>
     </div>
   </section>
-
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

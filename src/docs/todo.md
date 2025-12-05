@@ -10,10 +10,6 @@
 
 - Dans les views qui importe des components, mettre des v-if si on souhaite afficher des choses ou pas si t'es connecté
   ou non
-- Crée un layout global pour judgement, voir ce que sais des slots
-- UTILISER COMPUTED POUR FAIRE LES FILTRES SELON LES DATA QU'ON VEUX AFFICHER (ex feed spcility)
-- dans les code ou faut rediriger vers une route, utiliser le nom de la route + paramrs (eu avec alban sur
-  linkSpecifically de feed )
 - pour toute code de for, on crée un composents qui contient des props (comme city)
 - un component quand c'est pertinent
 - trouver moyen de faire une sorte de notification (message vert et rouge sur le dom)

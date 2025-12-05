@@ -1,27 +1,23 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-import VueCookies from "vue-cookies";
+import VueCookies from 'vue-cookies'
 
-import HomeHome from '@/views/others/Home.vue';
-import CitiesList from '../views/others/CitiesList.vue';
-import CitiesMap from "@/views/others/CitiesMap.vue";
-import HomeJudgement from "@/views/judgement/home/HomeJudgement.vue";
-import GenreMoviesJudgementPage from "@/views/judgement/GenreMoviesJudgementPage.vue";
-import MovieJudgementPage from "@/views/judgement/MovieJudgementPage.vue";
-import DirectorJudgementPage from "@/views/judgement/DirectorJudgementPage.vue";
-import CastJudgementPage from "@/views/judgement/CastJudgementPage.vue";
-import ListJudgementPage from "@/views/judgement/ListJudgementPage.vue";
-import UserJudgementPage from "@/views/judgement/UserJudgementPage.vue";
-import LoginPageJudgement from "@/views/judgement/LoginPage.vue";
-import ProfilPageJudgement from "@/views/judgement/user/ProfilPage.vue";
-import EditProfilPageJudgement from "@/views/judgement/user/EditProfilPage.vue";
-import EditCollectionPageJudgement from "@/views/judgement/user/EditCollectionPage.vue";
-import CreateCollectionPageJudgement from "@/views/judgement/user/CreateCollectionPage.vue";
-import EditVotesPageJudgement from "@/views/judgement/user/EditVotesPage.vue";
-import EditReviewPageJudgement from "@/views/judgement/user/EditReviewPage.vue";
-import RatingMoviePageJudgement from "@/views/judgement/RatingMoviePage.vue";
-import ReviewMoviePageJudgement from "@/views/judgement/ReviewMoviePage.vue";
-
+import HomeJudgement from '@/views/judgement/home/HomeJudgement.vue'
+import GenreMoviesJudgementPage from '@/views/judgement/GenreMoviesJudgementPage.vue'
+import MovieJudgementPage from '@/views/judgement/MovieJudgementPage.vue'
+import DirectorJudgementPage from '@/views/judgement/DirectorJudgementPage.vue'
+import CastJudgementPage from '@/views/judgement/CastJudgementPage.vue'
+import ListJudgementPage from '@/views/judgement/ListJudgementPage.vue'
+import UserJudgementPage from '@/views/judgement/user/UserJudgementPage.vue'
+import LoginPageJudgement from '@/views/judgement/login/LoginPage.vue'
+import ProfilPageJudgement from '@/views/judgement/profil/main/ProfilPage.vue'
+import EditProfilPageJudgement from '@/views/judgement/profil/main/EditProfilPage.vue'
+import EditCollectionPageJudgement from '@/views/judgement/profil/collections/EditCollectionPage.vue'
+import CreateCollectionPageJudgement from '@/views/judgement/profil/collections/CreateCollectionPage.vue'
+import EditVotesPageJudgement from '@/views/judgement/profil/EditVotesPage.vue'
+import EditReviewPageJudgement from '@/views/judgement/profil/EditReviewPage.vue'
+import RatingMoviePageJudgement from '@/views/judgement/RatingMoviePage.vue'
+import ReviewMoviePageJudgement from '@/views/judgement/ReviewMoviePage.vue'
 
 const routes = [
   {
@@ -35,16 +31,17 @@ const routes = [
   },
   {
     path: '/movie/:id',
+    name: 'MovieJudgementPage',
     component: MovieJudgementPage,
   },
   {
     path: '/movie/:id/rating',
-    name: "RatingMovieJudgement",
+    name: 'RatingMovieJudgement',
     component: RatingMoviePageJudgement,
   },
   {
     path: '/movie/:id/review',
-    name: "ReviewMovieJudgement",
+    name: 'ReviewMovieJudgement',
     component: ReviewMoviePageJudgement,
   },
   {
@@ -57,6 +54,7 @@ const routes = [
   },
   {
     path: '/list/:id',
+    name: 'ListJudgementPage',
     component: ListJudgementPage,
   },
   {
@@ -97,7 +95,7 @@ const routes = [
     path: '/profil/review/:id/edit',
     name: 'EditReviewJudgement',
     component: EditReviewPageJudgement,
-  }
+  },
 ]
 
 const rooter = createRouter({
@@ -105,17 +103,25 @@ const rooter = createRouter({
   routes,
 })
 
-
 rooter.beforeEach((to, from, next) => {
   const token = VueCookies.get('tokenUser')
-  const userId = VueCookies.get("idUser")
-  const cantComeNotConnected = ["ProfilPageJudgement", "RatingMoviePageJudgement", "ReviewMoviePageJudgement", "EditProfilPageJudgement", "EditCollectionPageJudgement", "CreateCollectionPageJudgement", "EditVotesPageJudgement", "EditReviewPageJudgement"]
-  const cantComeConnected = ["LoginPageJudgement"]
+  const userId = VueCookies.get('idUser')
+  const cantComeNotConnected = [
+    'ProfilPageJudgement',
+    'RatingMoviePageJudgement',
+    'ReviewMoviePageJudgement',
+    'EditProfilPageJudgement',
+    'EditCollectionPageJudgement',
+    'CreateCollectionPageJudgement',
+    'EditVotesPageJudgement',
+    'EditReviewPageJudgement',
+  ]
+  const cantComeConnected = ['LoginPageJudgement']
   if (cantComeNotConnected.includes(to.name) && !token && !userId) {
     return next('/login')
   }
   if (cantComeConnected.includes(to.name) && token && userId) {
-    return next('/judgement/profil')
+    return next('/judgement/main')
   }
   next()
 })

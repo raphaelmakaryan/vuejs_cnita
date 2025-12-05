@@ -1,28 +1,24 @@
 <template>
-  <Header>
-    <slot >
-      <router-view/>
-    </slot>
-  </Header>
+  <Header />
+  <router-view />
 </template>
 
 <script>
-import Header from "@/components/judgement/HeaderJudgement.vue";
-import {onMounted} from 'vue';
-import {useRouter} from 'vue-router';
+import Header from '@/components/judgement/HeaderJudgement.vue'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'App',
-  components: {Header},
+  components: { Header },
   setup() {
-    const router = useRouter();
+    const router = useRouter()
 
     onMounted(() => {
-      router.push('/');
-    });
-  }
-};
+      router.push('/')
+    })
+  },
+}
 </script>
 
-<style>
-</style>
+<style></style>

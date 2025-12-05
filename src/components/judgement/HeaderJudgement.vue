@@ -91,7 +91,7 @@ export default {
                 <div v-if="this.peoplesSearchBar.totalItems > 0">
                   <ul>
                     <li v-for="people in this.peoplesSearchBar.member">
-                      <router-link :to="{path: '/judgement/cast/' + people.id}"
+                      <router-link :to="{path: '/cast/' + people.id}"
                                    class="fs-6 m-2">{{ people.fullName }}
                       </router-link>
                     </li>
@@ -110,7 +110,7 @@ export default {
                 <div v-if="this.moviesSearchBar.totalItems > 0">
                   <ul>
                     <li v-for="movie in this.moviesSearchBar.member">
-                      <router-link :to="{path: '/judgement/movie/' + movie.id}"
+                      <router-link :to="{path: '/movie/' + movie.id}"
                                    class="fs-6 m-2">{{ movie.title }}
                       </router-link>
                     </li>
@@ -143,7 +143,7 @@ export default {
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/" class="nav-link">Accueil Judgement</router-link>
+              <router-link to="/" class="nav-link">Accueil</router-link>
             </li>
             <li class="nav-item" v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')">
               <router-link to="/login" class="nav-link">Se connecter</router-link>
