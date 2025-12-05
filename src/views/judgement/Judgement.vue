@@ -15,6 +15,7 @@ export default {
 
 <template>
   <HeaderJudgement/>
+  <FeedJudgement/>
   <GenreJudgement/>
   <router-link to="/judgement/all-users" class="text-decoration-none">
     allUser

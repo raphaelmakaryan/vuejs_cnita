@@ -56,10 +56,12 @@ const routes = [
   },
   {
     path: '/judgement/movie/:id/rating',
+    name: "RatingMovieJudgement",
     component: RatingMovieJudgement,
   },
   {
     path: '/judgement/movie/:id/review',
+    name: "ReviewMovieJudgement",
     component: ReviewMovieJudgement,
   },
   {
@@ -128,7 +130,7 @@ const index = createRouter({
 index.beforeEach((to, from, next) => {
   const token = VueCookies.get('tokenUser')
   const userId = VueCookies.get("idUser")
-  const cantComeNotConnected = ["ProfilJudgement"]
+  const cantComeNotConnected = ["ProfilJudgement", "RatingMovieJudgement", "ReviewMovieJudgement", "EditProfilJudgement", "EditCollectionJudgement", "CreateCollectionJudgement", "EditVotesJudgement", "EditReviewJudgement"]
   const cantComeConnected = ["LoginJudgement"]
   if (cantComeNotConnected.includes(to.name) && !token && !userId) {
     return next('/login')

@@ -4,7 +4,6 @@ import {toRaw} from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
 import VueCookies from "vue-cookies";
 import {format} from 'timeago.js';
-import JudgementApi from "@/components/API/JudgementAPI.vue";
 
 export default {
   name: "ProfilJudgement",
@@ -50,9 +49,6 @@ export default {
         window.location.reload();
       }
     },
-    async getFeed() {
-      this.feed = toRaw(await JudgementApi.mounted("GET", "feed", "", undefined, VueCookies.get('tokenUser')))
-    }
   },
   components: {HeaderJudgement},
   async mounted() {
@@ -62,8 +58,6 @@ export default {
     await this.getReviews();
     await this.getFollowers();
     await this.getFollows();
-    await this.getFeed()
-    console.log(this.feed)
   }
 }
 </script>
