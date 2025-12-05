@@ -48,18 +48,23 @@ export default {
         this.allCollectionPrivate = toRaw(await JudgementAPI.mounted("GET", `users/${VueCookies.get('idUser')}/collections`, "", undefined, ""))
         let backupCollectionId = []
         this.allCollectionPrivate.member.forEach((collection) => {
-          collection.entries.forEach((movie) => {
+          if (collection.entries.length === 0) {
+            this.collectionsSelectPrivate.push({
+              id: collection.id,
+              name: collection.title
+            });
+          } else {
             const exists = collection.entries.some(entry =>
               entry.movie.id === parseInt(this.valueIdMovie)
             );
-            if (!exists && backupCollectionId.some(backup => backup.id !== collection.id)) {
+            if (!exists && backupCollectionId.length >= 1 && backupCollectionId.some(backup => backup.id !== collection.id) || backupCollectionId.length === 0) {
               this.collectionsSelectPrivate.push({
                 id: collection.id,
                 name: collection.title
               });
             }
-            backupCollectionId.push(collection.id);
-          })
+          }
+          backupCollectionId.push(collection.id);
         })
       }
     },
@@ -71,16 +76,30 @@ export default {
     },
     async setupListRequest(id) {
       let newIndex = null
-      this.allCollectionPrivate.member[id - 1].entries.forEach((element, index) => {
-        let i = index + 1
-        this.newCollectionPrivate.push(
-          {
-            "position": i,
-            "movie": `/api/movies/${element.movie.id}`
-          },
-        );
-        newIndex = i;
-      });
+      this.allCollectionPrivate.member.forEach((collection) => {
+          if (collection.id === id) {
+            if (collection.entries.length === 0) {
+              this.newCollectionPrivate.push(
+                {
+                  "position": 1,
+                  "movie": `/api/movies/${this.valueIdMovie}`
+                },
+              );
+            } else {
+              collection.entries.forEach((element, index) => {
+                let i = index + 1
+                this.newCollectionPrivate.push(
+                  {
+                    "position": i,
+                    "movie": `/api/movies/${element.movie.id}`
+                  },
+                );
+                newIndex = i;
+              });
+            }
+          }
+        }
+      )
       return newIndex;
     },
     async addNewMovieOnList(i) {
@@ -90,14 +109,16 @@ export default {
           "movie": `/api/movies/${this.valueIdMovie}`
         },
       );
-    },
+    }
+    ,
     async updateCollection() {
       let body =
         {
           "entries": this.newCollectionPrivate
         }
       await this.status(await JudgementAPI.mounted("PATCH", `custom_lists/${this.chooseAddCollectionPrivate}`, body, "application/merge-patch+json", VueCookies.get('tokenUser')), "Vous avez ajouter le film a la collection !");
-    },
+    }
+    ,
     async status(data, texte) {
       if (data.status) {
         alert(data.detail);
@@ -105,7 +126,8 @@ export default {
         alert(texte);
         window.location.reload();
       }
-    },
+    }
+    ,
     async existedRatingUser() {
       if (VueCookies.get('tokenUser') && VueCookies.get('idUser')) {
         let data = toRaw(await JudgementAPI.mounted("GET", `movies/${this.valueIdMovie}/ratings?page=1&itemsPerPage=30`, "", undefined, ""))
@@ -124,7 +146,8 @@ export default {
           this.ratingsUserPrivate = true
         }
       }
-    },
+    }
+    ,
     async existedReviewUser() {
       if (VueCookies.get('tokenUser') && VueCookies.get('idUser')) {
         let data = toRaw(await JudgementAPI.mounted("GET", `movies/${this.valueIdMovie}/reviews?page=1&itemsPerPage=30`, "", undefined, ""))
@@ -143,7 +166,8 @@ export default {
           this.reviewUserPrivate = true
         }
       }
-    },
+    }
+    ,
     async getReviewMovie() {
       this.reviewPublic = toRaw(await JudgementAPI.mounted("GET", `movies/${this.valueIdMovie}/reviews`, "", undefined, ""))
     }
@@ -168,11 +192,12 @@ export default {
       <div class="row">
         <div class="col-12 cl-sm-12 col-md-4 col-lg-4">
           <select v-if="Object.values(this.collectionsSelectPrivate).length > 0" class="form-select"
-                  v-for="choice in this.collectionsSelectPrivate"
                   @change="addCollection()"
                   v-model="chooseAddCollectionPrivate">
             <option selected>L'ajouter a une collection</option>
-            <option :value="choice.id">{{ choice.name }}</option>
+            <option v-for="choice in this.collectionsSelectPrivate" :value="choice.id">
+              {{ choice.name }}
+            </option>
           </select>
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4 d-flex flex-column align-items-center">

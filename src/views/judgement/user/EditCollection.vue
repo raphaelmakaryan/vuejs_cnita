@@ -46,8 +46,13 @@ export default {
       await this.status(await JudgementAPI.mounted("PATCH", `custom_lists/${this.oldList.id}`, body, "application/merge-patch+json", VueCookies.get('tokenUser')));
     },
     removeFromList(id) {
-      this.newList.entries.splice(id - 1, 1);
-      this.listRequest.splice(id - 1, 1);
+      this.newList.entries.forEach((item) => {
+        if (id === item.id) {
+          this.newList.entries.splice(item.position - 1, 1);
+          this.listRequest.splice(item.position - 1, 1);
+        }
+      })
+      console.log(this.listRequest)
     },
     setupListRequest() {
       this.oldList.entries.forEach((element, index) => {
@@ -108,7 +113,10 @@ export default {
             <div class="card my-2" style="width: 18rem;">
               <img :src="movie.movie.poster" class="card-img-top" :alt="movie.movie.title">
               <div class="card-body">
-                <h5 class="card-title text-decoration-underline">{{ movie.movie.title }}</h5>
+                <router-link :to="{path: '/judgement/movie/' + movie.id}"
+                             class="card-title text-decoration-underline fs-5">
+                  {{ movie.movie.title }}
+                </router-link>
                 <div class="d-flex mt-3 mb-1 flex-column align-items-center">
                   <button type="button"
                           @click="removeFromList(movie.id)"

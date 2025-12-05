@@ -121,13 +121,13 @@ const routes = [
   },
 ]
 
-const index = createRouter({
+const rooter = createRouter({
   history: createWebHistory(),
   routes,
 })
 
 
-index.beforeEach((to, from, next) => {
+rooter.beforeEach((to, from, next) => {
   const token = VueCookies.get('tokenUser')
   const userId = VueCookies.get("idUser")
   const cantComeNotConnected = ["ProfilJudgement", "RatingMovieJudgement", "ReviewMovieJudgement", "EditProfilJudgement", "EditCollectionJudgement", "CreateCollectionJudgement", "EditVotesJudgement", "EditReviewJudgement"]
@@ -141,4 +141,4 @@ index.beforeEach((to, from, next) => {
   next()
 })
 
-export default index
+export default rooter

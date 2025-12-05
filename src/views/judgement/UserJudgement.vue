@@ -28,7 +28,7 @@ export default {
   methods: {
     format,
     async getUser() {
-      this.user = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}`, "", ""))
+      this.user = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}`, "", undefined, ""))
     },
     async getList() {
       this.list = toRaw(await JudgementAPI.mounted("GET", `users/${this.valueIdUser}/collections`, "", undefined, ""))

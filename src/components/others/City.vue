@@ -12,10 +12,10 @@ export default {
 
 <template>
   <tr>
-    <td>{{ $props.name }}</td>
-    <td>{{ $props.weather }}</td>
-    <td>{{ $props.temperature }}</td>
-    <td>{{ $props.updatedAt }}</td>
+    <td>{{ name }}</td>
+    <td>{{ weather }}</td>
+    <td>{{ temperature }}</td>
+    <td>{{ updatedAt }}</td>
   </tr>
 
 </template>
