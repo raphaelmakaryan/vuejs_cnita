@@ -8,7 +8,7 @@
 
 <script>
 import "leaflet/dist/leaflet.css";
-import HeaderMain from "@/components/HeaderMain.vue";
+import HeaderMain from "@/components/others/HeaderMain.vue";
 import L from "leaflet";
 import {LGeoJson, LMap, LTileLayer} from "@vue-leaflet/vue-leaflet";
 import {toRaw} from "vue";

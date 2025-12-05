@@ -1,6 +1,6 @@
 <script>
 import {format} from 'timeago.js';
-import HeaderMain from "@/components/HeaderMain.vue";
+import HeaderMain from "@/components/others/HeaderMain.vue";
 import City from "@/components/others/City.vue";
 import WeatherAPI from "@/components/API/weatherAPI.vue";
 import {toRaw} from "vue";

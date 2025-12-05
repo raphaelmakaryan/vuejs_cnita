@@ -1,13 +1,19 @@
 <template>
-  <router-view/>
+  <Header>
+    <slot >
+      <router-view/>
+    </slot>
+  </Header>
 </template>
 
 <script>
+import Header from "@/components/judgement/HeaderJudgement.vue";
 import {onMounted} from 'vue';
 import {useRouter} from 'vue-router';
 
 export default {
   name: 'App',
+  components: {Header},
   setup() {
     const router = useRouter();
 

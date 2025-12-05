@@ -2,10 +2,10 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 import VueCookies from "vue-cookies";
 
-import HomeHome from '@/views/Home.vue';
+import HomeHome from '@/views/others/Home.vue';
 import CitiesList from '../views/others/CitiesList.vue';
 import CitiesMap from "@/views/others/CitiesMap.vue";
-import HomeJudgement from "@/views/judgement/HomeJudgement.vue";
+import HomeJudgement from "@/views/judgement/home/HomeJudgement.vue";
 import GenreMoviesJudgementPage from "@/views/judgement/GenreMoviesJudgementPage.vue";
 import MovieJudgementPage from "@/views/judgement/MovieJudgementPage.vue";
 import DirectorJudgementPage from "@/views/judgement/DirectorJudgementPage.vue";
@@ -26,87 +26,75 @@ import ReviewMoviePageJudgement from "@/views/judgement/ReviewMoviePage.vue";
 const routes = [
   {
     path: '/',
-    component: HomeHome,
-  },
-  {
-    path: '/villes',
-    component: CitiesList,
-  },
-  {
-    path: '/carte',
-    component: CitiesMap,
-  },
-  {
-    path: '/judgement',
     name: 'HomeJudgement',
     component: HomeJudgement,
   },
   {
-    path: '/judgement/genres/:id/movies',
+    path: '/genres/:id/movies',
     component: GenreMoviesJudgementPage,
   },
   {
-    path: '/judgement/movie/:id',
+    path: '/movie/:id',
     component: MovieJudgementPage,
   },
   {
-    path: '/judgement/movie/:id/rating',
+    path: '/movie/:id/rating',
     name: "RatingMovieJudgement",
     component: RatingMoviePageJudgement,
   },
   {
-    path: '/judgement/movie/:id/review',
+    path: '/movie/:id/review',
     name: "ReviewMovieJudgement",
     component: ReviewMoviePageJudgement,
   },
   {
-    path: '/judgement/director/:id',
+    path: '/director/:id',
     component: DirectorJudgementPage,
   },
   {
-    path: '/judgement/cast/:id',
+    path: '/cast/:id',
     component: CastJudgementPage,
   },
   {
-    path: '/judgement/list/:id',
+    path: '/list/:id',
     component: ListJudgementPage,
   },
   {
-    path: '/judgement/user/:id',
+    path: '/user/:id',
     component: UserJudgementPage,
   },
   {
-    path: '/judgement/login',
+    path: '/login',
     name: 'LoginJudgement',
     component: LoginPageJudgement,
   },
   {
-    path: '/judgement/profil',
+    path: '/profil',
     name: 'ProfilJudgement',
     component: ProfilPageJudgement,
   },
   {
-    path: '/judgement/profil/edit',
+    path: '/profil/edit',
     name: 'EditProfilJudgement',
     component: EditProfilPageJudgement,
   },
   {
-    path: '/judgement/profil/list/:id/edit',
+    path: '/profil/list/:id/edit',
     name: 'EditCollectionJudgement',
     component: EditCollectionPageJudgement,
   },
   {
-    path: '/judgement/profil/list/create',
+    path: '/profil/list/create',
     name: 'CreateCollectionJudgement',
     component: CreateCollectionPageJudgement,
   },
   {
-    path: '/judgement/profil/rating/:id/edit',
+    path: '/profil/rating/:id/edit',
     name: 'EditVotesJudgement',
     component: EditVotesPageJudgement,
   },
   {
-    path: '/judgement/profil/review/:id/edit',
+    path: '/profil/review/:id/edit',
     name: 'EditReviewJudgement',
     component: EditReviewPageJudgement,
   }

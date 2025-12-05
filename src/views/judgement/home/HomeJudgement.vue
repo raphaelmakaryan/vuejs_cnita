@@ -1,6 +1,5 @@
 <script>
-import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
-import FeedJudgement from "@/components/judgement/FeedJudgement.vue";
+import FeedJudgement from "@/components/judgement/feed/FeedJudgement.vue";
 import GenreJudgement from "@/components/judgement/GenreJudgement.vue";
 import VueCookies from "vue-cookies";
 
@@ -12,7 +11,6 @@ export default {
     }
   },
   components: {
-    HeaderJudgement,
     FeedJudgement,
     GenreJudgement
   }
@@ -20,9 +18,10 @@ export default {
 </script>
 
 <template>
-  <HeaderJudgement/>
   <FeedJudgement v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"/>
+  <!--
   <GenreJudgement/>
+  -->
 </template>
 
 <style scoped>

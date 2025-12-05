@@ -74,7 +74,7 @@ export default {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
-          <router-link to="/judgement" class="navbar-brand">
+          <router-link to="/" class="navbar-brand">
             <img src="/logo.png" alt="Logo" width="50"
                  class="d-inline-block align-text-top">
           </router-link>
@@ -129,7 +129,7 @@ export default {
                 <div v-if="this.userSearchBar.totalItems > 0">
                   <ul>
                     <li v-for="user in this.userSearchBar.member">
-                      <router-link :to="{path: '/judgement/user/' + user.id}"
+                      <router-link :to="{path: '/user/' + user.id}"
                                    class="fs-6 m-2">{{ user.username }}
                       </router-link>
                     </li>
@@ -143,16 +143,13 @@ export default {
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/judgement" class="nav-link">Accueil Judgement</router-link>
+              <router-link to="/" class="nav-link">Accueil Judgement</router-link>
             </li>
             <li class="nav-item" v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')">
-              <router-link to="/judgement/login" class="nav-link">Se connecter</router-link>
+              <router-link to="/login" class="nav-link">Se connecter</router-link>
             </li>
             <li class="nav-item" v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')">
-              <router-link to="/judgement/profil" class="nav-link">Profil</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">Accueil du site</router-link>
+              <router-link to="/profil" class="nav-link">Profil</router-link>
             </li>
           </ul>
         </div>

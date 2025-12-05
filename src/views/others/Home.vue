@@ -1,5 +1,5 @@
 <script>
-import HeaderMain from "../components/HeaderMain.vue";
+import HeaderMain from "../../components/others/HeaderMain.vue";
 
 export default {
   name: 'Home',

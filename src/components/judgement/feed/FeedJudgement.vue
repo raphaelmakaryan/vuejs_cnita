@@ -25,11 +25,11 @@ export default {
     async linkSpecifically(value, data) {
       switch (value) {
         case "collection":
-          return "/judgement/list/" + data.data.id
+          return "/list/" + data.data.id
         case "review":
-          return "/judgement/movie/" + +data.data.movie.id
+          return "/movie/" + +data.data.movie.id
         case "rating":
-          return "/judgement/movie/" + data.data.movie.id
+          return "/movie/" + data.data.movie.id
       }
     },
     async typeVerification(value) {
@@ -53,13 +53,14 @@ export default {
     },
   },
   async mounted() {
-    await this.getFeed();
-    await this.getSpecifically();
+    //await this.getFeed();
+    //await this.getSpecifically();
   }
 }
 </script>
 
 <template>
+
   <section class="my-5">
     <div class="container">
       <div class="row my-2">
@@ -68,25 +69,27 @@ export default {
           <hr>
         </div>
       </div>
-      <div class="row my-2">
-        <div
-          class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column"
-          v-for="feed in this.feedSpecifically">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-                <router-link :to="{path: '/judgement/user/' + feed.userId}">{{
-                    feed.user
-                  }}
-                </router-link>
-                a crée {{ feed.type }} !
-              </h5>
-              <p class="card-text">Date de creation : {{ feed.created }}</p>
-              <router-link class="btn btn-primary w-100" :to="feed.link">Voir</router-link>
-            </div>
+      <!--
+    <div class="row my-2">
+      <div
+        class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column"
+        v-for="feed in this.feedSpecifically">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <router-link :to="{path: '/user/' + feed.userId}">{{
+                  feed.user
+                }}
+              </router-link>
+              a crée {{ feed.type }} !
+            </h5>
+            <p class="card-text">Date de creation : {{ feed.created }}</p>
+            <router-link class="btn btn-primary w-100" :to="feed.link">Voir</router-link>
           </div>
         </div>
       </div>
+    </div>
+    -->
     </div>
   </section>
 
