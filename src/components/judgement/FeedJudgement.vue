@@ -53,16 +53,14 @@ export default {
     },
   },
   async mounted() {
-    if (VueCookies.get('tokenUser') && VueCookies.get('idUser')) {
-      await this.getFeed();
-      await this.getSpecifically();
-    }
+    await this.getFeed();
+    await this.getSpecifically();
   }
 }
 </script>
 
 <template>
-  <section class="my-5" v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')">
+  <section class="my-5">
     <div class="container">
       <div class="row my-2">
         <div class="col-12">

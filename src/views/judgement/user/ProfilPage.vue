@@ -280,5 +280,5 @@ export default {
 </template>
 
 <style scoped>
-@import "bootstrap-icons/font/bootstrap-icons";
+
 </style>

@@ -16,6 +16,7 @@
   "dependencies": {
     "@splidejs/vue-splide": "^0.6.12",
     "axios": "^1.13.2",
+    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "timeago.js": "^4.0.2",
     "vue": "^3.5.25",

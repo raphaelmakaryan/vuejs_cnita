@@ -8,8 +8,6 @@
 
 # Global
 
-- Import boostrap et boostrap icon dans le projet complet
-- tout les fichiers qui sont des pages, les renommées a la fin : "Page"
 - Dans les views qui importe des components, mettre des v-if si on souhaite afficher des choses ou pas si t'es connecté
   ou non
 - Crée un layout global pour judgement, voir ce que sais des slots

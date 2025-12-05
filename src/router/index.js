@@ -1,41 +1,36 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
-import Home from '../views/Home.vue';
-import CitiesList from '../views/others/CitiesList.vue';
-import City from "@/components/others/City.vue";
-import CitiesMap from "@/views/others/CitiesMap.vue";
-import Judgement from "@/views/judgement/Judgement.vue";
-import genreMoviesJudgement from "@/views/judgement/GenreMoviesJudgement.vue";
-import MovieJudgement from "@/views/judgement/MovieJudgement.vue";
-import DirectorJudgement from "@/views/judgement/DirectorJudgement.vue";
-import CastJudgement from "@/views/judgement/CastJudgement.vue";
-import ListJudgement from "@/views/judgement/ListJudgement.vue";
-import UserJudgement from "@/views/judgement/UserJudgement.vue";
-import LoginJudgement from "@/views/judgement/Login.vue";
 import VueCookies from "vue-cookies";
-import ProfilJudgement from "@/views/judgement/user/Profil.vue";
-import AllUser from "@/views/judgement/AllUser.vue";
-import EditProfilJudgement from "@/views/judgement/user/EditProfil.vue";
-import EditCollectionJudgement from "@/views/judgement/user/EditCollection.vue";
-import CreateCollectionJudgement from "@/views/judgement/user/CreateCollection.vue";
-import EditVotesJudgement from "@/views/judgement/user/EditVotes.vue";
-import EditReviewJudgement from "@/views/judgement/user/EditReview.vue";
-import RatingMovieJudgement from "@/views/judgement/RatingMovie.vue";
-import ReviewMovieJudgement from "@/views/judgement/ReviewMovie.vue";
+
+import HomeHome from '@/views/Home.vue';
+import CitiesList from '../views/others/CitiesList.vue';
+import CitiesMap from "@/views/others/CitiesMap.vue";
+import HomeJudgement from "@/views/judgement/HomeJudgement.vue";
+import GenreMoviesJudgementPage from "@/views/judgement/GenreMoviesJudgementPage.vue";
+import MovieJudgementPage from "@/views/judgement/MovieJudgementPage.vue";
+import DirectorJudgementPage from "@/views/judgement/DirectorJudgementPage.vue";
+import CastJudgementPage from "@/views/judgement/CastJudgementPage.vue";
+import ListJudgementPage from "@/views/judgement/ListJudgementPage.vue";
+import UserJudgementPage from "@/views/judgement/UserJudgementPage.vue";
+import LoginPageJudgement from "@/views/judgement/LoginPage.vue";
+import ProfilPageJudgement from "@/views/judgement/user/ProfilPage.vue";
+import EditProfilPageJudgement from "@/views/judgement/user/EditProfilPage.vue";
+import EditCollectionPageJudgement from "@/views/judgement/user/EditCollectionPage.vue";
+import CreateCollectionPageJudgement from "@/views/judgement/user/CreateCollectionPage.vue";
+import EditVotesPageJudgement from "@/views/judgement/user/EditVotesPage.vue";
+import EditReviewPageJudgement from "@/views/judgement/user/EditReviewPage.vue";
+import RatingMoviePageJudgement from "@/views/judgement/RatingMoviePage.vue";
+import ReviewMoviePageJudgement from "@/views/judgement/ReviewMoviePage.vue";
 
 
 const routes = [
   {
     path: '/',
-    component: Home,
+    component: HomeHome,
   },
   {
     path: '/villes',
     component: CitiesList,
-  },
-  {
-    path: '/ville',
-    component: City,
   },
   {
     path: '/carte',
@@ -44,81 +39,77 @@ const routes = [
   {
     path: '/judgement',
     name: 'HomeJudgement',
-    component: Judgement,
+    component: HomeJudgement,
   },
   {
     path: '/judgement/genres/:id/movies',
-    component: genreMoviesJudgement,
+    component: GenreMoviesJudgementPage,
   },
   {
     path: '/judgement/movie/:id',
-    component: MovieJudgement,
+    component: MovieJudgementPage,
   },
   {
     path: '/judgement/movie/:id/rating',
     name: "RatingMovieJudgement",
-    component: RatingMovieJudgement,
+    component: RatingMoviePageJudgement,
   },
   {
     path: '/judgement/movie/:id/review',
     name: "ReviewMovieJudgement",
-    component: ReviewMovieJudgement,
+    component: ReviewMoviePageJudgement,
   },
   {
     path: '/judgement/director/:id',
-    component: DirectorJudgement,
+    component: DirectorJudgementPage,
   },
   {
     path: '/judgement/cast/:id',
-    component: CastJudgement,
+    component: CastJudgementPage,
   },
   {
     path: '/judgement/list/:id',
-    component: ListJudgement,
+    component: ListJudgementPage,
   },
   {
     path: '/judgement/user/:id',
-    component: UserJudgement,
+    component: UserJudgementPage,
   },
   {
     path: '/judgement/login',
     name: 'LoginJudgement',
-    component: LoginJudgement,
+    component: LoginPageJudgement,
   },
   {
     path: '/judgement/profil',
     name: 'ProfilJudgement',
-    component: ProfilJudgement,
+    component: ProfilPageJudgement,
   },
   {
     path: '/judgement/profil/edit',
     name: 'EditProfilJudgement',
-    component: EditProfilJudgement,
+    component: EditProfilPageJudgement,
   },
   {
     path: '/judgement/profil/list/:id/edit',
     name: 'EditCollectionJudgement',
-    component: EditCollectionJudgement,
+    component: EditCollectionPageJudgement,
   },
   {
     path: '/judgement/profil/list/create',
     name: 'CreateCollectionJudgement',
-    component: CreateCollectionJudgement,
+    component: CreateCollectionPageJudgement,
   },
   {
     path: '/judgement/profil/rating/:id/edit',
     name: 'EditVotesJudgement',
-    component: EditVotesJudgement,
+    component: EditVotesPageJudgement,
   },
   {
     path: '/judgement/profil/review/:id/edit',
     name: 'EditReviewJudgement',
-    component: EditReviewJudgement,
-  },
-  {
-    path: '/judgement/all-users',
-    component: AllUser,
-  },
+    component: EditReviewPageJudgement,
+  }
 ]
 
 const rooter = createRouter({
@@ -130,8 +121,8 @@ const rooter = createRouter({
 rooter.beforeEach((to, from, next) => {
   const token = VueCookies.get('tokenUser')
   const userId = VueCookies.get("idUser")
-  const cantComeNotConnected = ["ProfilJudgement", "RatingMovieJudgement", "ReviewMovieJudgement", "EditProfilJudgement", "EditCollectionJudgement", "CreateCollectionJudgement", "EditVotesJudgement", "EditReviewJudgement"]
-  const cantComeConnected = ["LoginJudgement"]
+  const cantComeNotConnected = ["ProfilPageJudgement", "RatingMoviePageJudgement", "ReviewMoviePageJudgement", "EditProfilPageJudgement", "EditCollectionPageJudgement", "CreateCollectionPageJudgement", "EditVotesPageJudgement", "EditReviewPageJudgement"]
+  const cantComeConnected = ["LoginPageJudgement"]
   if (cantComeNotConnected.includes(to.name) && !token && !userId) {
     return next('/login')
   }
