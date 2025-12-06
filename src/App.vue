@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Header from '@/components/judgement/HeaderJudgement.vue'
+import Header from '@/components/HeaderJudgement.vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 

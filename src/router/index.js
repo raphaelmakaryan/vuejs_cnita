@@ -2,22 +2,22 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import VueCookies from 'vue-cookies'
 
-import HomeJudgement from '@/views/judgement/home/HomeJudgement.vue'
-import GenreMoviesJudgementPage from '@/views/judgement/GenreMoviesJudgementPage.vue'
-import MovieJudgementPage from '@/views/judgement/MovieJudgementPage.vue'
-import DirectorJudgementPage from '@/views/judgement/DirectorJudgementPage.vue'
-import CastJudgementPage from '@/views/judgement/CastJudgementPage.vue'
-import ListJudgementPage from '@/views/judgement/list/ListJudgementPage.vue'
-import UserJudgementPage from '@/views/judgement/user/UserJudgementPage.vue'
-import LoginPageJudgement from '@/views/judgement/login/LoginPage.vue'
-import ProfilPageJudgement from '@/views/judgement/profil/main/ProfilPage.vue'
-import EditProfilPageJudgement from '@/views/judgement/profil/main/EditProfilPage.vue'
-import EditCollectionPageJudgement from '@/views/judgement/profil/collections/EditCollectionPage.vue'
-import CreateCollectionPageJudgement from '@/views/judgement/profil/collections/CreateCollectionPage.vue'
-import EditVotesPageJudgement from '@/views/judgement/profil/EditVotesPage.vue'
-import EditReviewPageJudgement from '@/views/judgement/profil/EditReviewPage.vue'
-import RatingMoviePageJudgement from '@/views/judgement/RatingMoviePage.vue'
-import ReviewMoviePageJudgement from '@/views/judgement/ReviewMoviePage.vue'
+import HomeJudgement from '@/views/home/HomeJudgement.vue'
+import GenreMoviesJudgementPage from '@/views/GenreMoviesJudgementPage.vue'
+import MovieJudgementPage from '@/views/MovieJudgementPage.vue'
+import DirectorJudgementPage from '@/views/director/DirectorJudgementPage.vue'
+import CastJudgementPage from '@/views/cast/CastJudgementPage.vue'
+import ListJudgementPage from '@/views/list/ListJudgementPage.vue'
+import UserJudgementPage from '@/views/user/UserJudgementPage.vue'
+import LoginPageJudgement from '@/views/login/LoginPage.vue'
+import ProfilPageJudgement from '@/views/profil/main/ProfilPage.vue'
+import EditProfilPageJudgement from '@/views/profil/main/EditProfilPage.vue'
+import EditCollectionPageJudgement from '@/views/profil/collections/EditCollectionPage.vue'
+import CreateCollectionPageJudgement from '@/views/profil/collections/CreateCollectionPage.vue'
+import EditVotesPageJudgement from '@/views/profil/rating/EditVotesPage.vue'
+import EditReviewPageJudgement from '@/views/profil/review/EditReviewPage.vue'
+import RatingMoviePageJudgement from '@/views/profil/rating/RatingMoviePage.vue'
+import ReviewMoviePageJudgement from '@/views/profil/review/ReviewMoviePage.vue'
 
 const routes = [
   {
@@ -121,7 +121,7 @@ rooter.beforeEach((to, from, next) => {
     return next('/login')
   }
   if (cantComeConnected.includes(to.name) && token && userId) {
-    return next('/judgement/main')
+    return next('/')
   }
   next()
 })
