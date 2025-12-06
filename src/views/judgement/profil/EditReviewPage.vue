@@ -1,58 +1,63 @@
 <script>
-import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
-import {toRaw} from "vue";
-import JudgementAPI from "@/components/API/JudgementAPI.vue";
-import VueCookies from "vue-cookies";
+import { toRaw } from 'vue'
+import JudgementAPI from '@/components/API/JudgementAPI.vue'
+import VueCookies from 'vue-cookies'
 
 export default {
-  name: "EditReviewJudgement",
+  name: 'EditReviewJudgement',
   data() {
     return {
       valueIdReview: this.$route.params.id,
-      movie: [],
+      dataMovie: {},
+      newBody: {
+        content: '',
+      },
       review: [],
       newReview: null,
     }
   },
   methods: {
     async getReview() {
-      this.review = toRaw(await JudgementAPI.mounted("GET", `reviews/${this.valueIdReview}`, "", undefined, ""))
-    },
-    async getMovie() {
-      this.movie = await this.review.movie
+      this.review = toRaw(
+        await JudgementAPI.mounted('GET', `reviews/${this.valueIdReview}`, '', undefined, ''),
+      )
     },
     async status(data) {
       if (data.status) {
-        alert(data.detail);
+        alert(data.detail)
       } else {
-        alert("Vous avec modifié votre review !");
-        window.location.reload();
+        alert('Vous avec modifié votre review !')
+        window.location.reload()
       }
     },
     async updateReview() {
-      let body =
-        {
-          "content": this.newReview,
-        }
-      await this.status(await JudgementAPI.mounted("PATCH", `reviews/${this.valueIdReview}`, body, "application/merge-patch+json", VueCookies.get('tokenUser')));
+      await this.status(
+        await JudgementAPI.mounted(
+          'PATCH',
+          `reviews/${this.valueIdReview}`,
+          this.newBody,
+          'application/merge-patch+json',
+          VueCookies.get('tokenUser'),
+        ),
+      )
     },
   },
-  components: {HeaderJudgement},
   async mounted() {
-    await this.getReview();
-    await this.getMovie();
-  }
+    await this.getReview()
+    this.dataMovie = {
+      title: await this.review.movie.title,
+      poster: await this.review.movie.poster,
+    }
+  },
 }
 </script>
 
 <template>
-  <HeaderJudgement/>
-
   <section class="my-5">
     <div class="container">
       <div class="row">
         <div class="col-12 d-flex flex-column align-items-center">
-          <img :src="this.movie.poster" class="img-fluid w-25" :alt="this.movie.title">
+          <img :src="this.dataMovie.poster" class="img-fluid w-25" :alt="this.dataMovie.title" />
         </div>
       </div>
     </div>
@@ -64,21 +69,27 @@ export default {
         <div class="row">
           <div class="col-12">
             <p class="fs-2 mt-3">
-              MODIFIER LA REVIEW POUR LE FILM : <span
-              class="fw-bold fst-italic">
-                {{ this.movie.title }}
+              MODIFIER LA REVIEW POUR LE FILM :
+              <span class="fw-bold fst-italic">
+                {{ this.dataMovie.title }}
               </span>
             </p>
-            <hr>
+            <hr />
           </div>
         </div>
 
         <div class="row my-2">
           <div class="col-12">
             <label for="newReview" class="form-label">Nouvelle review</label>
-            <input type="text" class="form-control" id="newReview" v-model="newReview"
-                   minlength="3" required :placeholder="this.review.content"
-            >
+            <input
+              type="text"
+              class="form-control"
+              id="newReview"
+              v-model="newBody.content"
+              minlength="3"
+              required
+              :placeholder="this.review.content"
+            />
           </div>
         </div>
       </div>
@@ -97,6 +108,5 @@ export default {
 </template>
 
 <style scoped>
-@import "bootstrap-icons/font/bootstrap-icons";
+@import 'bootstrap-icons/font/bootstrap-icons';
 </style>
-
