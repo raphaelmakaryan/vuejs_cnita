@@ -13,7 +13,7 @@ export default {
       listRequest: [],
       newBody: {
         title: null,
-        entries: null,
+        entries: [],
       },
     }
   },
@@ -23,30 +23,31 @@ export default {
   },
   methods: {
     async updateCollection() {
-      switch (this.newBody.title) {
-        case null:
-          this.newBody.title = this.list.title
-          break
+      if (this.newBody.title === null) {
+        this.newBody.title = this.list.title
       }
-      console.log(this.newBody)
-      /*
-      let body =
       await this.status(
         await JudgementAPI.mounted(
           'PATCH',
           `custom_lists/${this.oldList.id}`,
-          body,
+          this.newBody,
           'application/merge-patch+json',
           VueCookies.get('tokenUser'),
         ),
       )
-       */
     },
   },
   async mounted() {
     this.list = toRaw(
       await JudgementAPI.mounted('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
-    )
+    ),
+      this.list.entries.forEach((element, index) => {
+        this.listRequest.push({
+          position: index + 1,
+          movie: `/api/movies/${element.movie.id}`,
+        })
+      })
+    this.newBody.entries = this.listRequest
   },
 }
 </script>
@@ -54,7 +55,7 @@ export default {
 <template>
   <form @submit.prevent="updateCollection">
     <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event" />
-    <CollectionMovie :backupList="list" @updateList="newBody.entries = $event" />
+    <CollectionMovie :oldList="this.list" :oldListRequest="this.listRequest" @updateList="newBody.entries = $event" />
     <section class="my-5">
       <div class="container">
         <div class="row">

@@ -7,7 +7,7 @@ import GenreMoviesJudgementPage from '@/views/judgement/GenreMoviesJudgementPage
 import MovieJudgementPage from '@/views/judgement/MovieJudgementPage.vue'
 import DirectorJudgementPage from '@/views/judgement/DirectorJudgementPage.vue'
 import CastJudgementPage from '@/views/judgement/CastJudgementPage.vue'
-import ListJudgementPage from '@/views/judgement/ListJudgementPage.vue'
+import ListJudgementPage from '@/views/judgement/list/ListJudgementPage.vue'
 import UserJudgementPage from '@/views/judgement/user/UserJudgementPage.vue'
 import LoginPageJudgement from '@/views/judgement/login/LoginPage.vue'
 import ProfilPageJudgement from '@/views/judgement/profil/main/ProfilPage.vue'

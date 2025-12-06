@@ -1,12 +1,12 @@
 <script>
 import HeaderJudgement from "@/components/judgement/HeaderJudgement.vue";
-import {normalizeStyle, toRaw} from "vue";
+import { normalizeStyle, toRaw } from "vue";
 import JudgementAPI from "@/components/API/JudgementAPI.vue";
-import {format} from 'timeago.js';
+import { format } from 'timeago.js';
 
 export default {
   name: "ListJudgement",
-  components: {HeaderJudgement},
+  components: { HeaderJudgement },
   data() {
     return {
       valueIdList: this.$route.params.id,
@@ -27,9 +27,6 @@ export default {
 </script>
 
 <template>
-  <HeaderJudgement/>
-
-
   <section class="my-5" v-if="Object.keys(this.list).length >= 1">
     <div class="container border rounded">
       <div class="row">
@@ -43,28 +40,27 @@ export default {
       <div class="row mt-2">
         <div class="col-12 my-2">
           <p class="fs-6"><span class="text-decoration-underline">
-            Nom de la liste :
-          </span>
+              Nom de la liste :
+            </span>
             {{ list.title }}</p>
         </div>
         <div class="col-12 my-2">
           <p class="fs-6"><span class="text-decoration-underline">
-            Crée le :
-          </span>
+              Crée le :
+            </span>
             {{ format(list.createdAt) }}</p>
         </div>
         <div class="col-12 my-2">
           <p class="fs-6"><span class="text-decoration-underline">
-            Dernière mise a jour le :
-          </span>
+              Dernière mise a jour le :
+            </span>
             {{ format(list.updatedAt) }}</p>
         </div>
         <div class="col-12 my-2">
           <p class="fs-6"><span class="text-decoration-underline">
-            Crée par :
-          </span>
-            <router-link :to="{path: '/judgement/user/' + list.user.id }"
-                         class="text-decoration-none">
+              Crée par :
+            </span>
+            <router-link :to="{ path: '/judgement/user/' + list.user.id }" class="text-decoration-none">
               {{ list.user.username }}
             </router-link>
           </p>
@@ -85,8 +81,7 @@ export default {
       </div>
       <div class="row mt-2 d-flex flex-column flex-md-row align-items-center">
         <div class="col-12 col-sm-12 col-md-4 col-lg-4" v-for="movie in this.list.entries">
-          <router-link :to="{path: '/judgement/movie/' + movie.movie.id }"
-                       class="text-decoration-none">
+          <router-link :to="{ path: '/judgement/movie/' + movie.movie.id }" class="text-decoration-none">
             <div class="card my-2" style="width: 18rem;">
               <img :src="movie.movie.poster" class="card-img-top" :alt="movie.movie.title">
               <div class="card-body">
@@ -100,6 +95,4 @@ export default {
   </section>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
