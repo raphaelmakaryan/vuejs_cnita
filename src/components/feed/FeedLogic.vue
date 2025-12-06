@@ -48,7 +48,7 @@ export default {
         case 'collection':
           return { name: 'ListJudgementPage', params: { id: data.data.id } }
         default:
-          return { name: 'MovieJudgementPage', params: { id: data.data.id } }
+          return { name: 'MovieJudgementPage', params: { id: data.data.movie.id } }
       }
     },
   },
