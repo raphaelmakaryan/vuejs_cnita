@@ -28,7 +28,7 @@ export default {
           >
           <router-link
             to="/profil"
-            v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')"
+            v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"
             class="footer-link"
             >Profil</router-link
           >
@@ -43,6 +43,8 @@ export default {
   color: var(--color-text-secondary);
   font-size: 0.9rem;
   transition: color 0.2s ease;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .footer-link:hover {

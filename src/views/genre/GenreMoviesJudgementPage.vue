@@ -1,5 +1,5 @@
 <script>
-import HeaderJudgement from '@/components/HeaderJudgement.vue'
+import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import { toRaw } from 'vue'
 import Pagination from '@/components/Pagination.vue'

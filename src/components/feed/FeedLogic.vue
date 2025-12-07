@@ -46,11 +46,10 @@ export default {
       }
     },
     linkSpecifically(value, data) {
-      switch (value) {
-        case 'collection':
-          return { name: 'ListJudgementPage', params: { id: data.data.id } }
-        default:
-          return { name: 'MovieJudgementPage', params: { id: data.data.movie.id } }
+      if (value === 'collection') {
+        return { name: 'ListJudgementPage', params: { id: data.data.id } }
+      } else {
+        return { name: 'MovieJudgementPage', params: { id: data.data.movie.id } }
       }
     },
   },

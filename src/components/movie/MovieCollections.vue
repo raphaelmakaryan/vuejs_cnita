@@ -35,6 +35,7 @@ export default {
         '',
       ),
     )
+    console.log(this.listsData)
   },
 }
 </script>
@@ -42,7 +43,7 @@ export default {
 <template>
   <div
     class="col-5 border rounded m-2"
-    v-if="Object.keys(this.listsData).length >= 1"
+    v-if="this.listsData.totalItems >= 1"
     id="collectionsMovie"
   >
     <div class="container-fluid">

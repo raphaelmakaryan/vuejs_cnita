@@ -40,11 +40,7 @@ export default {
 </script>
 
 <template>
-  <div
-    class="col-5 border rounded m-2"
-    v-if="Object.keys(this.ratingData).length >= 1"
-    id="ratingMovie"
-  >
+  <div class="col-5 border rounded m-2" v-if="this.ratingData.totalItems >= 1" id="ratingMovie">
     <div class="container-fluid">
       <div class="row my-2">
         <div class="col-12">
