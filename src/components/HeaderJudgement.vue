@@ -191,10 +191,10 @@ export default {
               <router-link to="/" class="nav-link mx-1" activeClass="active">Accueil</router-link>
             </li>
             <li class="nav-item" v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')">
-              <router-link to="/login" class="nav-link mx-1">Se connecter</router-link>
+              <router-link to="/login" class="nav-link mx-1" activeClass="active">Se connecter</router-link>
             </li>
             <li class="nav-item" v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')">
-              <router-link to="/profil" class="nav-link mx-1">Profil</router-link>
+              <router-link to="/profil" class="nav-link mx-1" activeClass="active">Profil</router-link>
             </li>
           </ul>
         </div>

@@ -42,7 +42,7 @@ export default {
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <p class="fs-2">FILMS TROUVER</p>
+          <p class="fs-2 titleSeparation m-0">FILMS TROUVER</p>
           <hr />
         </div>
       </div>

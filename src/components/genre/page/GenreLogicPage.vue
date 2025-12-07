@@ -62,55 +62,30 @@ export default {
     <div class="col-12 mt-5 align-items-center flex-column" style="display: flex" id="textWait">
       <p class="fs-2 fw-bold">Chargement...</p>
     </div>
-    <div class="col-12 my-2 border rounded" v-for="movie in movies">
-      <div class="container-fuid">
+    <div class="col-12 my-2 movie-card" v-for="movie in movies">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-            <div class="poster">
-              <div id="posterMovie">
-                <router-link :to="{ path: '/movie/' + movie.id }">
-                  <img
-                    :src="movie.poster ?? this.urlNotPoster"
-                    class="img-fluid"
-                    :alt="movie.title"
-                  />
-                </router-link>
-              </div>
-              <div
-                id="ratingMovie"
-                class="mt-2 d-flex align-items-center flex-row justify-content-center"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="iconRating"
-                  viewBox="0 0 24 24"
-                  fill="#f5c518"
-                  role="presentation"
-                >
-                  <path
-                    d="M12 20.1l5.82 3.682c1.066.675 2.37-.322 2.09-1.584l-1.543-6.926 5.146-4.667c.94-.85.435-2.465-.799-2.567l-6.773-.602L13.29.89a1.38 1.38 0 0 0-2.581 0l-2.65 6.53-6.774.602C.052 8.126-.453 9.74.486 10.59l5.147 4.666-1.542 6.926c-.28 1.262 1.023 2.26 2.09 1.585L12 20.099z"
-                  ></path>
-                </svg>
-                <p class="fs-6 m-0 ms-1 text-white">
-                  {{ movie.rating }}
-                </p>
-              </div>
+            <div class="poster-placeholder position-relative">
+              <router-link :to="{ path: '/movie/' + movie.id }"
+                class="d-flex flex-column align-items-start justify-content-end m-2">
+                <img :src="movie.poster ?? this.urlNotPoster" class="img-fluid" :alt="movie.title" />
+                <div class="movie-rating m-1"><svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                    </path>
+                  </svg><span class="rating-value"> {{ movie.rating }}</span></div>
+              </router-link>
             </div>
           </div>
-          <div class="col-10 d-flex flex-column">
+          <div class="col-10 d-flex flex-column align-items-start justify-content-center">
             <div class="mt-2">
-              <router-link
-                :to="{ path: '/movie/' + movie.id }"
-                class="text-decoration-none fs-5 p-0 fw-bold text-black"
-              >
+              <router-link :to="{ path: '/movie/' + movie.id }" class="text-decoration-none fs-3 p-0 title text-white">
                 {{ movie.title }}
               </router-link>
             </div>
             <div class="my-2">
-              <p class="fs-6 p-0">
-                Sortie en : <span class="fst-italic">{{ movie.year }}</span>
+              <p class="fs-6 p-0 year">
+                Sortie en : <span>{{ movie.year }}</span>
               </p>
             </div>
           </div>
@@ -121,12 +96,64 @@ export default {
 </template>
 
 <style scoped>
-.poster {
-  background: rgb(22, 27, 38);
-  padding: 11px;
-  position: relative;
-  width: 174px;
-  border: 1px solid rgb(51, 55, 65);
-  border-radius: 4px;
+.movie-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-accent-primary);
+  transform: translateX(8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.year {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+.year span {
+  color: var(--color-accent-primary);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poster-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+}
+
+.movie-rating {
+  position: absolute;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-accent-primary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.star-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-accent-primary);
+}
+
+.rating-value {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
 }
 </style>

@@ -16,7 +16,7 @@ export default {
     <section class="container">
       <div class="row">
         <div class="col-12 col-lg-6 d-flex flex-column">
-          <p class="fs-6">© 2024 Judgement - Votre plateforme de critiques de films</p>
+          <p class="fs-6">© 2025 Judgement - Votre plateforme de critiques de films</p>
         </div>
         <div class="col-12 col-lg-6 d-flex flex-row justify-content-end">
           <router-link to="/" class="footer-link">Accueil</router-link>
