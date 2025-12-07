@@ -14,11 +14,7 @@
 - un component quand c'est pertinent
 - trouver moyen de faire une sorte de notification (message vert et rouge sur le dom)
 - trouver une solution pour gerer les redirections plutot que windows reload
-- pas crée une variable venant d'une autre variable (voir editvotes pour getRating avec getMovies )
-- Plutot que crée une variable pour le body pour faire les requetes, autnat crée a l'avance un objet qui va s'etre envoyé au body
-- retirer format dans les method car normalement y'a pas besoin
 - refaire la page movie au propre avec des composants et tout
-- Refaire city et tout aussi
 
 # Page précise
 - Pour genreMoviesJudg -> revoir un systeme propre pour : 
@@ -27,15 +23,16 @@
 - Dans l'edit de collection, pouvoir drag and drop pour organiser les positions
 
 # Rooter
-
-- au import retirer les components, que des views
-- premiere lettre en maj
 - gerer les authorisation de qui peut entre dans les page du rooter directement, avec befor enter, voir middlewaire et
   les page 404 dans vue-rooter
 
 # Component
 
 - Les api sont des fichiers JS tout court des maintenant
+
+# CSS
+- tout remettre au propre les css
+- faire toute le style du style
 
 # Autre
 
