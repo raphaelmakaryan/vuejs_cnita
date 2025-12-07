@@ -20,20 +20,25 @@ export default {
       }
     },
     chooseCategorie(div) {
-      this.optionBar(div, 'hide')
-      switch (this.filter) {
-        case 'movies':
-          this.getSearchBarMovies()
-          break
-        case 'peoples':
-          this.getSearchBarPeople()
-          break
-        case 'users':
-          this.getSearchBarUsers()
-          break
+      if (this.searchBarValue.length >= 2) {
+        this.optionBar(div, 'hide')
+        switch (this.filter) {
+          case 'movies':
+            this.getSearchBarMovies()
+            break
+          case 'peoples':
+            this.getSearchBarPeople()
+            break
+          case 'users':
+            this.getSearchBarUsers()
+            break
+        }
+        this.resetData(this.filter)
+        this.optionBar(div, 'show')
+      } else {
+        this.resetData(null)
+        this.optionBar(div, 'hide')
       }
-      this.resetData(this.filter)
-      this.optionBar(div, 'show')
     },
     optionBar(div, type) {
       switch (type) {
@@ -95,6 +100,11 @@ export default {
           this.moviesSearchBar = []
           this.peoplesSearchBar = []
           break
+        default:
+          this.moviesSearchBar = []
+          this.peoplesSearchBar = []
+          this.userSearchBar = []
+          break
       }
     },
   },
@@ -152,15 +162,13 @@ export default {
             <p class="fs-5 mx-1 text-decoration-underline m-0">PERSONNALITÉ</p>
             <hr class="w-100" />
           </div>
-          <div v-if="this.peoplesSearchBar.totalItems > 0">
-            <ul>
-              <li v-for="people in this.peoplesSearchBar.member">
-                <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2"
-                  >{{ people.fullName }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
+          <ul v-if="this.peoplesSearchBar.totalItems > 0">
+            <li v-for="people in this.peoplesSearchBar.member">
+              <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2"
+                >{{ people.fullName }}
+              </router-link>
+            </li>
+          </ul>
           <div v-else>
             <p class="fs-6 mx-1 fw-bold">Aucune personnalité.</p>
           </div>
