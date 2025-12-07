@@ -1,6 +1,6 @@
 <script>
 import FeedJudgement from '@/components/feed/FeedJudgement.vue'
-import GenreJudgement from '@/components/genre/GenreJudgement.vue'
+import GenreJudgement from '@/components/genre/home/GenreJudgement.vue'
 import VueCookies from 'vue-cookies'
 
 export default {

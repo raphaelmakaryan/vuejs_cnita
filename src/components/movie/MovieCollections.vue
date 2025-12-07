@@ -52,9 +52,10 @@ export default {
         </div>
       </div>
       <div class="row my-2">
-        <div class="col-12 d-flex flex-column border rounded my-2" v-for="list in this.listsData">
-          {{ list }}
-          <!--
+        <div
+          class="col-12 d-flex flex-column border rounded my-2"
+          v-for="list in this.listsData.member"
+        >
           <router-link :to="{ path: '/list/' + list.id }">
             <p class="fs-6 m-0 text-decoration-underline fw-bold text-black">
               {{ list.customList.title }}
@@ -76,7 +77,7 @@ export default {
             <span class="text-decoration-underline">Derniere mise a jour le : </span
             >{{ format(list.customList.updatedAt) }}
           </p>
-        --></div>
+        </div>
       </div>
     </div>
   </div>

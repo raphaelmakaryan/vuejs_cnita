@@ -6,14 +6,16 @@
     <div class="card" style="width: 18rem">
       <div class="card-body">
         <h5 class="card-title">
-          <router-link :to="{ path: '/user/' + feed.data.user.id }">
+          <router-link :to="{ path: '/user/' + feed.data.user.id }" class="user-link">
             {{ feed.data.user.username }}
           </router-link>
-          a crée {{ this.typeVerification(feed.type.toLowerCase()) }} !
+          <span class="activity-text">
+            a crée {{ this.typeVerification(feed.type.toLowerCase()) }} !
+          </span>
         </h5>
         <p class="card-text">Date de creation : {{ format(feed.createdAt) }}</p>
         <router-link
-          class="btn btn-primary w-100"
+          class="btn btn-primary"
           :to="this.linkSpecifically(feed.type.toLowerCase(), feed)"
           >Voir</router-link
         >
@@ -55,4 +57,36 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-body {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.user-link {
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  font-size: 1.05rem;
+}
+
+.user-link:hover {
+  text-decoration: underline;
+}
+
+.activity-text {
+  color: var(--color-text-primary);
+  font-size: 1rem;
+}
+
+.card-text {
+  color: var(--color-text-tertiary);
+  font-size: 0.875rem;
+}
+
+.card {
+  --bs-card-border-color: unset !important;
+  --bs-card-bg: unset !important;
+}
+</style>

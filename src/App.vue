@@ -1,16 +1,18 @@
 <template>
   <Header />
   <router-view />
+  <FooterJudgement />
 </template>
 
 <script>
 import Header from '@/components/HeaderJudgement.vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import FooterJudgement from '@/components/Footer.vue'
 
 export default {
   name: 'App',
-  components: { Header },
+  components: { FooterJudgement, Header },
   setup() {
     const router = useRouter()
 
