@@ -60,3 +60,7 @@ body {
 .color_yellow {
   color: var(--color-yellow-primary);
 }
+
+hr {
+  color: gray !important;
+}

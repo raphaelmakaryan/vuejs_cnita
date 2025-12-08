@@ -1,14 +1,12 @@
 <script>
 import api from "@/assets/api.js"
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 
 export default {
   name: 'GenreLogicPage',
   data() {
     return {
-      displayItems: 30,
-      page: 1,
-      movies: [],
+      rawMovies: [],
       urlNotPoster: 'https://placehold.co/150x237',
     }
   },
@@ -17,39 +15,53 @@ export default {
       type: String,
       required: true,
     },
+    page: {
+      type: Number,
+      required: true,
+    },
+    displayItems: {
+      type: Number,
+      required: true,
+    }
+  },
+  watch: {
+    page() {
+      this.rawMovies = []
+      this.getMovies()
+    }
   },
   methods: {
     async feedBackPoster(url) {
       try {
-        const response = await fetch(url, { method: 'HEAD' })
-        return response.ok ? url : this.urlNotPoster
-      } catch (error) {
+        await fetch(url, {method: 'HEAD'})
+        return url
+      } catch (e) {
         return this.urlNotPoster
       }
     },
     async getMovies() {
-      const textWait = document.getElementById('textWait')
-      let data = toRaw(
-        await api(
-          'GET',
-          `genres/${this.idGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`,
-          '',
-          undefined,
-          '',
-        ),
+      const data = await api(
+        'GET',
+        `genres/${this.idGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`,
+        '',
+        undefined,
+        ''
       )
-      textWait.style.display = 'none'
-      for (const item of Object.values(data.member)) {
-        this.movies.push({
+      this.rawMovies = []
+      document.getElementById('textWait').style.display = 'none'
+      for (const item of data.member) {
+        const poster = await this.feedBackPoster(item.poster)
+        this.rawMovies.push({
           id: item.id,
-          poster: await this.feedBackPoster(item.poster),
+          poster: poster,
           title: item.title,
           year: item.year,
-          rating: item.imdb.rating,
-          genres: item.genres,
+          rating: item.imdb?.rating ?? 0,
+          genres: item.genres
         })
       }
-    },
+      this.$emit("movies-loaded", data.totalItems)
+    }
   },
   async mounted() {
     setTimeout(await this.getMovies(), 3000)
@@ -60,26 +72,31 @@ export default {
 <template>
   <div class="row" id="moviesLists">
     <div class="col-12 mt-5 align-items-center flex-column" style="display: flex" id="textWait">
-      <p class="fs-2 fw-bold">Chargement...</p>
+      <p class="fs-2 fw-bold text-white">Chargement...</p>
     </div>
-    <div class="col-12 my-2 movie-card rounded" v-for="movie in movies">
+    <div class="col-12 my-2 movie-card rounded" v-for="movie in rawMovies" v-if="this.rawMovies">
       <div class="container-fluid">
         <div class="row">
           <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-            <div class="poster-placeholder d-flex align-items-center justify-content-center text-secondary position-relative">
+            <div
+              class="poster-placeholder d-flex align-items-center justify-content-center text-secondary position-relative">
               <router-link :to="{ path: '/movie/' + movie.id }"
-                class="d-flex flex-column align-items-start justify-content-end m-2">
-                <img :src="movie.poster ?? this.urlNotPoster" class="img-fluid" :alt="movie.title" />
-                <div class="movie-rating d-flex align-items-center m-1"><svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                           class="d-flex flex-column align-items-start justify-content-end m-2">
+                <img :src="movie.poster ?? this.urlNotPoster" class="img-fluid" :alt="movie.title"/>
+                <div class="movie-rating d-flex align-items-center m-1">
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
                     </path>
-                  </svg><span class="rating-value fw-bold text-white"> {{ movie.rating }}</span></div>
+                  </svg>
+                  <span class="rating-value fw-bold text-white"> {{ movie.rating }}</span></div>
               </router-link>
             </div>
           </div>
           <div class="col-10 d-flex flex-column align-items-start justify-content-center">
             <div class="mt-2">
-              <router-link :to="{ path: '/movie/' + movie.id }" class="text-decoration-none fs-3 p-0 fw-bold text-white text-white">
+              <router-link :to="{ path: '/movie/' + movie.id }"
+                           class="text-decoration-none fs-3 p-0 fw-bold text-white text-white">
                 {{ movie.title }}
               </router-link>
             </div>

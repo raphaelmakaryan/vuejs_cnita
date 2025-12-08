@@ -7,9 +7,6 @@
 - A quoi sa sert axios
 
 # Page précise
-- Pour genreMoviesJudg -> revoir un systeme propre pour : 
-   - charger l'api
-   - et au changement de page tout refaire et reafficher 
 - Dans l'edit de collection, pouvoir drag and drop pour organiser les positions
 
 # CSS
@@ -19,7 +16,7 @@
 - modifier pour utiliser axios
 
 # TO DO LIST
-- GenreMovie
 - Drag and drop
 - Axios
 - CSS
+- revision

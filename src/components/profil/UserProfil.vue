@@ -1,6 +1,6 @@
 <script>
-import { format } from 'timeago.js'
-import { toRaw } from 'vue'
+import {format} from 'timeago.js'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 
@@ -17,7 +17,7 @@ export default {
       VueCookies.remove('idUser')
       VueCookies.remove('tokenUser')
       window.dispatchEvent(new Event('auth-change'))
-      this.$router.push({ name: 'HomeJudgement' })
+      this.$router.push({name: 'HomeJudgement'})
     },
   },
   async mounted() {
@@ -43,7 +43,7 @@ export default {
           </svg>
         </div>
         <div class="col-12 col-lg-8 d-flex align-items-start flex-column mt-3">
-          <p class="fs-2" id="username" class="mb-1">
+          <p class="fs-2 mb-1" id="username">
             {{ user.username }}
           </p>
         </div>

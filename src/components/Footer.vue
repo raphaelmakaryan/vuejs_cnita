@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <footer class="mt-5 p-2 mt-2">
+  <footer class="mt-5 p-5 mt-2">
     <section class="container">
       <div class="row">
         <div class="col-12 col-lg-6 d-flex flex-column">
