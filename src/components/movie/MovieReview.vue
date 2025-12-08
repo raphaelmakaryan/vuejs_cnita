@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import { format } from 'timeago.js'
 
 export default {
@@ -27,7 +27,7 @@ export default {
   },
   async mounted() {
     this.reviewData = toRaw(
-      await JudgementAPI.mounted('GET', `movies/${this.idMovie}/reviews`, '', undefined, ''),
+      await api('GET', `movies/${this.idMovie}/reviews`, '', undefined, ''),
     )
   },
 }

@@ -1,7 +1,7 @@
 <script>
 import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import { th } from 'timeago.js/lib/lang/index.d.ts'
 import router from '@/router/index.js'
@@ -25,7 +25,7 @@ export default {
   methods: {
     async getRating() {
       this.rating = toRaw(
-        await JudgementAPI.mounted('GET', `ratings/${this.valueIdVote}`, '', undefined, ''),
+        await api('GET', `ratings/${this.valueIdVote}`, '', undefined, ''),
       )
     },
     async forNotification(data) {
@@ -39,7 +39,7 @@ export default {
     },
     async updateRating() {
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'PATCH',
           `ratings/${this.valueIdVote}`,
           this.newBody,

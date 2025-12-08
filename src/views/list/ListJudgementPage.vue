@@ -1,6 +1,6 @@
 <script>
 import { normalizeStyle, toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import { format } from 'timeago.js'
 import ListInfosJudgement from '@/components/list/ListInfos.vue'
 import ListMoviesJudgement from '@/components/list/ListMovies.vue'
@@ -19,7 +19,7 @@ export default {
     format,
     async getList() {
       this.list = toRaw(
-        await JudgementAPI.mounted('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
+        await api('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
       )
     },
   },

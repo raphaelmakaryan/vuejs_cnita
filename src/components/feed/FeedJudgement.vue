@@ -1,6 +1,6 @@
 <script>
 import { toRaw } from 'vue'
-import JudgementApi from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import FeedLogic from './FeedLogic.vue'
 
@@ -13,7 +13,7 @@ export default {
     }
   },
   async mounted() {
-    const response = await JudgementApi.mounted(
+    const response = await api(
       'GET',
       'feed',
       '',

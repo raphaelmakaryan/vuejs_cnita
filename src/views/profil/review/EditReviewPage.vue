@@ -1,6 +1,6 @@
 <script>
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
@@ -24,7 +24,7 @@ export default {
   methods: {
     async getReview() {
       this.review = toRaw(
-        await JudgementAPI.mounted('GET', `reviews/${this.valueIdReview}`, '', undefined, ''),
+        await api('GET', `reviews/${this.valueIdReview}`, '', undefined, ''),
       )
     },
     async forNotification(data) {
@@ -38,7 +38,7 @@ export default {
     },
     async updateReview() {
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'PATCH',
           `reviews/${this.valueIdReview}`,
           this.newBody,

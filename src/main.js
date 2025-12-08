@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import './assets/style.css'
+import "@/assets/style.css"
 import App from './App.vue'
 import router from './router'
 import VueCookies from 'vue-cookies'

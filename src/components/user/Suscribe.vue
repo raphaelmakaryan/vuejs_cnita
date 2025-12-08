@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import Notification from '@/components/Notification.vue'
 import router from '@/router/index.js'
 
@@ -34,7 +34,7 @@ export default {
       switch (type) {
         case 'follow':
           requestFollow = toRaw(
-            await JudgementAPI.mounted(
+            await api(
               'POST',
               `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
               '',
@@ -45,7 +45,7 @@ export default {
           texte = 'Vous etes desormais abonne !'
           break
         case 'unfollow':
-          requestFollow = await JudgementAPI.mounted(
+          requestFollow = await api(
             'DELETE',
             `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
             '',
@@ -68,7 +68,7 @@ export default {
       ) {
         let verification = false
         let userFollow = toRaw(
-          await JudgementAPI.mounted(
+          await api(
             'GET',
             `users/${VueCookies.get('idUser')}/follows`,
             '',

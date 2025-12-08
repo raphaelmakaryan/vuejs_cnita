@@ -1,5 +1,5 @@
 <script>
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import Notification from '@/components/Notification.vue'
 import router from '@/router/index.js'
 
@@ -19,7 +19,7 @@ export default {
   methods: {
     async login() {
       if (this.newBody.email && this.newBody.password) {
-        let data = await JudgementAPI.mounted('POST', `auth`, this.newBody, undefined, '')
+        let data = await api('POST', `auth`, this.newBody, undefined, '')
         await this.forNotification(data)
         await this.save(data)
       }

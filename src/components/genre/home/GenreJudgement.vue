@@ -1,7 +1,7 @@
 <script>
-import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import {toRaw} from 'vue'
 import GenreLogic from './GenreLogic.vue'
+import api from "@/assets/api.js"
 
 export default {
   name: 'GenreJudgement',
@@ -11,7 +11,7 @@ export default {
     }
   },
   async mounted() {
-    this.genres = toRaw(await JudgementAPI.mounted('GET', 'genres', '', '', ''))
+    this.genres = toRaw(await api('GET', 'genres', '', '', ''))
   },
   components: {
     GenreLogic,
@@ -25,11 +25,11 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 titleSeparation">GENRES</p>
-          <hr  />
+          <hr/>
         </div>
       </div>
       <div class="row">
-        <GenreLogic :GenreData="this.genres" />
+        <GenreLogic :GenreData="this.genres"/>
       </div>
     </div>
   </section>

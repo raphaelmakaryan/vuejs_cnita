@@ -13,13 +13,6 @@ import FooterJudgement from '@/components/Footer.vue'
 export default {
   name: 'App',
   components: { FooterJudgement, Header },
-  setup() {
-    const router = useRouter()
-
-    onMounted(() => {
-      router.push('/')
-    })
-  },
 }
 </script>
 

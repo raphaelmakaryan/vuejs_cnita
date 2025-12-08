@@ -1,5 +1,5 @@
 <script>
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import { toRaw } from 'vue'
 
 export default {
@@ -30,7 +30,7 @@ export default {
     async getMovies() {
       const textWait = document.getElementById('textWait')
       let data = toRaw(
-        await JudgementAPI.mounted(
+        await api(
           'GET',
           `genres/${this.idGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`,
           '',

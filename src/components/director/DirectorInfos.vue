@@ -1,6 +1,6 @@
 <script>
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 
 export default {
   name: 'DirectorInfosJudgement',
@@ -17,7 +17,7 @@ export default {
   },
   async mounted() {
     this.director = toRaw(
-      await JudgementAPI.mounted('GET', `people/${this.idDirector}`, '', undefined, ''),
+      await api('GET', `people/${this.idDirector}`, '', undefined, ''),
     )
   },
 }

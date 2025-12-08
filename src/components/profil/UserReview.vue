@@ -1,7 +1,7 @@
 <script>
 import { format } from 'timeago.js'
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import Notification from '@/components/Notification.vue'
 import router from '@/router/index.js'
@@ -20,7 +20,7 @@ export default {
     format,
     async functionDelete(id, name) {
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'DELETE',
           `${name}/${id}`,
           '',
@@ -44,7 +44,7 @@ export default {
   },
   async mounted() {
     this.review = toRaw(
-      await JudgementAPI.mounted(
+      await api(
         'GET',
         `users/${VueCookies.get('idUser')}/reviews`,
         '',

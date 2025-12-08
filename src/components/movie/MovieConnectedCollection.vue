@@ -1,6 +1,6 @@
 <script>
 import VueCookies from 'vue-cookies'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import { toRaw } from 'vue'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
@@ -35,7 +35,7 @@ export default {
   methods: {
     async getCollections() {
       this.collections = toRaw(
-        await JudgementAPI.mounted(
+        await api(
           'GET',
           `users/${VueCookies.get('idUser')}/collections`,
           '',
@@ -62,7 +62,7 @@ export default {
     async updateCollection() {
       this.newBody.entries = this.collectionRequest
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'PATCH',
           `custom_lists/${this.chooseAddCollection}`,
           this.newBody,

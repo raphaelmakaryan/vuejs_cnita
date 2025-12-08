@@ -1,7 +1,7 @@
 <script>
 import { toRaw } from 'vue'
 import { format } from 'timeago.js'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 
 export default {
   name: 'UserInfo',
@@ -17,7 +17,7 @@ export default {
     }
   },
   async mounted() {
-    this.user = toRaw(await JudgementAPI.mounted('GET', `users/${this.idUser}`, '', undefined, ''))
+    this.user = toRaw(await api('GET', `users/${this.idUser}`, '', undefined, ''))
   },
 }
 </script>

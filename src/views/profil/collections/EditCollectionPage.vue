@@ -1,6 +1,6 @@
 <script>
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import CollectionName from '@/components/collections/CollectionName.vue'
 import CollectionMovie from '@/components/collections/CollectionMovie.vue'
 import Notification from '@/components/Notification.vue'
@@ -42,7 +42,7 @@ export default {
         this.newBody.title = this.list.title
       }
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'PATCH',
           `custom_lists/${this.valueIdList}`,
           this.newBody,
@@ -57,7 +57,7 @@ export default {
   },
   async mounted() {
     ;((this.list = toRaw(
-      await JudgementAPI.mounted('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
+      await api('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
     )),
       this.list.entries.forEach((element, index) => {
         this.listRequest.push({

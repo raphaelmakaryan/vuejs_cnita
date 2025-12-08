@@ -1,6 +1,6 @@
 <script>
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
@@ -21,7 +21,7 @@ export default {
   methods: {
     async getUser() {
       this.user = toRaw(
-        await JudgementAPI.mounted('GET', `users/${VueCookies.get('idUser')}`, '', undefined, ''),
+        await api('GET', `users/${VueCookies.get('idUser')}`, '', undefined, ''),
       )
     },
     async forNotification(data) {
@@ -35,7 +35,7 @@ export default {
     },
     async updateProfil() {
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'PATCH',
           `users/${VueCookies.get('idUser')}`,
           this.newBody,

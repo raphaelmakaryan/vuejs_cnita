@@ -12,13 +12,6 @@
    - et au changement de page tout refaire et reafficher 
 - Dans l'edit de collection, pouvoir drag and drop pour organiser les positions
 
-# Rooter
-- gerer les authorisation de qui peut entre dans les page du rooter directement, avec befor enter, voir middlewaire et
-  les page 404 dans vue-rooter
-
-# Component
-- Les api sont des fichiers JS tout court des maintenant
-
 # CSS
 - tout remettre au propre les css
 - faire toute le style du style
@@ -27,8 +20,6 @@
 - modifier pour utiliser axios
 
 # TO DO LIST
-- Component
-- Rooter
 - CSS
 - GenreMovie
 - Drag and drop

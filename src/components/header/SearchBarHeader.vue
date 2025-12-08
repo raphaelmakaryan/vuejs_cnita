@@ -1,6 +1,6 @@
 <script>
 import { toRaw } from 'vue'
-import JudgementApi from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 
 export default {
   name: 'SearchBarHeader',
@@ -53,7 +53,7 @@ export default {
     async getSearchBarPeople() {
       this.peoplesSearchBar = []
       this.peoplesSearchBar = toRaw(
-        await JudgementApi.mounted(
+        await api(
           'GET',
           'people?page=1&itemsPerPage=3&fullName%5B%5D=' + this.searchBarValue,
           '',
@@ -65,7 +65,7 @@ export default {
     async getSearchBarMovies() {
       this.moviesSearchBar = []
       this.moviesSearchBar = toRaw(
-        await JudgementApi.mounted(
+        await api(
           'GET',
           'movies?page=1&itemsPerPage=3&title%5B%5D=' + this.searchBarValue,
           '',
@@ -77,7 +77,7 @@ export default {
     async getSearchBarUsers() {
       this.userSearchBar = []
       this.userSearchBar = toRaw(
-        await JudgementApi.mounted(
+        await api(
           'GET',
           'users?page=1&itemsPerPage=3&username%5B%5D=' + this.searchBarValue,
           '',

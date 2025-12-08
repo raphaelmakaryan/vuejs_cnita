@@ -1,6 +1,6 @@
 <script>
 import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import { toRaw } from 'vue'
 import Pagination from '@/components/Pagination.vue'
 import GenreLogicPage from '@/components/genre/page/GenreLogicPage.vue'

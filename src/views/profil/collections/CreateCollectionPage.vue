@@ -1,5 +1,5 @@
 <script>
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
@@ -31,7 +31,7 @@ export default {
     },
     async createCollection() {
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'POST',
           `custom_lists`,
           this.newBody,

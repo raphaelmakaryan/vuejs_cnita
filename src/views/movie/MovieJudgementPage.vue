@@ -1,5 +1,5 @@
 <script>
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import MovieConnectedJudgement from '@/components/movie/MovieConnected.vue'
 import MovieInfos from '@/components/movie/MovieInfos.vue'

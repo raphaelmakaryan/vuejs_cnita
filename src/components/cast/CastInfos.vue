@@ -1,6 +1,6 @@
 <script>
-import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import {toRaw} from 'vue'
+import api from "@/assets/api.js"
 
 export default {
   name: 'CastInfosJudgement',
@@ -16,7 +16,7 @@ export default {
     }
   },
   async mounted() {
-    this.cast = toRaw(await JudgementAPI.mounted('GET', `people/${this.idCast}`, '', '', ''))
+    this.cast = toRaw(await api('GET', `people/${this.idCast}`, '', '', ''))
   },
 }
 </script>
@@ -27,7 +27,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">INFORMATIONS DE L'ACTEUR</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">

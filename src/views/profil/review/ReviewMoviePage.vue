@@ -1,7 +1,7 @@
 <script>
 import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
 import { toRaw } from 'vue'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
@@ -25,13 +25,13 @@ export default {
   methods: {
     async getMovie() {
       this.movie = toRaw(
-        await JudgementAPI.mounted('GET', `movies/${this.valueIdMovie}`, '', undefined, ''),
+        await api('GET', `movies/${this.valueIdMovie}`, '', undefined, ''),
       )
     },
     async createRating() {
       this.newBody.movie = '/api/movies/' + this.valueIdMovie
       await this.forNotification(
-        await JudgementAPI.mounted(
+        await api(
           'POST',
           `reviews`,
           this.newBody,

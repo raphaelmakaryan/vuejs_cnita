@@ -1,7 +1,7 @@
 <script>
 import { toRaw } from 'vue'
 import { format } from 'timeago.js'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 
 export default {
   name: 'UserFollows',
@@ -18,7 +18,7 @@ export default {
   },
   async mounted() {
     this.follows = toRaw(
-      await JudgementAPI.mounted('GET', `users/${this.idUser}/follows`, '', undefined, ''),
+      await api('GET', `users/${this.idUser}/follows`, '', undefined, ''),
     )
   },
 }

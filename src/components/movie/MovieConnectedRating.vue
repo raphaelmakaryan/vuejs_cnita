@@ -1,6 +1,6 @@
 <script>
 import VueCookies from 'vue-cookies'
-import JudgementAPI from '@/components/JudgementAPI.vue'
+import api from "@/assets/api.js"
 import { toRaw } from 'vue'
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
   async mounted() {
     let data = toRaw(
-      await JudgementAPI.mounted(
+      await api(
         'GET',
         `movies/${this.idMovie}/ratings?page=1&itemsPerPage=30`,
         '',
