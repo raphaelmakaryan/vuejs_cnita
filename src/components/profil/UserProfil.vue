@@ -43,7 +43,7 @@ export default {
           </svg>
         </div>
         <div class="col-12 col-lg-8 d-flex align-items-start flex-column mt-3">
-          <p class="fs-2" id="username">
+          <p class="fs-2" id="username" class="mb-1">
             {{ user.username }}
           </p>
         </div>
@@ -73,20 +73,20 @@ export default {
   height: 120px;
   min-width: 120px;
   background: var(--color-bg-elevated);
-  border: 3px solid var(--color-accent-primary);
+  border: 3px solid var(--color-yellow-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-accent-primary);
+  color: var(--color-yellow-primary);
 }
 
 #avatar svg {
   width: 60%;
   height: 60%;
 }
+
 #username {
-  margin-bottom: var(--spacing-sm);
   text-transform: uppercase;
   letter-spacing: 2px;
 }

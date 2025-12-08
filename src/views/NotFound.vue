@@ -10,7 +10,7 @@ export default {
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <p class="text-center" style="font-size: 10rem; color: var(--color-accent-primary)">
+          <p class="text-center" style="font-size: 10rem; color: var(--color-yellow-primary)">
             404</p>
         </div>
       </div>

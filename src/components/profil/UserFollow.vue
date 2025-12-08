@@ -76,12 +76,12 @@ export default {
   height: 48px;
   min-width: 48px;
   background: var(--color-bg-elevated);
-  border: 2px solid var(--color-accent-primary);
+  border: 2px solid var(--color-yellow-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-accent-primary);
+  color: var(--color-yellow-primary);
 }
 
 .user-avatar svg {

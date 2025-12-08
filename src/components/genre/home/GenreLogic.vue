@@ -26,7 +26,7 @@ export default {
       <SplideSlide v-for="genre in this.GenreData.member" class="mb-5">
         <router-link :to="{ path: '/genres/' + genre.id + '/movies' }" class="text-decoration-none">
           <div class="genre-overlay"></div>
-          <div class="boxHome p-5 m-1 d-flex align-items-center flex-column justify-content-center">
+          <div class="boxHome p-5 m-1 d-flex align-items-center flex-column justify-content-center text-white fw-bold z-1">
             {{ genre.label }}
           </div>
         </router-link>
@@ -45,10 +45,7 @@ export default {
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 1;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
   text-transform: uppercase;
   letter-spacing: 2px;
 }

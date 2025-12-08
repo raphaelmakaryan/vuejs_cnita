@@ -62,29 +62,29 @@ export default {
     <div class="col-12 mt-5 align-items-center flex-column" style="display: flex" id="textWait">
       <p class="fs-2 fw-bold">Chargement...</p>
     </div>
-    <div class="col-12 my-2 movie-card" v-for="movie in movies">
+    <div class="col-12 my-2 movie-card rounded" v-for="movie in movies">
       <div class="container-fluid">
         <div class="row">
           <div class="col-2 d-flex justify-content-center align-items-center flex-column">
-            <div class="poster-placeholder position-relative">
+            <div class="poster-placeholder d-flex align-items-center justify-content-center text-secondary position-relative">
               <router-link :to="{ path: '/movie/' + movie.id }"
                 class="d-flex flex-column align-items-start justify-content-end m-2">
                 <img :src="movie.poster ?? this.urlNotPoster" class="img-fluid" :alt="movie.title" />
-                <div class="movie-rating m-1"><svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                <div class="movie-rating d-flex align-items-center m-1"><svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
                     </path>
-                  </svg><span class="rating-value"> {{ movie.rating }}</span></div>
+                  </svg><span class="rating-value fw-bold text-white"> {{ movie.rating }}</span></div>
               </router-link>
             </div>
           </div>
           <div class="col-10 d-flex flex-column align-items-start justify-content-center">
             <div class="mt-2">
-              <router-link :to="{ path: '/movie/' + movie.id }" class="text-decoration-none fs-3 p-0 title text-white">
+              <router-link :to="{ path: '/movie/' + movie.id }" class="text-decoration-none fs-3 p-0 fw-bold text-white text-white">
                 {{ movie.title }}
               </router-link>
             </div>
             <div class="my-2">
-              <p class="fs-6 p-0 year">
+              <p class="fs-6 p-0 year text-secondary">
                 Sortie en : <span>{{ movie.year }}</span>
               </p>
             </div>
@@ -99,63 +99,42 @@ export default {
 .movie-card {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
   transition: all 0.3s ease;
-  /*cursor: pointer;
-
-   */
 }
 
 .movie-card:hover {
   background: var(--color-bg-tertiary);
-  border-color: var(--color-accent-primary);
+  border-color: var(--color-yellow-primary);
   transform: translateX(8px);
   box-shadow: var(--shadow-lg);
 }
 
-.title {
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
 .year {
-  color: var(--color-text-secondary);
   font-size: 1rem;
 }
 
 .year span {
-  color: var(--color-accent-primary);
+  color: var(--color-yellow-primary);
   font-weight: 600;
   font-style: italic;
-}
-
-.poster-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-tertiary);
 }
 
 .movie-rating {
   position: absolute;
   background: rgba(15, 15, 15, 0.95);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-accent-primary);
+  border: 1px solid var(--color-yellow-primary);
   padding: 6px 12px;
   border-radius: 20px;
-  display: flex;
-  align-items: center;
 }
 
 .star-icon {
   width: 18px;
   height: 18px;
-  color: var(--color-accent-primary);
+  color: var(--color-yellow-primary);
 }
 
 .rating-value {
-  font-weight: 600;
-  color: var(--color-text-primary);
   font-size: 0.95rem;
 }
 </style>

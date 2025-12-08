@@ -12,24 +12,24 @@ export default {
 </script>
 
 <template>
-  <footer class="mt-5">
+  <footer class="mt-5 p-2 mt-2">
     <section class="container">
       <div class="row">
         <div class="col-12 col-lg-6 d-flex flex-column">
-          <p class="fs-6">© 2025 Judgement - Votre plateforme de critiques de films</p>
+          <p class="fs-6 text-white">© 2025 Judgement - Votre plateforme de critiques de films</p>
         </div>
         <div class="col-12 col-lg-6 d-flex flex-row justify-content-end">
-          <router-link to="/" class="footer-link">Accueil</router-link>
+          <router-link to="/" class="footer-link text-secondary mx-1">Accueil</router-link>
           <router-link
             to="/login"
             v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')"
-            class="footer-link"
+            class="footer-link text-secondary mx-1"
             >Se connecter</router-link
           >
           <router-link
             to="/profil"
             v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"
-            class="footer-link"
+            class="footer-link text-secondary mx-1"
             >Profil</router-link
           >
         </div>
@@ -40,21 +40,16 @@ export default {
 
 <style scoped>
 .footer-link {
-  color: var(--color-text-secondary);
   font-size: 0.9rem;
   transition: color 0.2s ease;
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .footer-link:hover {
-  color: var(--color-accent-primary);
+  color: var(--color-yellow-primary);
 }
 
 footer {
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-xl) 0;
-  margin-top: var(--spacing-2xl);
 }
 </style>

@@ -51,15 +51,15 @@ export default {
           <SearchBarHeader />
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/" class="nav-link mx-1" activeClass="active">Accueil</router-link>
+              <router-link to="/" class="nav-link text-secondary fw-bold mx-1" activeClass="active">Accueil</router-link>
             </li>
             <li class="nav-item" v-if="!isLogged">
-              <router-link to="/login" class="nav-link mx-1" activeClass="active"
+              <router-link to="/login" class="nav-link text-secondary fw-bold mx-1" activeClass="active"
                 >Se connecter</router-link
               >
             </li>
             <li class="nav-item" v-if="isLogged">
-              <router-link to="/profil" class="nav-link mx-1" activeClass="active"
+              <router-link to="/profil" class="nav-link text-secondary fw-bold mx-1" activeClass="active"
                 >Profil</router-link
               >
             </li>
@@ -78,19 +78,17 @@ export default {
 }
 
 .nav-link {
-  color: var(--color-text-secondary) !important;
-  font-weight: 500;
   border-radius: var(--radius-md);
   transition: all 0.2s ease;
 }
 
 .nav-link:hover {
-  color: var(--color-text-primary) !important;
+  color:  #ffffff !important;
   background: var(--color-bg-tertiary) !important;
 }
 
 .nav-link.active {
-  color: var(--color-accent-primary) !important;
+  color: var(--color-yellow-primary) !important;
   background: rgba(212, 175, 55, 0.1);
 }
 </style>

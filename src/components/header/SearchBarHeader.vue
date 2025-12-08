@@ -241,22 +241,22 @@ export default {
 #searchBar {
   background: var(--color-bg-primary) !important;
   border: 1px solid var(--color-border) !important;
-  color: var(--color-text-primary) !important;
+  color:  #ffffff !important;
   transition: all 0.3s ease;
 }
 
 #searchBar::placeholder {
-  color: var(--color-text-secondary) !important;
+  color: #6c757d !important;
 }
 
 #searchBar:focus {
-  border-color: var(--color-accent-primary) !important;
+  border-color: var(--color-yellow-primary) !important;
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 .dropdown-menu {
   background-color: var(--color-bg-primary) !important;
-  border: 1px solid var(--color-accent-primary) !important;
+  border: 1px solid var(--color-yellow-primary) !important;
 }
 
 .dropdown-menu > li > a:hover {
@@ -268,6 +268,6 @@ export default {
 }
 
 .colorSearch {
-  color: var(--color-accent-primary) !important;
+  color: var(--color-yellow-primary) !important;
 }
 </style>

@@ -21,11 +21,11 @@ export default {
   <section class="mt-5">
     <div class="container p-5">
       <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center text-white">
           <h1>Welcome to Judgement</h1>
         </div>
         <div class="col-12 text-center">
-          <p class="lead">Discover and share your favorite movies.</p>
+          <p class="text-secondary">Discover and share your favorite movies.</p>
         </div>
       </div>
     </div>

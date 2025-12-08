@@ -4,16 +4,16 @@
     v-for="feed in feedData.items"
   >
     <div class="card" style="width: 18rem">
-      <div class="card-body">
+      <div class="card-body rounded">
         <h5 class="card-title">
           <router-link :to="{ path: '/user/' + feed.data.user.id }" class="user-link">
             {{ feed.data.user.username }}
           </router-link>
-          <span class="activity-text">
+          <span class="activity-text text-white">
             a crée {{ this.typeVerification(feed.type.toLowerCase()) }} !
           </span>
         </h5>
-        <p class="card-text">Date de creation : {{ format(feed.createdAt) }}</p>
+        <p class="card-text text-secondary">Date de creation : {{ format(feed.createdAt) }}</p>
         <router-link
           class="btn btn-primary"
           :to="this.linkSpecifically(feed.type.toLowerCase(), feed)"
@@ -60,13 +60,12 @@ export default {
 .card-body {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .user-link {
   font-weight: 600;
-  color: var(--color-accent-primary);
+  color: var(--color-yellow-primary);
   font-size: 1.05rem;
 }
 
@@ -75,12 +74,10 @@ export default {
 }
 
 .activity-text {
-  color: var(--color-text-primary);
   font-size: 1rem;
 }
 
 .card-text {
-  color: var(--color-text-tertiary);
   font-size: 0.875rem;
 }
 

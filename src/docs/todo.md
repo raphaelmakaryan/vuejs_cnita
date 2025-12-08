@@ -13,14 +13,13 @@
 - Dans l'edit de collection, pouvoir drag and drop pour organiser les positions
 
 # CSS
-- tout remettre au propre les css
 - faire toute le style du style
 
 # Autre
 - modifier pour utiliser axios
 
 # TO DO LIST
-- CSS
 - GenreMovie
 - Drag and drop
 - Axios
+- CSS

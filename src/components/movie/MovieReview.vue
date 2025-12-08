@@ -63,7 +63,4 @@ export default {
 </template>
 
 <style scoped>
-.color_yellow {
-  color: var(--color-accent-primary);
-}
 </style>
