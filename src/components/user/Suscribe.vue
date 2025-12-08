@@ -2,20 +2,35 @@
 import VueCookies from 'vue-cookies'
 import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
+import Notification from '@/components/Notification.vue'
+import router from '@/router/index.js'
 
 export default {
   name: 'UserSuscribe',
+  components: { Notification },
   props: {
     idUser: Number,
   },
   data() {
     return {
       userConnectedFollow: null,
+      valueNotification: null,
+      textNotification: null,
     }
   },
   methods: {
+    async forNotification(data, texte) {
+      if (data.status) {
+        this.valueNotification = false
+        this.textNotification = data.detail
+      } else {
+        this.valueNotification = true
+        this.textNotification = texte
+      }
+    },
     async systemFollow(type) {
       let requestFollow
+      let texte
       switch (type) {
         case 'follow':
           requestFollow = toRaw(
@@ -27,20 +42,23 @@ export default {
               VueCookies.get('tokenUser'),
             ),
           )
-          await this.status(requestFollow, "Vous l'avez suivis !")
+          texte = 'Vous etes desormais abonne !'
           break
         case 'unfollow':
-          alert('Vous vous etes desabonnez !')
-          await JudgementAPI.mounted(
+          requestFollow = await JudgementAPI.mounted(
             'DELETE',
             `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
             '',
             undefined,
             VueCookies.get('tokenUser'),
           )
-          window.location.reload()
+          texte = 'Vous vous etes desabonnez !'
           break
       }
+      await this.forNotification(requestFollow, texte)
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
     async verificationFollow() {
       if (
@@ -66,14 +84,6 @@ export default {
         this.userConnectedFollow = verification
       }
     },
-    async status(data, texte) {
-      if (data !== null && data.status) {
-        alert(data.detail)
-      } else {
-        alert(texte)
-        window.location.reload()
-      }
-    },
   },
   computed: {
     VueCookies() {
@@ -92,6 +102,11 @@ export default {
     v-if="this.userConnectedFollow != null && parseInt(VueCookies.get('idUser')) !== this.idUser"
   >
     <div class="container">
+      <Notification
+        v-if="this.valueNotification != null && this.textNotification != null"
+        :value="valueNotification"
+        :text="textNotification"
+      />
       <div class="row">
         <div class="col-12" v-if="this.userConnectedFollow">
           <button type="button" @click="systemFollow('unfollow')" class="btn btn-danger">

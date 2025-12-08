@@ -51,7 +51,7 @@ export default {
           v-for="review in this.reviewData.member"
         >
           <router-link :to="{ path: '/user/' + review.user.id }">
-            <p class="fs-6 my-2 text-decoration-underline fw-bold text-black">
+            <p class="fs-6 my-2 text-decoration-underline fw-bold color_yellow">
               {{ review.user.username }}
             </p>
           </router-link>
@@ -62,4 +62,8 @@ export default {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.color_yellow {
+  color: var(--color-accent-primary);
+}
+</style>

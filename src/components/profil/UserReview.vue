@@ -3,18 +3,23 @@ import { format } from 'timeago.js'
 import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import VueCookies from 'vue-cookies'
+import Notification from '@/components/Notification.vue'
+import router from '@/router/index.js'
 
 export default {
   name: 'UserReview',
+  components: { Notification },
   data() {
     return {
       review: [],
+      valueNotification: null,
+      textNotification: null,
     }
   },
   methods: {
     format,
-    async functionDelete(id, name, texte) {
-      await this.status(
+    async functionDelete(id, name) {
+      await this.forNotification(
         await JudgementAPI.mounted(
           'DELETE',
           `${name}/${id}`,
@@ -22,15 +27,18 @@ export default {
           undefined,
           VueCookies.get('tokenUser'),
         ),
-        texte,
       )
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
-    async status(data, texte) {
+    async forNotification(data) {
       if (data.status) {
-        alert(data.detail)
+        this.valueNotification = false
+        this.textNotification = data.detail
       } else {
-        alert(texte)
-        window.location.reload()
+        this.valueNotification = true
+        this.textNotification = `Vous avez supprimez la review pour le film : ${this.review.member.title} !`
       }
     },
   },
@@ -54,6 +62,11 @@ export default {
     v-if="Object.keys(this.review).length >= 1 && this.review.member.length >= 1"
   >
     <div class="container">
+      <Notification
+        v-if="this.valueNotification != null && this.textNotification != null"
+        :value="valueNotification"
+        :text="textNotification"
+      />
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3 titleSeparation m-0">VOS REVIEWS</p>
@@ -83,13 +96,7 @@ export default {
             <button
               type="button"
               class="btn btn-danger mx-1"
-              @click="
-                functionDelete(
-                  review.id,
-                  'reviews',
-                  'Vous avez supprimez la review pour le film : ' + review.movie.title + '!',
-                )
-              "
+              @click="functionDelete(review.id, 'reviews')"
             >
               <i class="bi bi-trash"></i>
             </button>

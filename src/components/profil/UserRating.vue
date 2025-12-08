@@ -3,18 +3,32 @@ import { format } from 'timeago.js'
 import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import VueCookies from 'vue-cookies'
+import router from '@/router/index.js'
+import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'UserRating',
+  components: { Notification },
   data() {
     return {
       rating: [],
+      valueNotification: null,
+      textNotification: null,
     }
   },
   methods: {
     format,
-    async functionDelete(id, name, texte) {
-      await this.status(
+    async forNotification(data) {
+      if (data.status) {
+        this.valueNotification = false
+        this.textNotification = data.detail
+      } else {
+        this.valueNotification = true
+        this.textNotification = `Vous avez supprimez le vote pour le film : ${this.rating.member.movie.title} !`
+      }
+    },
+    async functionDelete(id, name) {
+      await this.forNotification(
         await JudgementAPI.mounted(
           'DELETE',
           `${name}/${id}`,
@@ -22,16 +36,10 @@ export default {
           undefined,
           VueCookies.get('tokenUser'),
         ),
-        texte,
       )
-    },
-    async status(data, texte) {
-      if (data.status) {
-        alert(data.detail)
-      } else {
-        alert(texte)
-        window.location.reload()
-      }
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
   },
   async mounted() {
@@ -54,6 +62,11 @@ export default {
     v-if="Object.keys(this.rating).length >= 1 && this.rating.member.length >= 1"
   >
     <div class="container">
+      <Notification
+        v-if="this.valueNotification != null && this.textNotification != null"
+        :value="valueNotification"
+        :text="textNotification"
+      />
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3 titleSeparation m-0">VOS VOTES</p>
@@ -98,13 +111,7 @@ export default {
             <button
               type="button"
               class="btn btn-danger mx-1"
-              @click="
-                functionDelete(
-                  rating.id,
-                  'ratings',
-                  'Vous avez supprimez le vote pour le film : ' + rating.movie.title + '!',
-                )
-              "
+              @click="functionDelete(rating.id, 'ratings')"
             >
               <i class="bi bi-trash"></i>
             </button>

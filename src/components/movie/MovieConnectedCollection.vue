@@ -2,9 +2,12 @@
 import VueCookies from 'vue-cookies'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import { toRaw } from 'vue'
+import router from '@/router/index.js'
+import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'MovieConnectedCollectionJudgement',
+  components: { Notification },
   computed: {
     VueCookies() {
       return VueCookies
@@ -22,9 +25,11 @@ export default {
       collectionsSelect: [],
       collectionRequest: [],
       chooseAddCollection: null,
+      valueNotification: null,
+      textNotification: null,
       newBody: {
         entries: [],
-      }
+      },
     }
   },
   methods: {
@@ -45,9 +50,18 @@ export default {
         await this.updateCollection()
       }
     },
+    async forNotification(data) {
+      if (data.status) {
+        this.valueNotification = false
+        this.textNotification = data.detail
+      } else {
+        this.valueNotification = true
+        this.textNotification = `Vous avez ajouter le film a la collection !`
+      }
+    },
     async updateCollection() {
       this.newBody.entries = this.collectionRequest
-      await this.status(
+      await this.forNotification(
         await JudgementAPI.mounted(
           'PATCH',
           `custom_lists/${this.chooseAddCollection}`,
@@ -55,8 +69,10 @@ export default {
           'application/merge-patch+json',
           VueCookies.get('tokenUser'),
         ),
-        'Vous avez ajouter le film a la collection !',
       )
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
     async setupListRequest(id) {
       let newIndex = null
@@ -80,14 +96,6 @@ export default {
         }
       })
       return newIndex
-    },
-    async status(data, texte) {
-      if (data.status) {
-        alert(data.detail)
-      } else {
-        alert(texte)
-        window.location.reload()
-      }
     },
     async existedCollection() {
       let backupCollectionId = []
@@ -124,9 +132,18 @@ export default {
 </script>
 
 <template>
+  <Notification
+    v-if="this.valueNotification != null && this.textNotification != null"
+    :value="valueNotification"
+    :text="textNotification"
+  />
   <div class="col-12 cl-sm-12 col-md-4 col-lg-4">
-    <select v-if="Object.values(this.collectionsSelect).length > 0" class="form-select" @change="addCollection()"
-      v-model="chooseAddCollection">
+    <select
+      v-if="Object.values(this.collectionsSelect).length > 0"
+      class="form-select"
+      @change="addCollection()"
+      v-model="chooseAddCollection"
+    >
       <option selected>L'ajouter a une collection</option>
       <option v-for="choice in this.collectionsSelect" :value="choice.id">
         {{ choice.name }}

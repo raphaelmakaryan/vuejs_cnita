@@ -25,3 +25,11 @@
 
 # Autre
 - modifier pour utiliser axios
+
+# TO DO LIST
+- Component
+- Rooter
+- CSS
+- GenreMovie
+- Drag and drop
+- Axios
