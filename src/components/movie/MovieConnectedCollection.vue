@@ -1,13 +1,14 @@
 <script>
 import VueCookies from 'vue-cookies'
 import api from "@/assets/api.js"
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
+import {computeScrollPosition} from "vue-router/dist/devtools-BLCumUwL.mjs";
 
 export default {
   name: 'MovieConnectedCollectionJudgement',
-  components: { Notification },
+  components: {Notification},
   computed: {
     VueCookies() {
       return VueCookies
@@ -71,11 +72,10 @@ export default {
         ),
       )
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
     async setupListRequest(id) {
-      let newIndex = null
       this.collections.member.forEach((collection) => {
         if (collection.id === id) {
           if (collection.entries.length === 0) {
@@ -84,18 +84,21 @@ export default {
               movie: `/api/movies/${this.idMovie}`,
             })
           } else {
-            collection.entries.forEach((element, index) => {
-              let i = index + 1
+            let newIndex = null
+            collection.entries.forEach((element) => {
               this.collectionRequest.push({
-                position: i,
+                position: element.position,
                 movie: `/api/movies/${element.movie.id}`,
               })
-              newIndex = i
+              newIndex = element.position + 1
+            })
+            this.collectionRequest.push({
+              position: newIndex,
+              movie: `/api/movies/${this.idMovie}`,
             })
           }
         }
       })
-      return newIndex
     },
     async existedCollection() {
       let backupCollectionId = []
@@ -106,14 +109,8 @@ export default {
             name: collection.title,
           })
         } else {
-          const exists = collection.entries.some(
-            (entry) => entry.movie.id === parseInt(this.idMovie),
-          )
-          if (
-            !exists &&
-            backupCollectionId.length >= 1 &&
-            backupCollectionId.some((backup) => backup.id !== collection.id)
-          ) {
+          const exists = collection.entries.some((entry) => entry.movie.id === parseInt(this.idMovie),)
+          if (!exists && backupCollectionId.some((backup) => backup.id !== collection.id) || !exists && backupCollectionId.length === 0) {
             this.collectionsSelect.push({
               id: collection.id,
               name: collection.title,
@@ -142,7 +139,7 @@ export default {
       v-if="Object.values(this.collectionsSelect).length > 0"
       class="form-select"
       @change="addCollection()"
-      v-model="chooseAddCollection"
+      v-model="chooseAddCollection" name="chooseAddCollection" aria-label="Default select example"
     >
       <option selected>L'ajouter a une collection</option>
       <option v-for="choice in this.collectionsSelect" :value="choice.id">

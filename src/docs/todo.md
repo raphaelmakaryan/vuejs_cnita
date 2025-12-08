@@ -6,9 +6,6 @@
 - Quel est la difference entre natif et web mobile
 - A quoi sa sert axios
 
-# Page précise
-- Dans l'edit de collection, pouvoir drag and drop pour organiser les positions
-
 # CSS
 - faire toute le style du style
 
@@ -16,7 +13,6 @@
 - modifier pour utiliser axios
 
 # TO DO LIST
-- Drag and drop
 - Axios
 - CSS
 - revision

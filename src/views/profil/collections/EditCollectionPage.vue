@@ -1,5 +1,5 @@
 <script>
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import CollectionName from '@/components/collections/CollectionName.vue'
 import CollectionMovie from '@/components/collections/CollectionMovie.vue'
@@ -51,20 +51,18 @@ export default {
         ),
       )
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
   async mounted() {
-    ;((this.list = toRaw(
-      await api('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
-    )),
-      this.list.entries.forEach((element, index) => {
-        this.listRequest.push({
-          position: index + 1,
-          movie: `/api/movies/${element.movie.id}`,
-        })
-      }))
+    this.list = toRaw(await api('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''))
+    this.list.entries.forEach((element, index) => {
+      this.listRequest.push({
+        position: index + 1,
+        movie: `/api/movies/${element.movie.id}`,
+      })
+    })
     this.newBody.entries = this.listRequest
   },
 }
@@ -81,7 +79,7 @@ export default {
     </div>
   </section>
   <form @submit.prevent="updateCollection">
-    <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event" />
+    <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event"/>
     <CollectionMovie
       :oldList="this.list"
       :oldListRequest="this.listRequest"
