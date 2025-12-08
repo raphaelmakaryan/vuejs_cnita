@@ -1,6 +1,5 @@
 <script>
-import { toRaw } from 'vue'
-import { format } from 'timeago.js'
+import {format} from 'timeago.js'
 import api from "@/assets/api.js"
 
 export default {
@@ -17,9 +16,11 @@ export default {
     }
   },
   async mounted() {
-    this.list = toRaw(
-      await api('GET', `users/${this.valueIdUser}/collections`, '', undefined, ''),
-    )
+    let data = await api({
+      url: `users/${this.valueIdUser}/collections`,
+      method: 'get',
+    })
+    this.list = data.data
   },
 }
 </script>
@@ -30,7 +31,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">COLLECTIONS</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">

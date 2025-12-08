@@ -1,15 +1,15 @@
 <script>
 import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
-import { th } from 'timeago.js/lib/lang/index.d.ts'
+import {th} from 'timeago.js/lib/lang/index.d.ts'
 import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'EditVotesJudgement',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       valueIdVote: this.$route.params.id,
@@ -24,9 +24,11 @@ export default {
   },
   methods: {
     async getRating() {
-      this.rating = toRaw(
-        await api('GET', `ratings/${this.valueIdVote}`, '', undefined, ''),
-      )
+      let data = await api({
+        url: `ratings/${this.valueIdVote}`,
+        method: 'get'
+      })
+      this.rating = data.data
     },
     async forNotification(data) {
       if (data.status) {
@@ -38,17 +40,17 @@ export default {
       }
     },
     async updateRating() {
-      await this.forNotification(
-        await api(
-          'PATCH',
-          `ratings/${this.valueIdVote}`,
-          this.newBody,
-          'application/merge-patch+json',
-          VueCookies.get('tokenUser'),
-        ),
-      )
+      let data = await api({
+        url: `ratings/${this.valueIdVote}`,
+        method: 'patch',
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        },
+        data: this.newBody
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
@@ -67,7 +69,7 @@ export default {
     <div class="container">
       <div class="row">
         <div class="col-12 d-flex flex-column align-items-center">
-          <img :src="this.dataMovie.poster" class="img-fluid w-25" :alt="this.dataMovie.title" />
+          <img :src="this.dataMovie.poster" class="img-fluid w-25" :alt="this.dataMovie.title"/>
         </div>
       </div>
     </div>
@@ -89,7 +91,7 @@ export default {
                 {{ this.dataMovie.title }}
               </span>
             </p>
-            <hr />
+            <hr/>
           </div>
         </div>
 

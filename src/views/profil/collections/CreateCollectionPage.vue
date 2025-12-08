@@ -6,7 +6,7 @@ import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'CreateCollectionJudgement',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       newBody: {
@@ -30,17 +30,17 @@ export default {
       }
     },
     async createCollection() {
-      await this.forNotification(
-        await api(
-          'POST',
-          `custom_lists`,
-          this.newBody,
-          undefined,
-          VueCookies.get('tokenUser'),
-        ),
-      )
+      let data = await api({
+        url: '/custom_lists',
+        method: 'post',
+        data: this.newBody,
+        headers: {
+          "Authorization": `Bearer ${VueCookies.get('tokenUser')}`
+        }
+      })
+      await this.forNotification(data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
@@ -59,7 +59,7 @@ export default {
         <div class="row">
           <div class="col-12">
             <p class="fs-2 mt-3">CREER UNE COLLECTION</p>
-            <hr />
+            <hr/>
           </div>
         </div>
 

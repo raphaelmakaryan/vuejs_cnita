@@ -5,7 +5,7 @@ import router from '@/router/index.js'
 
 export default {
   name: 'LoginJudgement',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       valueNotification: null,
@@ -19,9 +19,13 @@ export default {
   methods: {
     async login() {
       if (this.newBody.email && this.newBody.password) {
-        let data = await api('POST', `auth`, this.newBody, undefined, '')
-        await this.forNotification(data)
-        await this.save(data)
+        let data = await api({
+          url: '/auth',
+          method: 'post',
+          data: this.newBody
+        })
+        await this.forNotification(data.data)
+        await this.save(data.data)
       }
     },
     async save(data) {
@@ -29,7 +33,7 @@ export default {
         this.$cookies.set('tokenUser', data.token, data.ttl)
         this.$cookies.set('idUser', data.user.id, data.ttl)
         window.dispatchEvent(new Event('auth-change'))
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 1000)
     },
     async forNotification(data) {

@@ -16,7 +16,11 @@ export default {
     }
   },
   async mounted() {
-    this.cast = toRaw(await api('GET', `people/${this.idCast}`, '', '', ''))
+    let data = await api({
+      url: `people/${this.idCast}`,
+      method: 'get',
+    })
+    this.cast = data.data
   },
 }
 </script>

@@ -17,9 +17,11 @@ export default {
     }
   },
   async mounted() {
-    this.follows = toRaw(
-      await api('GET', `users/${this.idUser}/follows`, '', undefined, ''),
-    )
+    let data = await api({
+      url: `users/${this.idUser}/follows`,
+      method: 'get',
+    })
+    this.follows = data.data
   },
 }
 </script>
@@ -42,7 +44,7 @@ export default {
           v-for="follow in this.follows.member"
         >
           <router-link :to="{ path: '/user/' + follow.id }" class="text-decoration-none">
-            <p class="fs-6 m-0 text-decoration-underline fw-bold text-black">
+            <p class="fs-6 m-0 text-decoration-underline fw-bold color_yellow">
               {{ follow.username }}
             </p>
           </router-link>

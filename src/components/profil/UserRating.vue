@@ -1,6 +1,6 @@
 <script>
-import { format } from 'timeago.js'
-import { toRaw } from 'vue'
+import {format} from 'timeago.js'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
@@ -8,7 +8,7 @@ import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'UserRating',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       rating: [],
@@ -27,31 +27,26 @@ export default {
         this.textNotification = `Vous avez supprimez le vote pour le film : ${this.rating.member.movie.title} !`
       }
     },
-    async functionDelete(id, name) {
-      await this.forNotification(
-        await api(
-          'DELETE',
-          `${name}/${id}`,
-          '',
-          undefined,
-          VueCookies.get('tokenUser'),
-        ),
-      )
+    async functionDelete(id) {
+      let data = await api({
+        url: `ratings/${id}`,
+        method: 'delete',
+        headers: {
+          Authorization: `Bearer ${VueCookies.get('tokenUser')}`
+        }
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
   async mounted() {
-    this.rating = toRaw(
-      await api(
-        'GET',
-        `users/${VueCookies.get('idUser')}/ratings`,
-        '',
-        undefined,
-        '',
-      ),
-    )
+    let data = await api({
+      url: `users/${VueCookies.get('idUser')}/ratings`,
+      method: 'get'
+    })
+    this.rating = data.data
   },
 }
 </script>
@@ -70,7 +65,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3 titleSeparation m-0">VOS VOTES</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">
@@ -111,7 +106,7 @@ export default {
             <button
               type="button"
               class="btn btn-danger mx-1"
-              @click="functionDelete(rating.id, 'ratings')"
+              @click="functionDelete(rating.id)"
             >
               <i class="bi bi-trash"></i>
             </button>

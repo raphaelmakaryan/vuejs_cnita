@@ -30,8 +30,8 @@ export default {
       </div>
     </div>
   </section>
-  <FeedJudgement v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')" />
-  <GenreJudgement />
+  <FeedJudgement v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"/>
+  <GenreJudgement/>
 </template>
 
 <style scoped>

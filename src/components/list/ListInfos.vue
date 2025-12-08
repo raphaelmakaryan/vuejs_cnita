@@ -27,26 +27,26 @@ export default {
       <div class="row mt-2">
         <div class="col-12 my-2">
           <p class="fs-6">
-            <span class="text-decoration-underline"> Nom de la liste : </span> {{ listData.title }}
+            <span class="text-decoration-underline"> Nom de la liste :</span>  {{ listData.title }}
           </p>
         </div>
         <div class="col-12 my-2">
           <p class="fs-6">
-            <span class="text-decoration-underline"> Crée le : </span>
+            <span class="text-decoration-underline"> Crée le :</span>
             {{ format(listData.createdAt) }}
           </p>
         </div>
         <div class="col-12 my-2">
           <p class="fs-6">
-            <span class="text-decoration-underline"> Dernière mise a jour le : </span>
+            <span class="text-decoration-underline"> Dernière mise a jour le :</span>
             {{ format(listData.updatedAt) }}
           </p>
         </div>
         <div class="col-12 my-2">
           <p class="fs-6">
-            <span class="text-decoration-underline"> Crée par : </span>
-            <router-link :to="{ path: '/user/' + listData.user.id }" class="text-decoration-none">
-              {{ listData.user.username }}
+            <span class="text-decoration-underline">Crée par :</span>
+            <router-link :to="{ path: '/user/' + listData.user.id }" class="text-decoration-none color_yellow ms-1">
+               {{ listData.user.username }}
             </router-link>
           </p>
         </div>

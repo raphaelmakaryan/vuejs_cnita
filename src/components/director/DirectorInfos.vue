@@ -1,5 +1,5 @@
 <script>
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 
 export default {
@@ -16,9 +16,11 @@ export default {
     }
   },
   async mounted() {
-    this.director = toRaw(
-      await api('GET', `people/${this.idDirector}`, '', undefined, ''),
-    )
+    let data = await api({
+      url: `people/${this.idDirector}`,
+      method: 'get',
+    })
+    this.director = data.data
   },
 }
 </script>
@@ -29,7 +31,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">INFORMATIONS DU DIRECTEUR</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">

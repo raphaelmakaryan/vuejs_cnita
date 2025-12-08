@@ -4,7 +4,7 @@ import SearchBarHeader from '@/components/header/SearchBarHeader.vue'
 
 export default {
   name: 'HeaderJudgement',
-  components: { SearchBarHeader },
+  components: {SearchBarHeader},
   computed: {
     VueCookies() {
       return VueCookies
@@ -16,6 +16,7 @@ export default {
     }
   },
   mounted() {
+    this.verification()
     window.addEventListener('auth-change', this.updateStatus)
   },
   beforeUnmount() {
@@ -25,6 +26,12 @@ export default {
     updateStatus() {
       this.isLogged = VueCookies.get('tokenUser') && VueCookies.get('idUser')
     },
+    verification() {
+      if (!VueCookies.get('tokenUser') && VueCookies.get('idUser') || VueCookies.get('tokenUser') && !VueCookies.get('idUser')) {
+        VueCookies.remove('idUser')
+        VueCookies.remove('tokenUser')
+      }
+    }
   },
 }
 </script>
@@ -46,21 +53,27 @@ export default {
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
           <router-link to="/" class="navbar-brand">
-            <img src="/logoW.png" alt="Logo" width="50" class="d-inline-block align-text-top" />
+            <img src="/logoW.png" alt="Logo" width="50" class="d-inline-block align-text-top"/>
           </router-link>
-          <SearchBarHeader />
+          <SearchBarHeader/>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/" class="nav-link text-secondary fw-bold mx-1" activeClass="active">Accueil</router-link>
+              <router-link to="/" class="nav-link text-secondary fw-bold mx-1" activeClass="active">
+                Accueil
+              </router-link>
             </li>
             <li class="nav-item" v-if="!isLogged">
-              <router-link to="/login" class="nav-link text-secondary fw-bold mx-1" activeClass="active"
-                >Se connecter</router-link
+              <router-link to="/login" class="nav-link text-secondary fw-bold mx-1"
+                           activeClass="active"
+              >Se connecter
+              </router-link
               >
             </li>
             <li class="nav-item" v-if="isLogged">
-              <router-link to="/profil" class="nav-link text-secondary fw-bold mx-1" activeClass="active"
-                >Profil</router-link
+              <router-link to="/profil" class="nav-link text-secondary fw-bold mx-1"
+                           activeClass="active"
+              >Profil
+              </router-link
               >
             </li>
           </ul>
@@ -83,7 +96,7 @@ export default {
 }
 
 .nav-link:hover {
-  color:  #ffffff !important;
+  color: #ffffff !important;
   background: var(--color-bg-tertiary) !important;
 }
 

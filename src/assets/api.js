@@ -1,5 +1,6 @@
 import axios from "axios";
 
+/*
 export default async (method, parameter, body, content = "application/json", authorisation) => {
   if (body !== "" && authorisation !== "") {
     return await withBodyAndAuthorize(method, parameter, content, body, authorisation);
@@ -67,3 +68,20 @@ async function notBodyAuthorize(method, parameter, content) {
       return await data
     })
 }
+
+
+ */
+
+export default axios.create({
+  baseURL: import.meta.env.VITE_BASE_API_JUDGEMENT,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
+
+axios.interceptors.request.use(config => {
+  if (config.method === "patch") {
+    config.headers["Content-Type"] = "application/merge-patch+json"
+    return config;
+  }
+})

@@ -1,6 +1,6 @@
 <script>
 import VueCookies from 'vue-cookies'
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 
 export default {
@@ -22,9 +22,11 @@ export default {
     },
   },
   async mounted() {
-    this.movie = toRaw(
-      await api('GET', `movies/${this.idMovie}`, '', undefined, ''),
-    )
+    let data = await api({
+      url: `movies/${this.idMovie}`,
+      method: 'get',
+    })
+    this.movie = data.data
   },
 }
 </script>

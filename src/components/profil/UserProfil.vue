@@ -21,9 +21,11 @@ export default {
     },
   },
   async mounted() {
-    this.user = toRaw(
-      await api('GET', `users/${VueCookies.get('idUser')}`, '', undefined, ''),
-    )
+    let data = await api({
+      url: `users/${VueCookies.get('idUser')}`,
+      method: 'get',
+    })
+    this.user = data.data
   },
 }
 </script>

@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import api from "@/assets/api.js"
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 
 export default {
   name: 'MovieConnectedRatingJudgement',
@@ -22,18 +22,17 @@ export default {
     }
   },
   async mounted() {
-    let data = toRaw(
-      await api(
-        'GET',
-        `movies/${this.idMovie}/ratings?page=1&itemsPerPage=30`,
-        '',
-        undefined,
-        '',
-      ),
-    )
-    if (data.totalItems > 0) {
+    let data = await api({
+      url: `movies/${this.idMovie}/ratings`,
+      method: 'get',
+      params: {
+        page: 1,
+        itemsPerPage: 30,
+      }
+    })
+    if (data.data.totalItems > 0) {
       let backupUserId = []
-      data.member.forEach((ratings) => {
+      data.data.member.forEach((ratings) => {
         backupUserId.push(ratings.user.id)
       })
       const memeUser = backupUserId.some((rating) => rating === parseInt(VueCookies.get('idUser')))

@@ -1,5 +1,4 @@
 <script>
-import { toRaw } from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
@@ -7,7 +6,7 @@ import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'EditReviewJudgement',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       valueIdReview: this.$route.params.id,
@@ -23,9 +22,14 @@ export default {
   },
   methods: {
     async getReview() {
-      this.review = toRaw(
-        await api('GET', `reviews/${this.valueIdReview}`, '', undefined, ''),
-      )
+      let data = await api({
+        url: `reviews/${this.valueIdReview}`,
+        method: 'get',
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        }
+      })
+      this.review = data.data
     },
     async forNotification(data) {
       if (data.status) {
@@ -37,17 +41,17 @@ export default {
       }
     },
     async updateReview() {
-      await this.forNotification(
-        await api(
-          'PATCH',
-          `reviews/${this.valueIdReview}`,
-          this.newBody,
-          'application/merge-patch+json',
-          VueCookies.get('tokenUser'),
-        ),
-      )
+      let data = await api({
+        url: `reviews/${this.valueIdReview}`,
+        method: 'get',
+        data: this.newBody,
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        }
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
@@ -66,7 +70,7 @@ export default {
     <div class="container">
       <div class="row">
         <div class="col-12 d-flex flex-column align-items-center">
-          <img :src="this.dataMovie.poster" class="img-fluid w-25" :alt="this.dataMovie.title" />
+          <img :src="this.dataMovie.poster" class="img-fluid w-25" :alt="this.dataMovie.title"/>
         </div>
       </div>
     </div>
@@ -88,7 +92,7 @@ export default {
                 {{ this.dataMovie.title }}
               </span>
             </p>
-            <hr />
+            <hr/>
           </div>
         </div>
 

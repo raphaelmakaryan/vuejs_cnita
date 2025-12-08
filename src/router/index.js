@@ -17,7 +17,6 @@ import EditReviewPageJudgement from '@/views/profil/review/EditReviewPage.vue'
 import RatingMoviePageJudgement from '@/views/profil/rating/RatingMoviePage.vue'
 import ReviewMoviePageJudgement from '@/views/profil/review/ReviewMoviePage.vue'
 import NotFound from "@/views/NotFound.vue";
-import Test from "@/views/Test.vue";
 
 function isAuthenticate() {
   if (!VueCookies.get('tokenUser') && !VueCookies.get('idUser')) {
@@ -40,11 +39,6 @@ const routes = [
     path: '/',
     name: 'HomeJudgement',
     component: HomeJudgement,
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component: Test,
   },
   {
     path: '/genres/:id/movies',

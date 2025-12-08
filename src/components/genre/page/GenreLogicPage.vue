@@ -1,6 +1,7 @@
 <script>
 import api from "@/assets/api.js"
 import {toRaw} from 'vue'
+import VueCookies from "vue-cookies";
 
 export default {
   name: 'GenreLogicPage',
@@ -40,16 +41,17 @@ export default {
       }
     },
     async getMovies() {
-      const data = await api(
-        'GET',
-        `genres/${this.idGenre}/movies?page=${this.page}&itemsPerPage=${this.displayItems}`,
-        '',
-        undefined,
-        ''
-      )
+      let data = await api({
+        url: `genres/${this.idGenre}/movies`,
+        method: 'get',
+        params: {
+          page: this.page,
+          itemsPerPage: this.displayItems
+        }
+      })
       this.rawMovies = []
       document.getElementById('textWait').style.display = 'none'
-      for (const item of data.member) {
+      for (const item of data.data.member) {
         const poster = await this.feedBackPoster(item.poster)
         this.rawMovies.push({
           id: item.id,
@@ -60,7 +62,7 @@ export default {
           genres: item.genres
         })
       }
-      this.$emit("movies-loaded", data.totalItems)
+      this.$emit("movies-loaded", data.data.totalItems)
     }
   },
   async mounted() {

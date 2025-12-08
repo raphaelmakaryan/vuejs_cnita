@@ -1,6 +1,6 @@
 <script>
-import { format } from 'timeago.js'
-import { toRaw } from 'vue'
+import {format} from 'timeago.js'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import Notification from '@/components/Notification.vue'
@@ -8,7 +8,7 @@ import router from '@/router/index.js'
 
 export default {
   name: 'UserList',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       list: [],
@@ -27,31 +27,26 @@ export default {
         this.textNotification = `Vous avez supprimez la collection : ${this.list.member.title} !`
       }
     },
-    async functionDelete(id, name) {
-      await this.forNotification(
-        await api(
-          'DELETE',
-          `${name}/${id}`,
-          '',
-          undefined,
-          VueCookies.get('tokenUser'),
-        ),
-      )
+    async functionDelete(id) {
+      let data = await api({
+        url: `custom_lists/${id}`,
+        method: 'delete',
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        }
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
   async mounted() {
-    this.list = toRaw(
-      await api(
-        'GET',
-        `users/${VueCookies.get('idUser')}/collections`,
-        '',
-        undefined,
-        '',
-      ),
-    )
+    let data = await api({
+      url: `users/${VueCookies.get('idUser')}/collections`,
+      method: 'get'
+    })
+    this.list = data.data
   },
 }
 </script>
@@ -76,7 +71,7 @@ export default {
           </router-link>
         </div>
         <div class="col-12">
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">
@@ -99,7 +94,7 @@ export default {
             <button
               type="button"
               class="btn btn-danger mx-1"
-              @click="functionDelete(list.id, 'custom_lists')"
+              @click="functionDelete(list.id)"
             >
               <i class="bi bi-trash"></i>
             </button>

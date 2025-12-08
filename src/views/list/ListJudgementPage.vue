@@ -1,13 +1,13 @@
 <script>
-import { normalizeStyle, toRaw } from 'vue'
+import {normalizeStyle, toRaw} from 'vue'
 import api from "@/assets/api.js"
-import { format } from 'timeago.js'
+import {format} from 'timeago.js'
 import ListInfosJudgement from '@/components/list/ListInfos.vue'
 import ListMoviesJudgement from '@/components/list/ListMovies.vue'
 
 export default {
   name: 'ListJudgement',
-  components: { ListMoviesJudgement, ListInfosJudgement },
+  components: {ListMoviesJudgement, ListInfosJudgement},
   data() {
     return {
       valueIdList: this.$route.params.id,
@@ -18,9 +18,11 @@ export default {
   methods: {
     format,
     async getList() {
-      this.list = toRaw(
-        await api('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
-      )
+      let data = await api({
+        url: `/custom_lists/${this.valueIdList}`,
+        method: 'get',
+      })
+      this.list = data.data
     },
   },
   async mounted() {
@@ -30,8 +32,8 @@ export default {
 </script>
 
 <template>
-  <ListInfosJudgement :listData="list" />
-  <ListMoviesJudgement :listData="list" />
+  <ListInfosJudgement :listData="list"/>
+  <ListMoviesJudgement :listData="list"/>
 </template>
 
 <style scoped></style>

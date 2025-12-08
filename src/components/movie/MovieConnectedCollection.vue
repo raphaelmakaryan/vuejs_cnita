@@ -35,15 +35,11 @@ export default {
   },
   methods: {
     async getCollections() {
-      this.collections = toRaw(
-        await api(
-          'GET',
-          `users/${VueCookies.get('idUser')}/collections`,
-          '',
-          undefined,
-          '',
-        ),
-      )
+      let data = await api({
+        url: `users/${VueCookies.get('idUser')}/collections`,
+        method: 'get',
+      })
+      this.collections = data.data
     },
     async addCollection() {
       if (this.chooseAddCollection != null && typeof this.chooseAddCollection === 'number') {
@@ -62,15 +58,15 @@ export default {
     },
     async updateCollection() {
       this.newBody.entries = this.collectionRequest
-      await this.forNotification(
-        await api(
-          'PATCH',
-          `custom_lists/${this.chooseAddCollection}`,
-          this.newBody,
-          'application/merge-patch+json',
-          VueCookies.get('tokenUser'),
-        ),
-      )
+      let data = await api({
+        url: `custom_lists/${this.chooseAddCollection}`,
+        method: 'patch',
+        data: this.newBody,
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        }
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
       }, 2000)

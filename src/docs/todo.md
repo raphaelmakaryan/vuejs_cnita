@@ -9,10 +9,7 @@
 # CSS
 - faire toute le style du style
 
-# Autre
-- modifier pour utiliser axios
 
 # TO DO LIST
-- Axios
 - CSS
 - revision

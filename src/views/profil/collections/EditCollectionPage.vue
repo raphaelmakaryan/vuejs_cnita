@@ -41,22 +41,26 @@ export default {
       if (this.newBody.title === null) {
         this.newBody.title = this.list.title
       }
-      await this.forNotification(
-        await api(
-          'PATCH',
-          `custom_lists/${this.valueIdList}`,
-          this.newBody,
-          'application/merge-patch+json',
-          VueCookies.get('tokenUser'),
-        ),
-      )
+      let data = await api({
+        url: `custom_lists/${this.valueIdList}`,
+        method: 'patch',
+        data: this.newBody,
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        }
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
   },
   async mounted() {
-    this.list = toRaw(await api('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''))
+    let data = await api({
+      url: `custom_lists/${this.valueIdList}`,
+      method: 'get',
+    })
+    this.list = data.data
     this.list.entries.forEach((element, index) => {
       this.listRequest.push({
         position: index + 1,

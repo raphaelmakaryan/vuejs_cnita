@@ -1,26 +1,25 @@
 <script>
-import { toRaw } from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import FeedLogic from './FeedLogic.vue'
 
 export default {
   name: 'FeedJudgement',
-  components: { FeedLogic },
+  components: {FeedLogic},
   data() {
     return {
       feeds: [],
     }
   },
   async mounted() {
-    const response = await api(
-      'GET',
-      'feed',
-      '',
-      undefined,
-      VueCookies.get('tokenUser'),
-    )
-    this.feeds = toRaw(response)
+    let data = await api({
+      url: '/feed',
+      method: 'get',
+      headers: {
+        Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+      }
+    })
+    this.feeds = data.data
   },
 }
 </script>
@@ -31,11 +30,11 @@ export default {
       <div class="row my-2">
         <div class="col-12">
           <p class="fs-2 text-uppercase titleSeparation">ARTICLES Récents</p>
-          <hr class="z--1" />
+          <hr class="z--1"/>
         </div>
       </div>
       <div class="row my-2">
-        <FeedLogic :feedData="this.feeds" />
+        <FeedLogic :feedData="this.feeds"/>
       </div>
     </div>
   </section>

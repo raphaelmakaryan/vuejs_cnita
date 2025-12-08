@@ -1,5 +1,4 @@
 <script>
-import {toRaw} from 'vue'
 import GenreLogic from './GenreLogic.vue'
 import api from "@/assets/api.js"
 
@@ -11,7 +10,11 @@ export default {
     }
   },
   async mounted() {
-    this.genres = toRaw(await api('GET', 'genres', '', '', ''))
+    let data = await api({
+      url: '/genres',
+      method: 'get'
+    })
+    this.genres = data.data
   },
   components: {
     GenreLogic,

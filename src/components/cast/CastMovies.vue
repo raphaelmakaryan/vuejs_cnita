@@ -1,5 +1,5 @@
 <script>
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 
 export default {
@@ -16,9 +16,11 @@ export default {
     }
   },
   async mounted() {
-    this.movies = toRaw(
-      await api('GET', `casts/${this.idCast}/movies`, '', '', ''),
-    )
+    let data = await api({
+      url: `casts/${this.idCast}/movies`,
+      method: 'get',
+    })
+    this.movies = data.data
   },
 }
 </script>
@@ -29,14 +31,14 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">FILMS PRESENT</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2 d-flex flex-column flex-md-row align-items-center">
         <div class="col-12 col-sm-12 col-md-4 col-lg-4" v-for="movie in this.movies.member">
           <router-link :to="{ path: '/movie/' + movie.id }" class="text-decoration-none">
             <div class="card" style="width: 18rem">
-              <img :src="movie.poster" class="card-img-top" :alt="movie.title" />
+              <img :src="movie.poster" class="card-img-top" :alt="movie.title"/>
               <div class="card-body">
                 <h5 class="card-title">{{ movie.title }}</h5>
                 <p class="card-text text-wrap">{{ movie.plot }}</p>

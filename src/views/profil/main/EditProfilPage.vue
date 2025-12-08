@@ -1,5 +1,4 @@
 <script>
-import { toRaw } from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
@@ -7,7 +6,7 @@ import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'EditProfilJudgement',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       user: [],
@@ -20,9 +19,11 @@ export default {
   },
   methods: {
     async getUser() {
-      this.user = toRaw(
-        await api('GET', `users/${VueCookies.get('idUser')}`, '', undefined, ''),
-      )
+      let data = await api({
+        url: `users/${VueCookies.get('idUser')}`,
+        method: 'get'
+      })
+      this.user = data.data
     },
     async forNotification(data) {
       if (data.status) {
@@ -34,18 +35,18 @@ export default {
       }
     },
     async updateProfil() {
-      await this.forNotification(
-        await api(
-          'PATCH',
-          `users/${VueCookies.get('idUser')}`,
-          this.newBody,
-          'application/merge-patch+json',
-          VueCookies.get('tokenUser'),
-        ),
-        setTimeout(() => {
-          router.push({ name: 'ProfilJudgement' })
-        }, 2000),
-      )
+      let data = await api({
+        url: `users/${VueCookies.get('idUser')}`,
+        method: 'patch',
+        data: this.newBody,
+        headers: {
+          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+        }
+      })
+      await this.forNotification(data.data)
+      setTimeout(() => {
+        router.push({name: 'ProfilJudgement'})
+      }, 2000)
     },
   },
   async mounted() {
@@ -65,7 +66,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">MODIFIER SON PROFIL</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <form @submit.prevent="updateProfil">

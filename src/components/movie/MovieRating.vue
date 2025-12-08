@@ -1,8 +1,8 @@
 <script>
 import VueCookies from 'vue-cookies'
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
-import { format } from 'timeago.js'
+import {format} from 'timeago.js'
 
 export default {
   name: 'MovieRating',
@@ -26,15 +26,15 @@ export default {
     format,
   },
   async mounted() {
-    this.ratingData = toRaw(
-      await api(
-        'GET',
-        `movies/${this.idMovie}/ratings?page=1&itemsPerPage=30`,
-        '',
-        undefined,
-        '',
-      ),
-    )
+    let data = await api({
+      url: `movies/${this.idMovie}/ratings`,
+      method: 'get',
+      params: {
+        page: "1",
+        itemsPerPage: "30"
+      }
+    })
+    this.ratingData = data.data
   },
 }
 </script>

@@ -1,6 +1,6 @@
 <script>
-import { format } from 'timeago.js'
-import { toRaw } from 'vue'
+import {format} from 'timeago.js'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import Notification from '@/components/Notification.vue'
@@ -8,7 +8,7 @@ import router from '@/router/index.js'
 
 export default {
   name: 'UserReview',
-  components: { Notification },
+  components: {Notification},
   data() {
     return {
       review: [],
@@ -18,18 +18,17 @@ export default {
   },
   methods: {
     format,
-    async functionDelete(id, name) {
-      await this.forNotification(
-        await api(
-          'DELETE',
-          `${name}/${id}`,
-          '',
-          undefined,
-          VueCookies.get('tokenUser'),
-        ),
-      )
+    async functionDelete(id) {
+      let data = await api({
+        url: `reviews/${id}`,
+        method: 'delete',
+        headers: {
+          Authorization: `Bearer ${VueCookies.get('tokenUser')}`
+        }
+      })
+      await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
     async forNotification(data) {
@@ -43,15 +42,11 @@ export default {
     },
   },
   async mounted() {
-    this.review = toRaw(
-      await api(
-        'GET',
-        `users/${VueCookies.get('idUser')}/reviews`,
-        '',
-        undefined,
-        '',
-      ),
-    )
+    let data = await api({
+      url: `users/${VueCookies.get('idUser')}/reviews`,
+      method: 'get',
+    })
+    this.review = data.data
   },
 }
 </script>
@@ -70,7 +65,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3 titleSeparation m-0">VOS REVIEWS</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">
@@ -96,7 +91,7 @@ export default {
             <button
               type="button"
               class="btn btn-danger mx-1"
-              @click="functionDelete(review.id, 'reviews')"
+              @click="functionDelete(review.id)"
             >
               <i class="bi bi-trash"></i>
             </button>

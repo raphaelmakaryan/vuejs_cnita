@@ -1,5 +1,4 @@
 <script>
-import { toRaw } from 'vue'
 import api from "@/assets/api.js"
 
 export default {
@@ -52,39 +51,42 @@ export default {
     },
     async getSearchBarPeople() {
       this.peoplesSearchBar = []
-      this.peoplesSearchBar = toRaw(
-        await api(
-          'GET',
-          'people?page=1&itemsPerPage=3&fullName%5B%5D=' + this.searchBarValue,
-          '',
-          undefined,
-          '',
-        ),
-      )
+      let data = await api({
+        url: '/people',
+        method: 'get',
+        params: {
+          page: "1",
+          itemsPerPage: "3",
+          fullName: this.searchBarValue
+        }
+      })
+      this.peoplesSearchBar = data.data
     },
     async getSearchBarMovies() {
       this.moviesSearchBar = []
-      this.moviesSearchBar = toRaw(
-        await api(
-          'GET',
-          'movies?page=1&itemsPerPage=3&title%5B%5D=' + this.searchBarValue,
-          '',
-          undefined,
-          '',
-        ),
-      )
+      let data = await api({
+        url: '/movies',
+        method: 'get',
+        params: {
+          page: "1",
+          itemsPerPage: "3",
+          title: this.searchBarValue
+        }
+      })
+      this.moviesSearchBar = data.data
     },
     async getSearchBarUsers() {
       this.userSearchBar = []
-      this.userSearchBar = toRaw(
-        await api(
-          'GET',
-          'users?page=1&itemsPerPage=3&username%5B%5D=' + this.searchBarValue,
-          '',
-          undefined,
-          '',
-        ),
-      )
+      let data = await api({
+        url: '/users',
+        method: 'get',
+        params: {
+          page: "1",
+          itemsPerPage: "3",
+          username: this.searchBarValue
+        }
+      })
+      this.userSearchBar = data.data
     },
     resetData(notValue) {
       switch (notValue) {
@@ -160,12 +162,12 @@ export default {
         >
           <div class="my-2">
             <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">PERSONNALITÉ</p>
-            <hr class="w-100" />
+            <hr class="w-100"/>
           </div>
           <ul v-if="this.peoplesSearchBar.totalItems > 0">
             <li v-for="people in this.peoplesSearchBar.member">
               <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2 colorSearch"
-                >{{ people.fullName }}
+              >{{ people.fullName }}
               </router-link>
             </li>
           </ul>
@@ -180,13 +182,13 @@ export default {
         >
           <div class="my-2">
             <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">FILMS</p>
-            <hr class="w-100" />
+            <hr class="w-100"/>
           </div>
           <div v-if="this.moviesSearchBar.totalItems > 0">
             <ul>
               <li v-for="movie in this.moviesSearchBar.member">
                 <router-link :to="{ path: '/movie/' + movie.id }" class="fs-6 m-2 colorSearch"
-                  >{{ movie.title }}
+                >{{ movie.title }}
                 </router-link>
               </li>
             </ul>
@@ -202,13 +204,13 @@ export default {
         >
           <div class="my-2">
             <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">UTILISATEURS</p>
-            <hr class="w-100" />
+            <hr class="w-100"/>
           </div>
           <div v-if="this.userSearchBar.totalItems > 0">
             <ul>
               <li v-for="user in this.userSearchBar.member">
                 <router-link :to="{ path: '/user/' + user.id }" class="fs-6 m-2 colorSearch"
-                  >{{ user.username }}
+                >{{ user.username }}
                 </router-link>
               </li>
             </ul>
@@ -241,7 +243,7 @@ export default {
 #searchBar {
   background: var(--color-bg-primary) !important;
   border: 1px solid var(--color-border) !important;
-  color:  #ffffff !important;
+  color: #ffffff !important;
   transition: all 0.3s ease;
 }
 

@@ -1,8 +1,8 @@
 <script>
 import VueCookies from 'vue-cookies'
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
-import { format } from 'timeago.js'
+import {format} from 'timeago.js'
 
 export default {
   name: 'MovieCollections',
@@ -26,16 +26,16 @@ export default {
     format,
   },
   async mounted() {
-    this.listsData = toRaw(
-      await api(
-        'GET',
-        `movies/${this.idMovie}/custom_list_entries?page=1&itemsPerPage=30`,
-        '',
-        undefined,
-        '',
-      ),
-    )
-  },
+    let data = await api({
+      url: `movies/${this.idMovie}/custom_list_entries`,
+      method: 'get',
+      params: {
+        page: 1,
+        itemsPerPage: 30
+      }
+    })
+    this.listsData = data.data
+  }
 }
 </script>
 
@@ -65,7 +65,7 @@ export default {
           <p class="fs-6 m-0 text-black">
             <span class="text-decoration-underline me-1">Crée par : </span>
             <router-link :to="{ path: '/user/' + list.customList.user.id }"
-              >{{ list.customList.user.username }}
+            >{{ list.customList.user.username }}
             </router-link>
           </p>
 

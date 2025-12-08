@@ -1,6 +1,6 @@
 <script>
-import { format } from 'timeago.js'
-import { toRaw } from 'vue'
+import {format} from 'timeago.js'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 
@@ -15,15 +15,11 @@ export default {
     format,
   },
   async mounted() {
-    this.follows = toRaw(
-      await api(
-        'GET',
-        `users/${VueCookies.get('idUser')}/follows`,
-        '',
-        undefined,
-        '',
-      ),
-    )
+    let data = await api({
+      url: `users/${VueCookies.get('idUser')}/follows`,
+      method: 'get',
+    })
+    this.follows = data.data
   },
 }
 </script>
@@ -37,7 +33,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3 titleSeparation">VOUS SUIVEZ</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">

@@ -1,6 +1,6 @@
 <script>
-import { toRaw } from 'vue'
-import { format } from 'timeago.js'
+import {toRaw} from 'vue'
+import {format} from 'timeago.js'
 import api from "@/assets/api.js"
 
 export default {
@@ -17,9 +17,11 @@ export default {
     }
   },
   async mounted() {
-    this.review = toRaw(
-      await api('GET', `users/${this.idUser}/reviews`, '', undefined, ''),
-    )
+    let data = await api({
+      url: `users/${this.idUser}/reviews`,
+      method: 'get',
+    })
+    this.review = data.data
   },
 }
 </script>
@@ -33,7 +35,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">REVIEWS</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2">
@@ -45,7 +47,7 @@ export default {
             :to="{ path: '/movie/' + review.movie.id }"
             class="text-decoration-none"
           >
-            <p class="fs-6 text-decoration-underline fw-bold text-black">
+            <p class="fs-6 text-decoration-underline fw-bold color_yellow">
               {{ review.movie.title }}
             </p>
           </router-link>

@@ -1,13 +1,13 @@
 <script>
 import VueCookies from 'vue-cookies'
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import Notification from '@/components/Notification.vue'
 import router from '@/router/index.js'
 
 export default {
   name: 'UserSuscribe',
-  components: { Notification },
+  components: {Notification},
   props: {
     idUser: Number,
   },
@@ -33,31 +33,30 @@ export default {
       let texte
       switch (type) {
         case 'follow':
-          requestFollow = toRaw(
-            await api(
-              'POST',
-              `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
-              '',
-              undefined,
-              VueCookies.get('tokenUser'),
-            ),
-          )
+          requestFollow = await api({
+            url: `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
+            method: 'post',
+            headers: {
+              Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+            }
+          })
+
           texte = 'Vous etes desormais abonne !'
           break
         case 'unfollow':
-          requestFollow = await api(
-            'DELETE',
-            `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
-            '',
-            undefined,
-            VueCookies.get('tokenUser'),
-          )
+          requestFollow = await api({
+            url: `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
+            method: 'delete',
+            headers: {
+              Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+            }
+          })
           texte = 'Vous vous etes desabonnez !'
           break
       }
       await this.forNotification(requestFollow, texte)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
     async verificationFollow() {
@@ -67,15 +66,11 @@ export default {
         parseInt(VueCookies.get('idUser')) !== this.idUser
       ) {
         let verification = false
-        let userFollow = toRaw(
-          await api(
-            'GET',
-            `users/${VueCookies.get('idUser')}/follows`,
-            '',
-            undefined,
-            '',
-          ),
-        )
+        let data = await api({
+          url: `users/${VueCookies.get('idUser')}/follows`,
+          method: 'get'
+        })
+        let userFollow = data.data
         userFollow.member.forEach((user) => {
           if (user.id === this.idUser) {
             verification = true
