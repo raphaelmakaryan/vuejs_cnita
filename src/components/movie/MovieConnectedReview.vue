@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
-import {toRaw} from 'vue'
-import api from "@/assets/api.js"
+import { toRaw } from 'vue'
+import api from '@/assets/api.js'
 
 export default {
   name: 'MovieConnectedReviewJudgement',
@@ -28,7 +28,7 @@ export default {
       params: {
         page: 1,
         itemsPerPage: 30,
-      }
+      },
     })
     if (data.data.totalItems > 0) {
       let backupUserId = []
@@ -47,18 +47,49 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-sm-12 col-md-4 col-lg-4 d-flex flex-column align-items-center">
-    <router-link
-      class="btn btn-success"
-      v-if="reviewUser"
-      :to="{ path: '/movie/' + this.idMovie + '/review' }"
-    >
-      Crée une review
-    </router-link>
-    <button type="button" class="btn btn-success" v-else-if="!reviewUser" disabled>
-      Crée une review
-    </button>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center flex-column my-2">
+    <div class="card p-4">
+      <div>
+        <p class="fs-4 text-white">Review</p>
+        <p class="fs-6 text-secondary">Ajouter un commentaire / une critique au film</p>
+      </div>
+      <div>
+        <router-link
+          class="btn btn-success"
+          v-if="reviewUser"
+          :to="{ path: '/movie/' + this.idMovie + '/review' }"
+        >
+          Crée une review
+        </router-link>
+        <button type="button" class="btn btn-primary" v-else-if="!reviewUser" disabled>
+          Crée une review
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.card {
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--color-yellow-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn:disabled,
+.btn.disabled,
+fieldset:disabled .btn {
+  color: white;
+  background-color: var(--color-yellow-primary);
+  border-color: var(--color-yellow-hover);
+}
+</style>

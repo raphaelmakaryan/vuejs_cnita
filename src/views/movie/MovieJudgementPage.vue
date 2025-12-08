@@ -1,5 +1,4 @@
 <script>
-import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import MovieConnectedJudgement from '@/components/movie/MovieConnected.vue'
 import MovieInfos from '@/components/movie/MovieInfos.vue'
@@ -30,25 +29,33 @@ export default {
 </script>
 
 <template>
+  <MovieInfos :idMovie="valueIdMovie" />
+
   <MovieConnectedJudgement
     :idMovie="valueIdMovie"
     v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"
   />
 
-  <MovieInfos :idMovie="valueIdMovie" />
-
-  <section id="otherDetail" class="my-5">
-    <div class="container-fluid">
-      <div class="row my-2">
-        <div class="col-lg-1"></div>
+  <section class="my-5" id="collectionsMovie">
+    <div class="container">
+      <div class="row">
         <MovieCollections :idMovie="valueIdMovie" />
-        <MovieRating :idMovie="valueIdMovie" />
-        <div class="col-lg-1"></div>
       </div>
-      <div class="row my-2">
-        <div class="col-lg-1"></div>
+    </div>
+  </section>
+
+  <section class="my-5" id="rankingMovie">
+    <div class="container">
+      <div class="row">
+        <MovieRating :idMovie="valueIdMovie" />
+      </div>
+    </div>
+  </section>
+
+  <section class="my-5" id="reviewMovie">
+    <div class="container">
+      <div class="row">
         <MovieReview :idMovie="valueIdMovie" />
-        <div class="col-lg-1"></div>
       </div>
     </div>
   </section>
