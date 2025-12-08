@@ -101,7 +101,9 @@ export default {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   transition: all 0.3s ease;
-  cursor: pointer;
+  /*cursor: pointer;
+
+   */
 }
 
 .movie-card:hover {

@@ -2,15 +2,20 @@
 import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import VueCookies from 'vue-cookies'
+import router from '@/router/index.js'
+import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'EditProfilJudgement',
+  components: { Notification },
   data() {
     return {
       user: [],
       newBody: {
         username: null,
       },
+      valueNotification: null,
+      textNotification: null,
     }
   },
   methods: {
@@ -19,23 +24,27 @@ export default {
         await JudgementAPI.mounted('GET', `users/${VueCookies.get('idUser')}`, '', undefined, ''),
       )
     },
-    async status(data) {
+    async forNotification(data) {
       if (data.status) {
-        alert(data.detail)
+        this.valueNotification = false
+        this.textNotification = data.detail
       } else {
-        alert('Vous avec modifié votre pseudo !')
-        window.location.reload()
+        this.valueNotification = true
+        this.textNotification = 'Vous avec modifié votre pseudo !'
       }
     },
     async updateProfil() {
-      await this.status(
+      await this.forNotification(
         await JudgementAPI.mounted(
           'PATCH',
           `users/${VueCookies.get('idUser')}`,
-          this.newBody.username,
+          this.newBody,
           'application/merge-patch+json',
           VueCookies.get('tokenUser'),
         ),
+        setTimeout(() => {
+          router.push({ name: 'ProfilJudgement' })
+        }, 2000),
       )
     },
   },
@@ -48,6 +57,11 @@ export default {
 <template>
   <section class="mt-5">
     <div class="container border rounded">
+      <Notification
+        v-if="this.valueNotification != null && this.textNotification != null"
+        :value="valueNotification"
+        :text="textNotification"
+      />
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">MODIFIER SON PROFIL</p>

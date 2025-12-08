@@ -3,6 +3,9 @@ import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import CollectionName from '@/components/collections/CollectionName.vue'
 import CollectionMovie from '@/components/collections/CollectionMovie.vue'
+import Notification from '@/components/Notification.vue'
+import VueCookies from 'vue-cookies'
+import router from '@/router/index.js'
 
 export default {
   name: 'EditCollectionJudgement',
@@ -15,47 +18,75 @@ export default {
         title: null,
         entries: [],
       },
+      valueNotification: null,
+      textNotification: null,
     }
   },
   components: {
+    Notification,
     CollectionMovie,
     CollectionName,
   },
   methods: {
+    async forNotification(data) {
+      if (data.status) {
+        this.valueNotification = false
+        this.textNotification = data.detail
+      } else {
+        this.valueNotification = true
+        this.textNotification = 'Vous avec modifié la liste !'
+      }
+    },
     async updateCollection() {
       if (this.newBody.title === null) {
         this.newBody.title = this.list.title
       }
-      await this.status(
+      await this.forNotification(
         await JudgementAPI.mounted(
           'PATCH',
-          `custom_lists/${this.oldList.id}`,
+          `custom_lists/${this.valueIdList}`,
           this.newBody,
           'application/merge-patch+json',
           VueCookies.get('tokenUser'),
         ),
       )
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
   },
   async mounted() {
-    this.list = toRaw(
+    ;((this.list = toRaw(
       await JudgementAPI.mounted('GET', `custom_lists/${this.valueIdList}`, '', undefined, ''),
-    ),
+    )),
       this.list.entries.forEach((element, index) => {
         this.listRequest.push({
           position: index + 1,
           movie: `/api/movies/${element.movie.id}`,
         })
-      })
+      }))
     this.newBody.entries = this.listRequest
   },
 }
 </script>
 
 <template>
+  <section class="mt-5">
+    <div class="container">
+      <Notification
+        v-if="this.valueNotification != null && this.textNotification != null"
+        :value="valueNotification"
+        :text="textNotification"
+      />
+    </div>
+  </section>
   <form @submit.prevent="updateCollection">
     <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event" />
-    <CollectionMovie :oldList="this.list" :oldListRequest="this.listRequest" @updateList="newBody.entries = $event" />
+    <CollectionMovie
+      :oldList="this.list"
+      :oldListRequest="this.listRequest"
+      @updateList="newBody.entries = $event"
+    />
     <section class="my-5">
       <div class="container">
         <div class="row">

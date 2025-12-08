@@ -3,14 +3,23 @@ import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
 import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import VueCookies from 'vue-cookies'
+import router from '@/router/index.js'
+import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'ReviewJudgement',
+  components: { Notification },
   data() {
     return {
       valueIdMovie: this.$route.params.id,
       movie: [],
-      newReview: null,
+      valueNotification: null,
+      textNotification: null,
+      newBody: {
+        movie: null,
+        user: '/api/users/' + VueCookies.get('idUser'),
+        content: null,
+      },
     }
   },
   methods: {
@@ -20,21 +29,27 @@ export default {
       )
     },
     async createRating() {
-      let body = {
-        movie: '/api/movies/' + this.valueIdMovie,
-        user: '/api/users/' + VueCookies.get('idUser'),
-        content: this.newReview,
-      }
-      await this.status(
-        await JudgementAPI.mounted('POST', `reviews`, body, undefined, VueCookies.get('tokenUser')),
+      this.newBody.movie = '/api/movies/' + this.valueIdMovie
+      await this.forNotification(
+        await JudgementAPI.mounted(
+          'POST',
+          `reviews`,
+          this.newBody,
+          undefined,
+          VueCookies.get('tokenUser'),
+        ),
       )
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
-    async status(data) {
+    async forNotification(data) {
       if (data.status) {
-        alert(data.detail)
+        this.valueNotification = false
+        this.textNotification = data.detail
       } else {
-        alert('Vous avez crée la review !')
-        window.location.reload()
+        this.valueNotification = true
+        this.textNotification = 'Vous avez crée la review !'
       }
     },
   },
@@ -58,6 +73,11 @@ export default {
   <form @submit.prevent="createRating">
     <section class="my-5">
       <div class="container">
+        <Notification
+          v-if="this.valueNotification != null && this.textNotification != null"
+          :value="valueNotification"
+          :text="textNotification"
+        />
         <div class="row">
           <div class="col-12">
             <p class="fs-2 mt-3">
@@ -76,7 +96,7 @@ export default {
               type="text"
               class="form-control"
               id="newReview"
-              v-model="newReview"
+              v-model="newBody.content"
               minlength="5"
               required
               placeholder="Ce film étais géniale !"

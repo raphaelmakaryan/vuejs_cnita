@@ -2,9 +2,12 @@
 import { toRaw } from 'vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import VueCookies from 'vue-cookies'
+import router from '@/router/index.js'
+import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'EditReviewJudgement',
+  components: { Notification },
   data() {
     return {
       valueIdReview: this.$route.params.id,
@@ -14,6 +17,8 @@ export default {
       },
       review: [],
       newReview: null,
+      valueNotification: null,
+      textNotification: null,
     }
   },
   methods: {
@@ -22,16 +27,17 @@ export default {
         await JudgementAPI.mounted('GET', `reviews/${this.valueIdReview}`, '', undefined, ''),
       )
     },
-    async status(data) {
+    async forNotification(data) {
       if (data.status) {
-        alert(data.detail)
+        this.valueNotification = false
+        this.textNotification = data.detail
       } else {
-        alert('Vous avec modifié votre review !')
-        window.location.reload()
+        this.valueNotification = true
+        this.textNotification = 'Vous avec modifié votre review !'
       }
     },
     async updateReview() {
-      await this.status(
+      await this.forNotification(
         await JudgementAPI.mounted(
           'PATCH',
           `reviews/${this.valueIdReview}`,
@@ -40,6 +46,9 @@ export default {
           VueCookies.get('tokenUser'),
         ),
       )
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
   },
   async mounted() {
@@ -66,6 +75,11 @@ export default {
   <form @submit.prevent="updateReview">
     <section class="my-5">
       <div class="container">
+        <Notification
+          v-if="this.valueNotification != null && this.textNotification != null"
+          :value="valueNotification"
+          :text="textNotification"
+        />
         <div class="row">
           <div class="col-12">
             <p class="fs-2 mt-3">

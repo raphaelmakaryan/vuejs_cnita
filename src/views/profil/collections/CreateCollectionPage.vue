@@ -1,9 +1,12 @@
 <script>
 import JudgementAPI from '@/components/JudgementAPI.vue'
 import VueCookies from 'vue-cookies'
+import router from '@/router/index.js'
+import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'CreateCollectionJudgement',
+  components: { Notification },
   data() {
     return {
       newBody: {
@@ -12,19 +15,22 @@ export default {
         entries: [],
       },
       newName: null,
+      valueNotification: null,
+      textNotification: null,
     }
   },
   methods: {
-    async status(data) {
+    async forNotification(data) {
       if (data.status) {
-        alert(data.detail)
+        this.valueNotification = false
+        this.textNotification = data.detail
       } else {
-        alert('Vous avec crée une nouvelle liste !')
-        window.location.reload()
+        this.valueNotification = true
+        this.textNotification = 'Vous avec crée une nouvelle liste !'
       }
     },
     async createCollection() {
-      await this.status(
+      await this.forNotification(
         await JudgementAPI.mounted(
           'POST',
           `custom_lists`,
@@ -33,6 +39,9 @@ export default {
           VueCookies.get('tokenUser'),
         ),
       )
+      setTimeout(() => {
+        router.push({ name: 'ProfilJudgement' })
+      }, 2000)
     },
   },
 }
@@ -42,6 +51,11 @@ export default {
   <form @submit.prevent="createCollection">
     <section class="my-5">
       <div class="container">
+        <Notification
+          v-if="this.valueNotification != null && this.textNotification != null"
+          :value="valueNotification"
+          :text="textNotification"
+        />
         <div class="row">
           <div class="col-12">
             <p class="fs-2 mt-3">CREER UNE COLLECTION</p>

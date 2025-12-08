@@ -10,6 +10,22 @@ export default {
       return VueCookies
     },
   },
+  data() {
+    return {
+      isLogged: VueCookies.get('tokenUser') && VueCookies.get('idUser'),
+    }
+  },
+  mounted() {
+    window.addEventListener('auth-change', this.updateStatus)
+  },
+  beforeUnmount() {
+    window.removeEventListener('auth-change', this.updateStatus)
+  },
+  methods: {
+    updateStatus() {
+      this.isLogged = VueCookies.get('tokenUser') && VueCookies.get('idUser')
+    },
+  },
 }
 </script>
 
@@ -37,12 +53,12 @@ export default {
             <li class="nav-item">
               <router-link to="/" class="nav-link mx-1" activeClass="active">Accueil</router-link>
             </li>
-            <li class="nav-item" v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')">
+            <li class="nav-item" v-if="!isLogged">
               <router-link to="/login" class="nav-link mx-1" activeClass="active"
                 >Se connecter</router-link
               >
             </li>
-            <li class="nav-item" v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')">
+            <li class="nav-item" v-if="isLogged">
               <router-link to="/profil" class="nav-link mx-1" activeClass="active"
                 >Profil</router-link
               >

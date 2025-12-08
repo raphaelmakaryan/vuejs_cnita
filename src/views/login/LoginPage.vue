@@ -1,38 +1,45 @@
 <script>
-import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
 import JudgementAPI from '@/components/JudgementAPI.vue'
+import Notification from '@/components/Notification.vue'
+import router from '@/router/index.js'
 
 export default {
   name: 'LoginJudgement',
-  components: { HeaderJudgement },
+  components: { Notification },
   data() {
     return {
-      email: null,
-      password: null,
+      valueNotification: null,
+      textNotification: null,
+      newBody: {
+        email: null,
+        password: null,
+      },
     }
   },
   methods: {
     async login() {
-      if (this.email && this.password) {
-        let body = {
-          email: this.email,
-          password: this.password,
-        }
-        await this.status(await JudgementAPI.mounted('POST', `auth`, body, undefined, ''))
+      if (this.newBody.email && this.newBody.password) {
+        let data = await JudgementAPI.mounted('POST', `auth`, this.newBody, undefined, '')
+        await this.forNotification(data)
+        await this.save(data)
       }
     },
-    async status(data) {
+    async save(data) {
+      setTimeout(() => {
+        this.$cookies.set('tokenUser', data.token, data.ttl)
+        this.$cookies.set('idUser', data.user.id, data.ttl)
+        window.dispatchEvent(new Event('auth-change'))
+        router.push({ name: 'ProfilJudgement' })
+      }, 1000)
+    },
+    async forNotification(data) {
       if (data.status) {
-        alert(data.detail)
+        this.valueNotification = false
+        this.textNotification = data.detail
       } else {
-        alert('Vous êtes connecté !')
-        this.saveData(data)
-        window.location.reload()
+        this.valueNotification = true
+        this.textNotification = 'Vous êtes connecté !'
       }
-    },
-    async saveData(data) {
-      this.$cookies.set('tokenUser', data.token, data.ttl)
-      this.$cookies.set('idUser', data.user.id, data.ttl)
     },
   },
 }
@@ -46,6 +53,11 @@ export default {
           <p class="fs-1 text-center">Se connecter</p>
         </div>
       </div>
+      <Notification
+        v-if="this.valueNotification != null && this.textNotification != null"
+        :value="valueNotification"
+        :text="textNotification"
+      />
       <form method="post" @submit.prevent="login">
         <div class="row my-2">
           <div class="col-12">
@@ -54,7 +66,7 @@ export default {
               type="email"
               class="form-control"
               id="emailInput"
-              v-model="email"
+              v-model="newBody.email"
               placeholder="name@example.com"
               required
             />
@@ -67,7 +79,7 @@ export default {
               type="passwordInput"
               class="form-control"
               id="passwordInput"
-              v-model="password"
+              v-model="newBody.password"
               required
             />
           </div>

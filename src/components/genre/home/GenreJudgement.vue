@@ -25,7 +25,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 titleSeparation">GENRES</p>
-          <hr />
+          <hr  />
         </div>
       </div>
       <div class="row">

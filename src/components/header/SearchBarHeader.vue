@@ -12,7 +12,7 @@ export default {
       this.filter = value
     },
     searchBar() {
-      if (this.filter != null) {
+      if (this.filter != null && this.searchBarValue !== '') {
         clearTimeout(this.debounceTimer)
         this.debounceTimer = setTimeout(() => {
           this.chooseCategorie(this.displayResult())
@@ -159,12 +159,12 @@ export default {
           class="my-2 d-flex flex-column w-100"
         >
           <div class="my-2">
-            <p class="fs-5 mx-1 text-decoration-underline m-0">PERSONNALITÉ</p>
+            <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">PERSONNALITÉ</p>
             <hr class="w-100" />
           </div>
           <ul v-if="this.peoplesSearchBar.totalItems > 0">
             <li v-for="people in this.peoplesSearchBar.member">
-              <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2"
+              <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2 colorSearch"
                 >{{ people.fullName }}
               </router-link>
             </li>
@@ -179,13 +179,13 @@ export default {
           class="my-2 d-flex flex-column w-100"
         >
           <div class="my-2">
-            <p class="fs-5 mx-1 text-decoration-underline m-0">FILMS</p>
+            <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">FILMS</p>
             <hr class="w-100" />
           </div>
           <div v-if="this.moviesSearchBar.totalItems > 0">
             <ul>
               <li v-for="movie in this.moviesSearchBar.member">
-                <router-link :to="{ path: '/movie/' + movie.id }" class="fs-6 m-2"
+                <router-link :to="{ path: '/movie/' + movie.id }" class="fs-6 m-2 colorSearch"
                   >{{ movie.title }}
                 </router-link>
               </li>
@@ -201,13 +201,13 @@ export default {
           class="my-2 d-flex flex-column w-100"
         >
           <div class="my-2">
-            <p class="fs-5 mx-1 text-decoration-underline m-0">UTILISATEURS</p>
+            <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">UTILISATEURS</p>
             <hr class="w-100" />
           </div>
           <div v-if="this.userSearchBar.totalItems > 0">
             <ul>
               <li v-for="user in this.userSearchBar.member">
-                <router-link :to="{ path: '/user/' + user.id }" class="fs-6 m-2"
+                <router-link :to="{ path: '/user/' + user.id }" class="fs-6 m-2 colorSearch"
                   >{{ user.username }}
                 </router-link>
               </li>
@@ -265,5 +265,9 @@ export default {
 
 .dropdown-menu > li > a {
   color: white;
+}
+
+.colorSearch {
+  color: var(--color-accent-primary) !important;
 }
 </style>

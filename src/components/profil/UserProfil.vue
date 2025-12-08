@@ -13,6 +13,12 @@ export default {
   },
   methods: {
     format,
+    deconnect() {
+      VueCookies.remove('idUser')
+      VueCookies.remove('tokenUser')
+      window.dispatchEvent(new Event('auth-change'))
+      this.$router.push({ name: 'HomeJudgement' })
+    },
   },
   async mounted() {
     this.user = toRaw(
@@ -41,10 +47,13 @@ export default {
             {{ user.username }}
           </p>
         </div>
-        <div class="col-12 col-lg-2 d-flex  flex-column mt-2">
-          <router-link to="/profil/edit" class="btn btn-primary">
+        <div
+          class="col-12 col-lg-2 d-flex flex-column mt-2 align-items-center justify-content-center"
+        >
+          <router-link to="/profil/edit" class="btn btn-primary my-2">
             Modifier votre profil
           </router-link>
+          <button @click="deconnect()" class="btn btn-primary my-2">Déconnecter</button>
         </div>
       </div>
     </div>

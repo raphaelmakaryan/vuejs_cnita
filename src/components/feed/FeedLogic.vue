@@ -1,6 +1,6 @@
 <template>
   <div
-    class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column z--1"
+    class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 my-2 d-flex align-items-center flex-column"
     v-for="feed in feedData.items"
   >
     <div class="card" style="width: 18rem">
@@ -87,9 +87,5 @@ export default {
 .card {
   --bs-card-border-color: unset !important;
   --bs-card-bg: unset !important;
-}
-
-.z--1 {
-  z-index: -1;
 }
 </style>

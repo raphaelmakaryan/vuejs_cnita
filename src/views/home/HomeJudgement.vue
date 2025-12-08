@@ -18,8 +18,27 @@ export default {
 </script>
 
 <template>
+  <section class="mt-5">
+    <div class="container p-5">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>Welcome to Judgement</h1>
+        </div>
+        <div class="col-12 text-center">
+          <p class="lead">Discover and share your favorite movies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <FeedJudgement v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')" />
   <GenreJudgement />
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+</style>

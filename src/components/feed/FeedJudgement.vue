@@ -31,7 +31,7 @@ export default {
       <div class="row my-2">
         <div class="col-12">
           <p class="fs-2 text-uppercase titleSeparation">ARTICLES Récents</p>
-          <hr />
+          <hr class="z--1" />
         </div>
       </div>
       <div class="row my-2">

@@ -18,20 +18,12 @@ export default {
     },
   },
   methods: {
-    async status(data) {
-      if (data.status) {
-        alert(data.detail)
-      } else {
-        alert('Vous avec modifié votre collection !')
-        window.location.reload()
-      }
-    },
     removeFromList(id) {
       this.oldList.entries.forEach((item) => {
         if (id === item.id) {
           this.oldList.entries.splice(item.position - 1, 1)
           this.listRequest.splice(item.position - 1, 1)
-          this.$emit("updateList", this.listRequest);
+          this.$emit('updateList', this.listRequest)
         }
       })
     },
@@ -53,7 +45,10 @@ export default {
           <div class="card my-2" style="width: 18rem">
             <img :src="movie.movie.poster" class="card-img-top" :alt="movie.movie.title" />
             <div class="card-body">
-              <router-link :to="{ path: '/movie/' + movie.id }" class="card-title text-decoration-underline fs-5">
+              <router-link
+                :to="{ path: '/movie/' + movie.id }"
+                class="card-title text-decoration-underline fs-5"
+              >
                 {{ movie.movie.title }}
               </router-link>
               <div class="d-flex mt-3 mb-1 flex-column align-items-center">
