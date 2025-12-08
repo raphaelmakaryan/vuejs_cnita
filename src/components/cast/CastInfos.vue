@@ -1,6 +1,5 @@
 <script>
-import {toRaw} from 'vue'
-import api from "@/assets/api.js"
+import api from '@/assets/api.js'
 
 export default {
   name: 'CastInfosJudgement',
@@ -27,22 +26,44 @@ export default {
 
 <template>
   <section class="my-5" v-if="Object.keys(this.cast).length >= 1">
-    <div class="container border rounded">
+    <div class="container">
       <div class="row">
-        <div class="col-12">
-          <p class="fs-2 fw-bold mt-3">INFORMATIONS DE L'ACTEUR</p>
-          <hr/>
+        <div class="col-12 col-lg-6 d-flex avatar">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
         </div>
-      </div>
-      <div class="row mt-2">
-        <div class="col-12">
-          <p class="fs-6">
-            <span class="text-decoration-underline"> Nom de l'acteur : </span> {{ cast.fullName }}
-          </p>
+        <div class="col-12 col-lg-6">
+          <p class="title ms-1">{{ cast.fullName }}</p>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.avatar {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-elevated));
+  border: 3px solid var(--color-yellow-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-yellow-primary);
+  position: sticky;
+  top: 100px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-yellow-primary), var(--color-yellow-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+</style>
