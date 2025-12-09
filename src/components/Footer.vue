@@ -8,6 +8,20 @@ export default {
       return VueCookies
     },
   },
+  data() {
+    return {
+      isLogged: VueCookies.get('tokenUser') && VueCookies.get('idUser'),
+    }
+  },
+  beforeUnmount() {
+    window.removeEventListener('auth-change', this.updateStatus)
+  },
+  methods: {
+    updateStatus() {
+      this.isLogged = VueCookies.get('tokenUser') && VueCookies.get('idUser')
+    },
+  }
+
 }
 </script>
 
@@ -18,19 +32,22 @@ export default {
         <div class="col-12 col-lg-6 d-flex flex-column align-items-lg-start align-items-center">
           <p class="fs-6 text-white">© 2025 Judgement - Votre plateforme de critiques de films</p>
         </div>
-        <div class="col-12 col-lg-6 d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
+        <div
+          class="col-12 col-lg-6 d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
           <router-link to="/" class="footer-link text-secondary mx-1">Accueil</router-link>
           <router-link
             to="/login"
-            v-if="!VueCookies.get('tokenUser') && !VueCookies.get('idUser')"
+            v-if="!this.isLogged"
             class="footer-link text-secondary mx-1"
-            >Se connecter</router-link
+          >Se connecter
+          </router-link
           >
           <router-link
             to="/profil"
-            v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"
+            v-if="this.isLogged"
             class="footer-link text-secondary mx-1"
-            >Profil</router-link
+          >Profil
+          </router-link
           >
         </div>
       </div>

@@ -4,7 +4,7 @@ import SearchBarHeader from '@/components/header/SearchBarHeader.vue'
 
 export default {
   name: 'HeaderJudgement',
-  components: { SearchBarHeader },
+  components: {SearchBarHeader},
   computed: {
     VueCookies() {
       return VueCookies
@@ -59,10 +59,10 @@ export default {
           id="navbarTogglerDemo01"
         >
           <router-link to="/" class="navbar-brand">
-            <img src="/logoW.png" alt="Logo" width="50" class="d-inline-block align-text-top" />
+            <img src="/logoW.png" alt="Logo" width="50" class="d-inline-block align-text-top"/>
           </router-link>
-          <SearchBarHeader />
-          <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column align-items-center">
+          <SearchBarHeader/>
+          <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column align-items-center flex-lg-row">
             <li class="nav-item m-2">
               <router-link to="/" class="nav-link text-secondary fw-bold" activeClass="active">
                 Accueil
@@ -70,12 +70,12 @@ export default {
             </li>
             <li class="nav-item m-2" v-if="!isLogged">
               <router-link to="/login" class="nav-link text-secondary fw-bold" activeClass="active"
-                >Se connecter
+              >Se connecter
               </router-link>
             </li>
             <li class="nav-item m-2" v-if="isLogged">
               <router-link to="/profil" class="nav-link text-secondary fw-bold" activeClass="active"
-                >Profil
+              >Profil
               </router-link>
             </li>
           </ul>
@@ -111,8 +111,9 @@ export default {
   border: var(--bs-border-width) solid var(--color-yellow-primary);
 }
 
+
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' fill='white'/></svg>");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMCAzMCc+PHBhdGggc3Ryb2tlPScjZmZmJyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgc3Ryb2tlLXdpZHRoPScyJyBkPSdNNCA3aDIyTTQgMTVoMjJNNCAyM2gyMicvPjwvc3ZnPg==");
 }
 
 .show {

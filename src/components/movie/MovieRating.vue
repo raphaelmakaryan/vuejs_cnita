@@ -1,6 +1,5 @@
 <script>
 import VueCookies from 'vue-cookies'
-import { toRaw } from 'vue'
 import api from '@/assets/api.js'
 import { format } from 'timeago.js'
 
@@ -44,7 +43,7 @@ export default {
     <div class="container-fluid">
       <div class="row my-2">
         <div class="col-12">
-          <p class="fs-2 text-uppercase titleSeparation">Votes Récents</p>
+          <p class="fs-2 text-uppercase titleSeparation">VotesRécents</p>
           <hr />
         </div>
       </div>

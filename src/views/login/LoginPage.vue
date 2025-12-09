@@ -51,10 +51,11 @@ export default {
 
 <template>
   <section class="mt-5">
-    <div class="container border rounded">
+    <div class="container">
       <div class="row my-2">
         <div class="col-12">
-          <p class="fs-1 text-center">Se connecter</p>
+          <p class="fs-1 text-start titleSeparation">Se connecter</p>
+          <hr>
         </div>
       </div>
       <Notification

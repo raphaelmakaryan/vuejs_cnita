@@ -47,7 +47,7 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 my-2">
     <div class="card p-4">
       <div>
         <p class="fs-4 text-white">Votes</p>

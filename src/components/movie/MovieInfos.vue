@@ -35,7 +35,7 @@ export default {
     <div class="container">
       <div class="row">
         <div
-          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center largePoster"
+          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center largePoster my-2"
         >
           <div class="poster">
             <img
@@ -45,7 +45,7 @@ export default {
             />
           </div>
         </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 my-2">
           <div class="my-2">
             <p class="fs-1 fw-bold color_yellow">{{ movie.title }}</p>
             <p class="fs-6 text-secondary">{{ movie.fullPlot }}</p>
@@ -154,7 +154,6 @@ export default {
 
 <style scoped>
 .largePoster {
-  position: sticky;
   top: 100px;
 }
 

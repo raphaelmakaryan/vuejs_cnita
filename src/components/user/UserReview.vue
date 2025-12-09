@@ -31,39 +31,37 @@ export default {
     class="my-5"
     v-if="Object.keys(this.review).length >= 1 && this.review.member.length >= 1"
   >
-    <div class="container border rounded">
+    <div class="container">
       <div class="row">
         <div class="col-12">
-          <p class="fs-2 fw-bold mt-3">REVIEWS</p>
+          <p class="fs-2 fw-bold mt-3 titleSeparation m-0">REVIEWS</p>
           <hr/>
         </div>
       </div>
       <div class="row mt-2">
         <div
-          class="col-12 d-flex flex-column border rounded p-2 my-2"
+          class="col-12 d-flex flex-row align-items-center justify-content-between p-2 my-2 items"
           v-for="review in this.review.member"
         >
-          <router-link
-            :to="{ path: '/movie/' + review.movie.id }"
-            class="text-decoration-none"
-          >
-            <p class="fs-6 text-decoration-underline fw-bold color_yellow">
-              {{ review.movie.title }}
-            </p>
-          </router-link>
-          <p class="font-monospace">{{ review.content }}</p>
-          <p>
-            <span class="text-decoration-underline me-1"> Crée le : </span>
-            {{ format(review.createdAt) }}
-          </p>
-          <p>
-            <span class="text-decoration-underline me-1"> Derniere mise a jour le : </span>
-            {{ format(review.updateddAt) }}
-          </p>
+          <div>
+            <router-link :to="{ path: '/movie/' + review.movie.id }" class="text-decoration-none">
+              <p class="fs-6 text-decoration-underline fw-bold text-white">
+                {{ review.movie.title }}
+              </p>
+            </router-link>
+            <p class="font-monospace">{{ review.content }}</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.items {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+</style>

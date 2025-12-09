@@ -79,7 +79,7 @@ export default {
     <div class="col-12 my-2 movie-card rounded" v-for="movie in rawMovies" v-if="this.rawMovies">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-2 d-flex justify-content-center align-items-center flex-column">
+          <div class="col-4 col-lg-2 d-flex justify-content-center align-items-center flex-column">
             <div
               class="poster-placeholder d-flex align-items-center justify-content-center text-secondary position-relative">
               <router-link :to="{ path: '/movie/' + movie.id }"
@@ -95,7 +95,7 @@ export default {
               </router-link>
             </div>
           </div>
-          <div class="col-10 d-flex flex-column align-items-start justify-content-center">
+          <div class="col-8 col-lg-10 d-flex flex-column align-items-start justify-content-center">
             <div class="mt-2">
               <router-link :to="{ path: '/movie/' + movie.id }"
                            class="text-decoration-none fs-3 p-0 fw-bold text-white text-white">

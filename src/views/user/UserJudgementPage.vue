@@ -1,6 +1,5 @@
 <script>
 import VueCookies from 'vue-cookies'
-import Suscribe from '@/components/user/Suscribe.vue'
 import UserInfo from '@/components/user/UserInfo.vue'
 import UserFollowers from '@/components/user/UserFollowers.vue'
 import UserFollows from '@/components/user/UserFollows.vue'
@@ -24,7 +23,6 @@ export default {
     UserReview,
     UserRating,
     UserCollections,
-    Suscribe,
     UserInfo,
     UserFollowers,
     UserFollows,
@@ -33,10 +31,6 @@ export default {
 </script>
 
 <template>
-  <Suscribe
-    :idUser="this.valueIdUser"
-    v-if="VueCookies.get('tokenUser') && VueCookies.get('idUser')"
-  />
   <UserInfo :idUser="this.valueIdUser" />
   <UserFollowers :idUser="this.valueIdUser" />
   <UserFollows :idUser="this.valueIdUser" />

@@ -34,7 +34,7 @@ export default {
       switch (type) {
         case 'follow':
           requestFollow = await api({
-            url: `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
+            url: `users/${VueCookies.get('idUser')}/follow/${this.idUser}`,
             method: 'post',
             headers: {
               Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
@@ -45,7 +45,7 @@ export default {
           break
         case 'unfollow':
           requestFollow = await api({
-            url: `users/${VueCookies.get('idUser')}/follow/${this.valueIdUser}`,
+            url: `users/${VueCookies.get('idUser')}/follow/${this.idUser}`,
             method: 'delete',
             headers: {
               Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
@@ -92,30 +92,23 @@ export default {
 </script>
 
 <template>
-  <section
-    class="my-5"
-    v-if="this.userConnectedFollow != null && parseInt(VueCookies.get('idUser')) !== this.idUser"
-  >
-    <div class="container">
-      <Notification
-        v-if="this.valueNotification != null && this.textNotification != null"
-        :value="valueNotification"
-        :text="textNotification"
-      />
-      <div class="row">
-        <div class="col-12" v-if="this.userConnectedFollow">
-          <button type="button" @click="systemFollow('unfollow')" class="btn btn-danger">
-            Se désabonner
-          </button>
-        </div>
-        <div class="col-12" v-else-if="!this.userConnectedFollow">
-          <button type="button" @click="systemFollow('follow')" class="btn btn-success">
-            S'abonner
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Notification
+    v-if="this.valueNotification != null && this.textNotification != null"
+    :value="valueNotification"
+    :text="textNotification"
+  />
+  <div class="col-12 my-2"
+       v-if="this.userConnectedFollow && parseInt(VueCookies.get('idUser')) !== this.idUser">
+    <button type="button" @click="systemFollow('unfollow')" class="btn btn-danger">
+      Se désabonner
+    </button>
+  </div>
+  <div class="col-12"
+       v-else-if="!this.userConnectedFollow && parseInt(VueCookies.get('idUser')) !== this.idUser">
+    <button type="button" @click="systemFollow('follow')" class="btn btn-success">
+      S'abonner
+    </button>
+  </div>
 </template>
 
 <style scoped></style>

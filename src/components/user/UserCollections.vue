@@ -17,7 +17,7 @@ export default {
   },
   async mounted() {
     let data = await api({
-      url: `users/${this.valueIdUser}/collections`,
+      url: `users/${this.idUser}/collections`,
       method: 'get',
     })
     this.list = data.data
@@ -27,20 +27,20 @@ export default {
 
 <template>
   <section class="my-5" v-if="Object.keys(this.list).length >= 1 && this.list.member.length >= 1">
-    <div class="container border rounded">
+    <div class="container">
       <div class="row">
         <div class="col-12">
-          <p class="fs-2 fw-bold mt-3">COLLECTIONS</p>
+          <p class="fs-2 fw-bold mt-3 m-0 titleSeparation">COLLECTIONS</p>
           <hr/>
         </div>
       </div>
       <div class="row mt-2">
         <div
-          class="col-12 d-flex flex-column border rounded p-2 my-2"
+          class="col-12 d-flex flex-row align-items-center justify-content-between items p-2 my-2"
           v-for="list in this.list.member"
         >
-          <router-link :to="{ path: '/judgement/list/' + list.id }" class="text-decoration-none">
-            <p class="fs-6 m-0 text-decoration-underline fw-bold text-black">{{ list.title }}</p>
+          <router-link :to="{ path: '/list/' + list.id }" class="text-decoration-none">
+            <p class="fs-6 m-0 text-decoration-underline fw-bold text-white">{{ list.title }}</p>
           </router-link>
         </div>
       </div>
@@ -48,4 +48,11 @@ export default {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.items {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+</style>

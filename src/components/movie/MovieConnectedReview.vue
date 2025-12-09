@@ -55,7 +55,7 @@ export default {
       </div>
       <div>
         <router-link
-          class="btn btn-success"
+          class="btn btn-primary"
           v-if="reviewUser"
           :to="{ path: '/movie/' + this.idMovie + '/review' }"
         >

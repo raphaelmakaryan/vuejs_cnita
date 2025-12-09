@@ -34,7 +34,7 @@ export default {
         </div>
       </div>
       <div class="row mt-2 d-flex flex-column flex-md-row align-items-center">
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4" v-for="movie in this.movies.member">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 my-2" v-for="movie in this.movies.member">
           <router-link
             :to="{ path: '/movie/' + movie.id }"
             class="text-decoration-none d-flex flex-column align-items-center"

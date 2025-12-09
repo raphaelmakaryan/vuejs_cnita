@@ -39,7 +39,7 @@ export default {
     <div class="container-fluid">
       <div class="row my-2">
         <div class="col-12">
-          <p class="fs-2 text-uppercase titleSeparation">Review Récentes</p>
+          <p class="fs-2 text-uppercase titleSeparation">Reviews</p>
           <hr />
         </div>
       </div>

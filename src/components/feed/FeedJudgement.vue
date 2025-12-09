@@ -29,7 +29,7 @@ export default {
     <div class="container">
       <div class="row my-2">
         <div class="col-12">
-          <p class="fs-2 text-uppercase titleSeparation">ARTICLES Récents</p>
+          <p class="fs-2 text-uppercase titleSeparation">NOUVEAUTES</p>
           <hr class="z--1"/>
         </div>
       </div>

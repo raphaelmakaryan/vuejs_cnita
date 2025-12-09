@@ -27,15 +27,15 @@ export default {
 <template>
   <section class="my-5" v-if="Object.keys(this.director).length >= 1">
     <div class="container">
-      <div class="row">
-        <div class="col-12 col-lg-6 d-flex avatar">
+      <div class="row flex-lg-row d-flex flex-column align-items-center">
+        <div class="col-12 col-lg-6 my-2 d-flex avatar">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path
               d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
             />
           </svg>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 my-2 d-flex flex-lg-row flex-column align-items-center">
           <p class="title ms-1">{{ director.fullName }}</p>
         </div>
       </div>
@@ -54,7 +54,6 @@ export default {
   align-items: center;
   justify-content: center;
   color: var(--color-yellow-primary);
-  position: sticky;
   top: 100px;
 }
 
