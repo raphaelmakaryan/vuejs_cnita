@@ -9,16 +9,14 @@ export default {
   components: {ListMoviesJudgement, ListInfosJudgement},
   data() {
     return {
-      valueIdList: this.$route.params.id,
       list: [],
-      movies: [],
     }
   },
   methods: {
     format,
     async getList() {
       let data = await api({
-        url: `/custom_lists/${this.valueIdList}`,
+        url: `/custom_lists/${this.$route.params.id}`,
         method: 'get',
       })
       this.list = data.data

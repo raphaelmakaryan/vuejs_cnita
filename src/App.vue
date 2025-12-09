@@ -6,8 +6,6 @@
 
 <script>
 import Header from '@/components/header/HeaderJudgement.vue'
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import FooterJudgement from '@/components/Footer.vue'
 
 export default {

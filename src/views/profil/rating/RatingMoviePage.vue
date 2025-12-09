@@ -1,6 +1,4 @@
 <script>
-import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
-import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import router from '@/router/index.js'
@@ -24,6 +22,17 @@ export default {
     }
   },
   methods: {
+    clickedStar(index) {
+      const starRow = document.getElementById("starRow")
+      for (let i = 0; i < 5; i++) {
+        if (i < index) {
+          starRow.children[i].classList.add('clicked')
+        } else {
+          starRow.children[i].classList.remove('clicked')
+        }
+      }
+      this.newBody.note = index
+    },
     async getMovie() {
       let data = await api({
         url: `movies/${this.valueIdMovie}`,
@@ -32,19 +41,28 @@ export default {
       this.movie = data.data
     },
     async createRating() {
-      this.newBody.movie = '/api/movies/' + this.valueIdMovie
-      let data = await api({
-        url: `ratings`,
-        method: 'post',
-        data: this.newBody,
-        headers: {
-          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
-        }
-      })
-      await this.forNotification(data.data)
-      setTimeout(() => {
-        router.push({name: 'HomeJudgement'})
-      }, 2000)
+      if (this.newBody.note >= 1) {
+        this.valueNotification = null
+        this.textNotification = null
+        this.newBody.movie = '/api/movies/' + this.valueIdMovie
+        let data = await api({
+          url: `ratings`,
+          method: 'post',
+          data: this.newBody,
+          headers: {
+            Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
+          }
+        })
+        await this.forNotification(data.data)
+        setTimeout(() => {
+          router.push({name: 'HomeJudgement'})
+        }, 2000)
+      } else {
+        await this.forNotification({
+          status: 'error',
+          detail : "Veuillez minimum choisir une êtoile."
+        })
+      }
     },
     async forNotification(data) {
       if (data.status) {
@@ -96,15 +114,14 @@ export default {
         <div class="row my-2">
           <div class="col-12">
             <label for="newRating" class="form-label">Nouvelle note</label>
-            <input
-              type="number"
-              class="form-control"
-              id="newRating"
-              v-model="newBody.note"
-              aria-valuemin="1"
-              aria-valuemax="10"
-              required
-            />
+            <div class="d-flex flex-row" id="starRow">
+              <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"
+                   v-for="(index) in 5" @click="clickedStar(index)">
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -122,4 +139,12 @@ export default {
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+.star-icon {
+  width: 50px;
+}
+
+.clicked {
+  color: var(--color-yellow-hover);
+}
+</style>

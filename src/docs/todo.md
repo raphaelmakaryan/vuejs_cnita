@@ -1,2 +1,7 @@
-# A reviser (competences)
-- voir notion
+- creation de note via les etoiles
+- tout les api uttiliser get et tout (fonction de axios)
+- parametrer pour les requete preioniser si on l'utilise une fois ou plisueirs fois si c'est necessaire de lez definir dans data
+- slecdt pour la barre de recherche
+- drag and dropavec les cartes
+- comaprer les 3 notes (imdb tomatoes moene -> apex chart)
+- scrapping
