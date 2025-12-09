@@ -33,7 +33,7 @@ export default {
 <template>
   <section class="mt-5">
     <div class="container">
-      <div class="row">
+      <div class="row d-flex flex-column flex-lg-row align-items-center">
         <div
           class="col-12 col-lg-2 d-flex align-items-center justify-content-center flex-column m-3"
           id="avatar"
@@ -44,7 +44,7 @@ export default {
             />
           </svg>
         </div>
-        <div class="col-12 col-lg-8 d-flex align-items-start flex-column mt-3">
+        <div class="col-12 col-lg-8 d-flex align-items-lg-start align-items-center flex-column mt-3">
           <p class="fs-2 mb-1" id="username">
             {{ user.username }}
           </p>

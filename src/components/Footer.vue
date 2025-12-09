@@ -15,10 +15,10 @@ export default {
   <footer class="mt-5 p-5 mt-2">
     <section class="container">
       <div class="row">
-        <div class="col-12 col-lg-6 d-flex flex-column">
+        <div class="col-12 col-lg-6 d-flex flex-column align-items-lg-start align-items-center">
           <p class="fs-6 text-white">© 2025 Judgement - Votre plateforme de critiques de films</p>
         </div>
-        <div class="col-12 col-lg-6 d-flex flex-row justify-content-end">
+        <div class="col-12 col-lg-6 d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
           <router-link to="/" class="footer-link text-secondary mx-1">Accueil</router-link>
           <router-link
             to="/login"

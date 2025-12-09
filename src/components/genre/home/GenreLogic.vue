@@ -22,11 +22,30 @@ export default {
 
 <template>
   <div class="col-12">
-    <Splide :options="{ rewind: true, perPage: 3 }" aria-label="Tout les genres de films">
+    <Splide
+      :options="{
+        rewind: true,
+        perPage: 3,
+        breakpoints: {
+          640: {
+            perPage: 1,
+          },
+          768: {
+            perPage: 1,
+          },
+          990: {
+            perPage: 1,
+          },
+        },
+      }"
+      aria-label="Tout les genres de films"
+    >
       <SplideSlide v-for="genre in this.GenreData.member" class="mb-5">
         <router-link :to="{ path: '/genres/' + genre.id + '/movies' }" class="text-decoration-none">
           <div class="genre-overlay"></div>
-          <div class="boxHome p-5 m-1 d-flex align-items-center flex-column justify-content-center text-white fw-bold z-1">
+          <div
+            class="boxHome p-5 m-1 d-flex align-items-center flex-column justify-content-center text-white fw-bold z-1"
+          >
             {{ genre.label }}
           </div>
         </router-link>

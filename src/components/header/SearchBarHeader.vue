@@ -124,7 +124,7 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex w-50 flex-column position-relative search-wrapper" role="search">
+  <div class="d-flex flex-column position-relative search-wrapper w-100 m-1 p-1" role="search">
     <div>
       <div class="input-group">
         <button
