@@ -1,5 +1,4 @@
 <script>
-import {normalizeStyle, toRaw} from 'vue'
 import api from "@/assets/api.js"
 import {format} from 'timeago.js'
 import ListInfosJudgement from '@/components/list/ListInfos.vue'
