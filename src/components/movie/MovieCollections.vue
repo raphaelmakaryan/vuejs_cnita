@@ -46,7 +46,7 @@ export default {
         </div>
       </div>
       <div class="row my-2">
-        <div class="col-12 card" v-for="list in this.listsData.member">
+        <div class="col-12 cardDetail" v-for="list in this.listsData.member">
           <div class="container-fluid">
             <div class="row my-3">
               <div class="col-6 d-flex flex-row align-items-center">
@@ -70,7 +70,7 @@ export default {
                 </svg>
                 <router-link
                   :to="{ path: '/user/' + list.customList.user.id }"
-                  class="text-decoration-none ms-1 username"
+                  class="text-decoration-none ms-1 text-white usernameInfos"
                 >
                   {{ list.customList.user.username }}
                 </router-link>
@@ -84,15 +84,6 @@ export default {
 </template>
 
 <style scoped>
-.card {
-  background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-}
-
 .user {
   width: 40px;
   height: 40px;
@@ -104,13 +95,5 @@ export default {
   align-items: center;
   justify-content: center;
   color: var(--color-yellow-primary);
-}
-
-.username {
-  color: white;
-}
-
-.username:hover {
-  color: var(--color-yellow-hover);
 }
 </style>

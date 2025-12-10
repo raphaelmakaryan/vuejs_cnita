@@ -41,15 +41,6 @@ export default {
 </template>
 
 <style scoped>
-.card {
-  --bs-card-border-color: var(--color-bg-tertiary);
-}
-.card-body {
-  background: var(--color-bg-tertiary) !important;
-  border: 1px solid var(--bs-card-border-color) !important;
-  --bs-card-border-width: unset !important;
-}
-
 .card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);

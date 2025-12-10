@@ -1,3 +1,4 @@
+/*#region ROOT*/
 :root {
   --color-bg-primary: #0f0f0f;
   --color-bg-secondary: #1a1a1a;
@@ -13,17 +14,14 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
 }
 
+/*#endregion ROOT*/
 
+/*#region BODY*/
 body {
   background: var(--color-bg-primary);
   color: #ffffff;
 }
 
-.titleSeparation {
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 1px;
-}
 
 .btn-primary {
   border-radius: var(--radius-md);
@@ -72,4 +70,160 @@ fieldset:disabled .btn {
   color: white;
   background-color: var(--color-yellow-primary);
   border-color: var(--color-yellow-hover);
+}
+
+
+.card {
+  --bs-card-border-color: var(--color-bg-tertiary);
+}
+
+.card-body {
+  background: var(--color-bg-tertiary) !important;
+  border: 1px solid var(--bs-card-border-color) !important;
+  --bs-card-border-width: unset !important;
+  color: white;
+}
+
+/*#endregion BODY*/
+
+.titleSeparation {
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.avatarIconsInfos {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-elevated));
+  border: 3px solid var(--color-yellow-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-yellow-primary);
+  position: sticky;
+  top: 100px;
+}
+
+.avatarLittleIcons {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: var(--color-bg-elevated);
+  border: 2px solid var(--color-yellow-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-yellow-primary);
+}
+
+.titleInfos {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-yellow-primary), var(--color-yellow-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cardInfos:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-yellow-hover);
+}
+
+
+.cardDetail {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.cardConnectedChoose {
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.cardConnectedChoose:hover {
+  border-color: var(--color-yellow-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+
+.moviePoster {
+  aspect-ratio: 2/3;
+  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-elevated));
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.movieLabel {
+  font-weight: 600;
+  color: var(--color-yellow-primary);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.starIconsInfos {
+  width: 24px;
+  height: 24px;
+  color: var(--color-yellow-primary);
+}
+
+.usernameInfos:hover {
+  color: var(--color-yellow-hover);
+}
+
+.usersItemsProfil {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.usersAvatarProfil {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: var(--color-bg-elevated);
+  border: 2px solid var(--color-yellow-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-yellow-primary);
+}
+
+.usersAvatarProfil svg {
+  width: 60%;
+  height: 60%;
+}
+
+.lotItemsProfil {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.clickedStar {
+  color: var(--color-yellow-hover);
+}
+
+.starIconsRating {
+  width: 50px;
 }

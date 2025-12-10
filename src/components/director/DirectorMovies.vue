@@ -36,7 +36,7 @@ export default {
             :to="{ path: '/movie/' + movie.id }"
             class="text-decoration-none d-flex flex-column align-items-center"
           >
-            <div class="card rounded-bottom" style="width: 18rem">
+            <div class="card cardInfos rounded-bottom" style="width: 18rem">
               <img :src="movie.poster" class="card-img-top" :alt="movie.title"/>
               <div class="card-body">
                 <h5 class="card-title text-white">{{ movie.title }}</h5>
@@ -51,19 +51,4 @@ export default {
 </template>
 
 <style scoped>
-.card {
-  --bs-card-border-color: var(--color-bg-tertiary);
-}
-
-.card-body {
-  background: var(--color-bg-tertiary) !important;
-  border: 1px solid var(--bs-card-border-color) !important;
-  --bs-card-border-width: unset !important;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-yellow-hover);
-}
 </style>

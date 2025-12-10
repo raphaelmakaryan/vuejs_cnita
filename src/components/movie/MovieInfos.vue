@@ -32,9 +32,9 @@ export default {
     <div class="container">
       <div class="row">
         <div
-          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center largePoster my-2"
+          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center my-2  top-50"
         >
-          <div class="poster">
+          <div class="moviePoster">
             <img
               :src="movie.poster ? movie.poster : 'https://placehold.co/600x400'"
               class="img-fluid h-75"
@@ -47,10 +47,10 @@ export default {
             <p class="fs-1 fw-bold color_yellow">{{ movie.title }}</p>
             <p class="fs-6 text-secondary">{{ movie.fullPlot }}</p>
           </div>
-          <div class="detail d-flex flex-column p-3">
+          <div class="cardDetail d-flex flex-column p-3">
             <div id="outMovie" class="d-flex flex-column">
               <div>
-                <p class="fs-6 labelMovie">Sortie en :</p>
+                <p class="fs-6 movieLabel">Sortie en :</p>
               </div>
               <div>
                 <p class="fs-6 valueMovie">{{ movie.year }}</p>
@@ -58,7 +58,7 @@ export default {
             </div>
             <div id="directorsMovie" class="d-flex flex-column my-2">
               <div>
-                <p class="fs-6 labelMovie">Réalisateur(s) :</p>
+                <p class="fs-6 movieLabel">Réalisateur(s) :</p>
               </div>
               <div>
                 <router-link
@@ -72,7 +72,7 @@ export default {
             </div>
             <div id="castMovie" class="d-flex flex-column my-2">
               <div>
-                <p class="fs-6 labelMovie">Acteur(s) :</p>
+                <p class="fs-6 movieLabel">Acteur(s) :</p>
               </div>
               <div>
                 <router-link
@@ -86,7 +86,7 @@ export default {
             </div>
             <div id="createMovie" class="d-flex flex-column my-2">
               <div>
-                <p class="fs-6 labelMovie">Crée au(x) :</p>
+                <p class="fs-6 movieLabel">Crée au(x) :</p>
               </div>
               <div class="d-flex flex-row">
                 <p class="text-white m-1 p-1" v-for="country in movie.countries">{{ country }}</p>
@@ -94,7 +94,7 @@ export default {
             </div>
             <div id="imdbMovie" class="d-flex flex-column my-2">
               <div>
-                <p class="fs-6 labelMovie">Vote IMDB :</p>
+                <p class="fs-6 movieLabel">Vote IMDB :</p>
               </div>
               <div class="d-flex flex-row">
                 <p class="text-white">
@@ -110,7 +110,7 @@ export default {
             </div>
             <div id="tomatoesMovie" class="d-flex flex-column my-2">
               <div>
-                <p class="fs-6 labelMovie">Vote Tomatoes :</p>
+                <p class="fs-6 movieLabel">Vote Tomatoes :</p>
               </div>
               <div class="d-flex flex-row">
                 <p class="text-white">
@@ -127,10 +127,10 @@ export default {
                 </p>
               </div>
             </div>
-            <hr />
+            <hr/>
             <div id="genreMovies" class="d-flex flex-column my-2">
               <div>
-                <p class="fs-6 labelMovie">Genres :</p>
+                <p class="fs-6 movieLabel">Genres :</p>
               </div>
               <div>
                 <router-link
@@ -150,36 +150,6 @@ export default {
 </template>
 
 <style scoped>
-.largePoster {
-  top: 100px;
-}
-
-.poster {
-  aspect-ratio: 2/3;
-  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-elevated));
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.detail {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
-
-.labelMovie {
-  font-weight: 600;
-  color: var(--color-yellow-primary);
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-}
 
 .valueMovie {
   font-size: 1rem;

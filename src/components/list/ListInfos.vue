@@ -24,7 +24,7 @@ export default {
           <hr />
         </div>
       </div>
-      <div class="row mt-2 card p-3">
+      <div class="row mt-2 cardDetail p-3">
         <div class="col-12 my-2">
           <p class="fs-6 text-white">Nom de la liste :</p>
           <p class="fs-6 text-secondary">{{ listData.title }}</p>
@@ -55,11 +55,4 @@ export default {
 </template>
 
 <style scoped>
-.card {
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-}
 </style>

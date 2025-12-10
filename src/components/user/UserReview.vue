@@ -36,7 +36,7 @@ export default {
       </div>
       <div class="row mt-2">
         <div
-          class="col-12 d-flex flex-row align-items-center justify-content-between p-2 my-2 items"
+          class="col-12 d-flex flex-row align-items-center justify-content-between p-2 my-2 lotItemsProfil"
           v-for="review in this.review.member"
         >
           <div>
@@ -54,10 +54,4 @@ export default {
 </template>
 
 <style scoped>
-.items {
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  transition: all 0.3s ease;
-}
 </style>

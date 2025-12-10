@@ -35,10 +35,10 @@ export default {
       </div>
       <div class="row mt-2">
         <div
-          class="col-12 d-flex flex-row user-item p-2 my-2 align-items-center"
+          class="col-12 d-flex flex-row usersItemsProfil p-2 my-2 align-items-center"
           v-for="follower in this.followers.member"
         >
-          <div class="user-avatar me-2">
+          <div class="usersAvatarProfil me-2">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
@@ -57,28 +57,4 @@ export default {
 </template>
 
 <style scoped>
-.user-item {
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  transition: all 0.3s ease;
-}
-
-.user-avatar {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  background: var(--color-bg-elevated);
-  border: 2px solid var(--color-yellow-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-yellow-primary);
-}
-
-.user-avatar svg {
-  width: 60%;
-  height: 60%;
-}
 </style>
