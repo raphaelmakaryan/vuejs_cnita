@@ -30,14 +30,16 @@ export default {
       }
     },
     async createCollection() {
-      let data = await api.post('/custom_lists', {
+      let data = await api({
         data: this.newBody,
+        url: '/custom_lists',
+        method: 'POST',
         headers: {
           "Authorization": `Bearer ${VueCookies.get('tokenUser')}`
         }
       })
       document.getElementById("buttonCollection").setAttribute("disabled", "disabled")
-      await this.forNotification(data)
+      await this.forNotification(data.data)
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
       }, 2000)

@@ -38,6 +38,8 @@ export default {
       }
     },
     async updateCollection() {
+      console.log(this.newBody)
+      /*
       if (this.newBody.title === null) {
         this.newBody.title = this.list.title
       }
@@ -52,6 +54,8 @@ export default {
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
       }, 2000)
+
+       */
     },
   },
   async mounted() {

@@ -18,16 +18,16 @@ export default {
   },
   methods: {
     format,
-    async forNotification(data) {
+    async forNotification(data, texte) {
       if (data.status) {
         this.valueNotification = false
         this.textNotification = data.detail
       } else {
         this.valueNotification = true
-        this.textNotification = `Vous avez supprimez la collection : ${this.list.member.title} !`
+        this.textNotification = `Vous avez supprimez la collection : ${texte} !`
       }
     },
-    async functionDelete(id) {
+    async functionDelete(id, texte) {
       let data = await api({
         url: `custom_lists/${id}`,
         method: 'delete',
@@ -35,9 +35,9 @@ export default {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
         }
       })
-      await this.forNotification(data.data)
+      await this.forNotification(data.data, texte)
       setTimeout(() => {
-        router.push({name: 'ProfilJudgement'})
+        router.push({name: 'HomeJudgement'})
       }, 2000)
     },
   },
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <template>
-  <section class="my-5" v-if="Object.keys(this.list).length >= 1 && this.list.member.length >= 1">
+  <section class="my-5">
     <div class="container">
       <Notification
         v-if="this.valueNotification != null && this.textNotification != null"
@@ -71,7 +71,7 @@ export default {
           <hr/>
         </div>
       </div>
-      <div class="row mt-2">
+      <div class="row mt-2" v-if="Object.keys(this.list).length >= 1 && this.list.member.length >= 1">
         <div
           class="col-12 d-flex flex-row align-items-center justify-content-between lotItemsProfil p-2 my-2"
           v-for="list in this.list.member"
@@ -91,7 +91,7 @@ export default {
             <button
               type="button"
               class="btn btn-danger mx-1"
-              @click="functionDelete(list.id)"
+              @click="functionDelete(list.id, list.title)"
             >
               <i class="bi bi-trash"></i>
             </button>
