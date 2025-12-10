@@ -1,6 +1,6 @@
 <script>
-import {toRaw} from 'vue'
-import api from "@/assets/api.js"
+import { toRaw } from 'vue'
+import api from '@/assets/api.js'
 import CollectionName from '@/components/collections/CollectionName.vue'
 import CollectionMovie from '@/components/collections/CollectionMovie.vue'
 import Notification from '@/components/Notification.vue'
@@ -38,8 +38,6 @@ export default {
       }
     },
     async updateCollection() {
-      console.log(this.newBody)
-      /*
       if (this.newBody.title === null) {
         this.newBody.title = this.list.title
       }
@@ -47,15 +45,13 @@ export default {
         data: this.newBody,
         headers: {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
-        }
+        },
       })
-      document.getElementById("buttonCollection").setAttribute("disabled", "disabled")
+      document.getElementById('buttonCollection').setAttribute('disabled', 'disabled')
       await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({name: 'ProfilJudgement'})
+        router.push({ name: 'ProfilJudgement' })
       }, 2000)
-
-       */
     },
   },
   async mounted() {
@@ -83,7 +79,7 @@ export default {
     </div>
   </section>
   <form @submit.prevent="updateCollection">
-    <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event"/>
+    <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event" />
     <CollectionMovie
       :oldList="this.list"
       :oldListRequest="this.listRequest"
@@ -93,8 +89,8 @@ export default {
       <div class="container">
         <div class="row">
           <div class="col-12 my-2">
-            <button type="submit" class="btn btn-primary w-100" id="buttonCollection">Mettre a
-              jour
+            <button type="submit" class="btn btn-primary w-100" id="buttonCollection">
+              Mettre a jour
             </button>
           </div>
         </div>
