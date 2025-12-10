@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import api from '@/assets/api.js'
-import { format } from 'timeago.js'
+import {format} from 'timeago.js'
 
 export default {
   name: 'MovieRating',
@@ -25,13 +25,11 @@ export default {
     format,
   },
   async mounted() {
-    let data = await api({
-      url: `movies/${this.idMovie}/ratings`,
-      method: 'get',
+    let data = await api.get(`movies/${this.idMovie}/ratings`, {
       params: {
         page: '1',
         itemsPerPage: '30',
-      },
+      }
     })
     this.ratingData = data.data
   },
@@ -44,7 +42,7 @@ export default {
       <div class="row my-2">
         <div class="col-12">
           <p class="fs-2 text-uppercase titleSeparation">Votes Récents</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row my-2">
@@ -52,7 +50,8 @@ export default {
           <div class="container-fluid">
             <div class="row my-3">
               <div class="col-6 d-flex flex-row align-items-center">
-                <p class="fs-5 m-0 text-decoration-none fw-bold text-white d-flex flex-row align-items-center">
+                <p
+                  class="fs-5 m-0 text-decoration-none fw-bold text-white d-flex flex-row align-items-center">
                   <svg class="star-icon me-1" viewBox="0 0 24 24" fill="currentColor">
                     <path
                       d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
@@ -118,7 +117,7 @@ export default {
   color: var(--color-yellow-hover);
 }
 
-.star-icon{
+.star-icon {
   width: 24px;
   height: 24px;
   color: var(--color-yellow-primary);

@@ -5,41 +5,29 @@ import router from '@/router/index.js'
 import Notification from '@/components/Notification.vue'
 
 export default {
-  name: 'EditReviewJudgement',
+  name: 'ReviewJudgement',
   components: {Notification},
   data() {
     return {
-      valueIdReview: this.$route.params.id,
-      dataMovie: {},
-      newBody: {
-        content: '',
-      },
-      review: [],
-      newReview: null,
+      valueIdMovie: this.$route.params.id,
+      movie: [],
       valueNotification: null,
       textNotification: null,
+      newBody: {
+        movie: null,
+        user: '/api/users/' + VueCookies.get('idUser'),
+        content: null,
+      },
     }
   },
   methods: {
-    async getReview() {
-      let data = await api.get(`reviews/${this.valueIdReview}`, {
-        headers: {
-          Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
-        }
-      })
-      this.review = data.data
+    async getMovie() {
+      let data = await api.get(`movies/${this.valueIdMovie}`)
+      this.movie = data.data
     },
-    async forNotification(data) {
-      if (data.status) {
-        this.valueNotification = false
-        this.textNotification = data.detail
-      } else {
-        this.valueNotification = true
-        this.textNotification = 'Vous avez modifié votre review !'
-      }
-    },
-    async updateReview() {
-      let data = await api.patch(`reviews/${this.valueIdReview}`, {
+    async createRating() {
+      this.newBody.movie = '/api/movies/' + this.valueIdMovie
+      let data = await api.post('/reviews', {
         data: this.newBody,
         headers: {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
@@ -50,19 +38,23 @@ export default {
         router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
+    async forNotification(data) {
+      if (data.status) {
+        this.valueNotification = false
+        this.textNotification = data.detail
+      } else {
+        this.valueNotification = true
+        this.textNotification = 'Vous avez crée la review !'
+      }
+    },
   },
   async mounted() {
-    await this.getReview()
-    this.dataMovie = {
-      title: await this.review.movie.title,
-      poster: await this.review.movie.poster,
-    }
+    await this.getMovie()
   },
 }
 </script>
 
 <template>
-
   <section class="my-5">
     <div class="container">
       <Notification
@@ -76,21 +68,21 @@ export default {
         >
           <div class="poster">
             <img
-              :src="this.dataMovie.poster ? this.dataMovie.poster : 'https://placehold.co/510x510'"
+              :src="this.movie.poster ? this.movie.poster : 'https://placehold.co/510x510'"
               class="img-fluid h-75"
-              :alt="this.dataMovie.title"
+              :alt="this.movie.title"
             />
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 my-2 order-0 order-lg-1">
           <div class="my-2">
             <p class="fs-1 color_yellow text-uppercase">REVIEW <span class="fw-bold">{{
-                dataMovie.title
+                movie.title
               }}</span>
             </p>
           </div>
           <div class="detail d-flex flex-column p-3">
-            <form @submit.prevent="updateReview">
+            <form @submit.prevent="createRating">
               <div class="my-2">
                 <label for="newRating" class="form-label labelMovie mb-2">Nouvelle review</label>
               </div>
@@ -99,14 +91,14 @@ export default {
                   type="text"
                   class="form-control"
                   id="newReview"
-                  v-model="this.newBody.content"
-                  minlength="3"
+                  v-model="newBody.content"
+                  minlength="5"
                   required
-                  :placeholder="this.review.content"
+                  placeholder="Ce film étais géniale !"
                 />
               </div>
               <div class="mb-1 mt-5">
-                <button type="submit" class="btn btn-primary w-100">Mettre a jour</button>
+                <button type="submit" class="btn btn-primary w-100">Crée la review</button>
               </div>
             </form>
           </div>

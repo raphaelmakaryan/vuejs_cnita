@@ -15,10 +15,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `people/${this.idDirector}`,
-      method: 'get',
-    })
+    let data = await api.get(`people/${this.idDirector}`)
     this.director = data.data
   },
 }

@@ -1,5 +1,4 @@
 <script>
-import {toRaw} from 'vue'
 import {format} from 'timeago.js'
 import api from "@/assets/api.js"
 
@@ -17,10 +16,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `users/${this.idUser}/follows`,
-      method: 'get',
-    })
+    let data = await api.get(`users/${this.idUser}/follows`)
     this.follows = data.data
   },
 }

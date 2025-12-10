@@ -42,10 +42,7 @@ export default {
     },
   },
   async mounted() {
-    let data = await api({
-      url: `users/${VueCookies.get('idUser')}/collections`,
-      method: 'get'
-    })
+    let data = await api.get(`users/${VueCookies.get('idUser')}/collections`)
     this.list = data.data
   },
 }

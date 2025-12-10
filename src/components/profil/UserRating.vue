@@ -28,9 +28,7 @@ export default {
       }
     },
     async functionDelete(id) {
-      let data = await api({
-        url: `ratings/${id}`,
-        method: 'delete',
+      let data = await api.delete(`ratings/${id}`, {
         headers: {
           Authorization: `Bearer ${VueCookies.get('tokenUser')}`
         }
@@ -42,10 +40,7 @@ export default {
     },
   },
   async mounted() {
-    let data = await api({
-      url: `users/${VueCookies.get('idUser')}/ratings`,
-      method: 'get'
-    })
+    let data = await api.get(`users/${VueCookies.get('idUser')}/ratings`)
     this.rating = data.data
   },
 }

@@ -19,9 +19,7 @@ export default {
   methods: {
     async login() {
       if (this.newBody.email && this.newBody.password) {
-        let data = await api({
-          url: '/auth',
-          method: 'post',
+        let data = await api.post('/auth', {
           data: this.newBody
         })
         await this.forNotification(data.data)

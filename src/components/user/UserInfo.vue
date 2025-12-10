@@ -24,10 +24,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `/users/${this.idUser}`,
-      method: 'get',
-    })
+    let data = await api.get(`/users/${this.idUser}`)
     this.user = data.data
   },
 }

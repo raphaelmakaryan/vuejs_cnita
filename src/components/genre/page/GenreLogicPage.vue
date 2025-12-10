@@ -41,9 +41,7 @@ export default {
       }
     },
     async getMovies() {
-      let data = await api({
-        url: `genres/${this.idGenre}/movies`,
-        method: 'get',
+      let data = await api.get(`genres/${this.idGenre}/movies`, {
         params: {
           page: this.page,
           itemsPerPage: this.displayItems

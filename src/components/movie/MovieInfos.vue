@@ -21,10 +21,7 @@ export default {
     },
   },
   async mounted() {
-    let data = await api({
-      url: `movies/${this.idMovie}`,
-      method: 'get',
-    })
+    let data = await api.get(`movies/${this.idMovie}`)
     this.movie = data.data
   },
 }

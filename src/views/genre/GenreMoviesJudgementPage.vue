@@ -1,7 +1,4 @@
 <script>
-import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
-import api from "@/assets/api.js"
-import {toRaw} from 'vue'
 import Pagination from '@/components/Pagination.vue'
 import GenreLogicPage from '@/components/genre/page/GenreLogicPage.vue'
 
@@ -10,7 +7,6 @@ export default {
   components: {GenreLogicPage, Pagination},
   data() {
     return {
-      valueIdGenre: this.$route.params.id,
       displayItems: 30,
       page: 1,
       totalPages: 1,
@@ -36,7 +32,7 @@ export default {
           <hr/>
         </div>
       </div>
-      <GenreLogicPage :idGenre="this.valueIdGenre" :page="this.page"
+      <GenreLogicPage :idGenre="this.$route.params.id" :page="this.page"
                       :displayItems="this.displayItems" @movies-loaded="updateTotalPages"/>
     </div>
   </section>

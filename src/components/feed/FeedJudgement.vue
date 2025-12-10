@@ -12,9 +12,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: '/feed',
-      method: 'get',
+    let data = await api.get("/feed", {
       headers: {
         Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
       }

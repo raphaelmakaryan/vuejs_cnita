@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import api from '@/assets/api.js'
-import { toRaw } from 'vue'
+import {toRaw} from 'vue'
 
 export default {
   name: 'MovieConnectedRatingJudgement',
@@ -22,9 +22,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `movies/${this.idMovie}/ratings`,
-      method: 'get',
+    let data = await api.get(`movies/${this.idMovie}/ratings`, {
       params: {
         page: 1,
         itemsPerPage: 30,

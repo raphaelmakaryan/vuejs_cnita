@@ -30,9 +30,7 @@ export default {
       }
     },
     async createCollection() {
-      let data = await api({
-        url: '/custom_lists',
-        method: 'post',
+      let data = await api.post('/custom_lists', {
         data: this.newBody,
         headers: {
           "Authorization": `Bearer ${VueCookies.get('tokenUser')}`

@@ -14,8 +14,8 @@ import EditCollectionPageJudgement from '@/views/profil/collections/EditCollecti
 import CreateCollectionPageJudgement from '@/views/profil/collections/CreateCollectionPage.vue'
 import EditVotesPageJudgement from '@/views/profil/rating/EditVotesPage.vue'
 import EditReviewPageJudgement from '@/views/profil/review/EditReviewPage.vue'
-import RatingMoviePageJudgement from '@/views/profil/rating/RatingMoviePage.vue'
-import ReviewMoviePageJudgement from '@/views/profil/review/ReviewMoviePage.vue'
+import RatingMoviePageJudgement from '@/views/movie/RatingMoviePage.vue'
+import ReviewMoviePageJudgement from '@/views/movie/ReviewMoviePage.vue'
 import NotFound from "@/views/NotFound.vue";
 
 function isAuthenticate() {

@@ -41,9 +41,7 @@ export default {
       if (this.newBody.title === null) {
         this.newBody.title = this.list.title
       }
-      let data = await api({
-        url: `custom_lists/${this.valueIdList}`,
-        method: 'patch',
+      let data = await api.patch(`custom_lists/${this.valueIdList}`, {
         data: this.newBody,
         headers: {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
@@ -56,10 +54,7 @@ export default {
     },
   },
   async mounted() {
-    let data = await api({
-      url: `custom_lists/${this.valueIdList}`,
-      method: 'get',
-    })
+    let data = await api.get(`custom_lists/${this.valueIdList}`)
     this.list = data.data
     this.list.entries.forEach((element, index) => {
       this.listRequest.push({

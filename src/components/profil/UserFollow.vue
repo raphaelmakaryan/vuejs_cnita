@@ -15,10 +15,7 @@ export default {
     format,
   },
   async mounted() {
-    let data = await api({
-      url: `users/${VueCookies.get('idUser')}/follows`,
-      method: 'get',
-    })
+    let data = await api.get(`users/${VueCookies.get('idUser')}/follows`)
     this.follows = data.data
   },
 }

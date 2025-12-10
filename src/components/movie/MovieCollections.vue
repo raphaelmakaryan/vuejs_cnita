@@ -1,7 +1,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import api from '@/assets/api.js'
-import { format } from 'timeago.js'
+import {format} from 'timeago.js'
 
 export default {
   name: 'MovieCollections',
@@ -25,9 +25,7 @@ export default {
     format,
   },
   async mounted() {
-    let data = await api({
-      url: `movies/${this.idMovie}/custom_list_entries`,
-      method: 'get',
+    let data = await api.get(`movies/${this.idMovie}/custom_list_entries`, {
       params: {
         page: 1,
         itemsPerPage: 30,
@@ -44,7 +42,7 @@ export default {
       <div class="row my-2">
         <div class="col-12">
           <p class="fs-2 text-uppercase titleSeparation">Collections</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row my-2">

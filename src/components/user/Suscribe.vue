@@ -33,9 +33,7 @@ export default {
       let texte
       switch (type) {
         case 'follow':
-          requestFollow = await api({
-            url: `users/${VueCookies.get('idUser')}/follow/${this.idUser}`,
-            method: 'post',
+          requestFollow = await api.post(`users/${VueCookies.get('idUser')}/follow/${this.idUser}`, {
             headers: {
               Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
             }
@@ -44,9 +42,7 @@ export default {
           texte = 'Vous etes desormais abonne !'
           break
         case 'unfollow':
-          requestFollow = await api({
-            url: `users/${VueCookies.get('idUser')}/follow/${this.idUser}`,
-            method: 'delete',
+          requestFollow = await api.delete(`users/${VueCookies.get('idUser')}/follow/${this.idUser}`, {
             headers: {
               Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
             }
@@ -66,10 +62,7 @@ export default {
         parseInt(VueCookies.get('idUser')) !== this.idUser
       ) {
         let verification = false
-        let data = await api({
-          url: `users/${VueCookies.get('idUser')}/follows`,
-          method: 'get'
-        })
+        let data = await api.get(`users/${VueCookies.get('idUser')}/follows`)
         let userFollow = data.data
         userFollow.member.forEach((user) => {
           if (user.id === this.idUser) {

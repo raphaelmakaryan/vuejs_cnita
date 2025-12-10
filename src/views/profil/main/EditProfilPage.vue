@@ -19,10 +19,7 @@ export default {
   },
   methods: {
     async getUser() {
-      let data = await api({
-        url: `users/${VueCookies.get('idUser')}`,
-        method: 'get'
-      })
+      let data = await api.get(`users/${VueCookies.get('idUser')}`)
       this.user = data.data
     },
     async forNotification(data) {
@@ -35,9 +32,7 @@ export default {
       }
     },
     async updateProfil() {
-      let data = await api({
-        url: `users/${VueCookies.get('idUser')}`,
-        method: 'patch',
+      let data = await api.patch(`users/${VueCookies.get('idUser')}`, {
         data: this.newBody,
         headers: {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),

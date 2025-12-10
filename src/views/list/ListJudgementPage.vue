@@ -15,10 +15,7 @@ export default {
   methods: {
     format,
     async getList() {
-      let data = await api({
-        url: `/custom_lists/${this.$route.params.id}`,
-        method: 'get',
-      })
+      let data = await api.get(`/custom_lists/${this.$route.params.id}`)
       this.list = data.data
     },
   },

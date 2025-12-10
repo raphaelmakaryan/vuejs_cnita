@@ -16,10 +16,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `users/${this.idUser}/collections`,
-      method: 'get',
-    })
+    let data = await api.get(`users/${this.idUser}/collections`)
     this.list = data.data
   },
 }

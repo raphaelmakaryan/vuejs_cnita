@@ -51,9 +51,7 @@ export default {
     },
     async getSearchBarPeople() {
       this.peoplesSearchBar = []
-      let data = await api({
-        url: '/people',
-        method: 'get',
+      let data = await api.get('/people', {
         params: {
           page: "1",
           itemsPerPage: "3",
@@ -64,9 +62,7 @@ export default {
     },
     async getSearchBarMovies() {
       this.moviesSearchBar = []
-      let data = await api({
-        url: '/movies',
-        method: 'get',
+      let data = await api.get('/movies', {
         params: {
           page: "1",
           itemsPerPage: "3",
@@ -77,9 +73,7 @@ export default {
     },
     async getSearchBarUsers() {
       this.userSearchBar = []
-      let data = await api({
-        url: '/users',
-        method: 'get',
+      let data = await api.get('/users', {
         params: {
           page: "1",
           itemsPerPage: "3",

@@ -23,15 +23,15 @@ export default {
 <template>
   <div class="d-flex flex-row pagination justify-content-center my-3">
     <button
+      type="button"
+      v-for="button in paginationButtons"
+      :key="button"
       :class="{
         'btn': true,
         'btn-primary': true,
         'btn-active': button === currentPage,
         'mx-1': true
       }"
-      type="button"
-      v-for="button in paginationButtons"
-      :key="button"
       @click="$props.function(button)"
     >
       {{ button }}

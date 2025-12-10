@@ -10,10 +10,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: '/genres',
-      method: 'get'
-    })
+    let data = await api.get( '/genres')
     this.genres = data.data
   },
   components: {

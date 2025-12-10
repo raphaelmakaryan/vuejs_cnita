@@ -15,10 +15,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `people/${this.idCast}`,
-      method: 'get',
-    })
+    let data = await api.get(`people/${this.idCast}`)
     this.cast = data.data
   },
 }

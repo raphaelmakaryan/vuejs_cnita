@@ -15,10 +15,7 @@ export default {
     }
   },
   async mounted() {
-    let data = await api({
-      url: `casts/${this.idCast}/movies`,
-      method: 'get',
-    })
+    let data = await api.get(`casts/${this.idCast}/movies`)
     this.movies = data.data
   },
 }
@@ -30,7 +27,7 @@ export default {
       <div class="row">
         <div class="col-12">
           <p class="fs-2 fw-bold mt-3">FILMS PRESENT</p>
-          <hr />
+          <hr/>
         </div>
       </div>
       <div class="row mt-2 d-flex flex-column flex-md-row align-items-center">
@@ -40,7 +37,7 @@ export default {
             class="text-decoration-none d-flex flex-column align-items-center"
           >
             <div class="card rounded-bottom" style="width: 18rem">
-              <img :src="movie.poster" class="card-img-top" :alt="movie.title" />
+              <img :src="movie.poster" class="card-img-top" :alt="movie.title"/>
               <div class="card-body">
                 <h5 class="card-title text-white">{{ movie.title }}</h5>
                 <p class="card-text text-wrap text-secondary">{{ movie.plot }}</p>
@@ -57,6 +54,7 @@ export default {
 .card {
   --bs-card-border-color: var(--color-bg-tertiary);
 }
+
 .card-body {
   background: var(--color-bg-tertiary) !important;
   border: 1px solid var(--bs-card-border-color) !important;

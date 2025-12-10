@@ -6,7 +6,7 @@ import Notification from '@/components/Notification.vue'
 
 export default {
   name: 'MovieConnectedCollectionJudgement',
-  components: { Notification },
+  components: {Notification},
   computed: {
     VueCookies() {
       return VueCookies
@@ -33,10 +33,7 @@ export default {
   },
   methods: {
     async getCollections() {
-      let data = await api({
-        url: `users/${VueCookies.get('idUser')}/collections`,
-        method: 'get',
-      })
+      let data = await api.get(`users/${VueCookies.get('idUser')}/collections`)
       this.collections = data.data
     },
     async addCollection() {
@@ -66,7 +63,7 @@ export default {
       })
       await this.forNotification(data.data)
       setTimeout(() => {
-        router.push({ name: 'ProfilJudgement' })
+        router.push({name: 'ProfilJudgement'})
       }, 2000)
     },
     async setupListRequest(id) {

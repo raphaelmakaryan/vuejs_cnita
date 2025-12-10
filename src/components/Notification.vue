@@ -39,7 +39,7 @@ export default {
               <line x1="23.3536" y1="11.3536" x2="13.3536" y2="21.3536" stroke="white"></line>
             </svg>
             <svg id="error"
-              v-else-if="!this.text"
+              v-else-if="!this.value"
               width="32"
               height="32"
               viewbox="0 0 32 32"
