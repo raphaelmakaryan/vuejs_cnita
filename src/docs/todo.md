@@ -1,2 +1,1 @@
-- comaprer les 3 notes (imdb tomatoes moene -> apex chart)
 - scrapping

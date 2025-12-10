@@ -1,12 +1,14 @@
 <script>
 import VueCookies from 'vue-cookies'
 import api from '@/assets/api.js'
+import ApexCharts from 'apexcharts'
 
 export default {
   name: 'MovieInfos',
   data() {
     return {
       movie: [],
+      chartData: [],
     }
   },
   props: {
@@ -20,9 +22,56 @@ export default {
       return VueCookies
     },
   },
+  methods: {
+    async createChart() {
+      let options = {
+        chart: {
+          type: 'bar',
+          height: 300,
+        },
+        series: [
+          {
+            name: 'Chart',
+            data: [
+              parseFloat(this.chartData[0]) * 10,
+              parseInt(this.chartData[1]),
+              (parseFloat(this.chartData[0]) * 10 + parseInt(this.chartData[1])) / 2,
+            ],
+          },
+        ],
+        fill: {
+          colors: ['#d4af37'],
+        },
+        dataLabels: {
+          style: {
+            colors: ['#0000000'],
+          },
+        },
+        xaxis: {
+          categories: ['IMDB', 'Tomatoes', 'Moyenne'],
+        },
+      }
+      let chart = new ApexCharts(document.getElementById('forChartMovie'), options)
+      chart.render()
+    },
+    forChart() {
+      if (this.movie.imdb.rating == null) {
+        this.chartData.push(0)
+      } else {
+        this.chartData.push(this.movie.imdb.rating)
+      }
+      if (this.movie.tomatoes.meter == null) {
+        this.chartData.push(0)
+      } else {
+        this.chartData.push(this.movie.tomatoes.meter)
+      }
+    },
+  },
   async mounted() {
     let data = await api.get(`movies/${this.idMovie}`)
     this.movie = data.data
+    this.forChart()
+    await this.createChart()
   },
 }
 </script>
@@ -32,7 +81,7 @@ export default {
     <div class="container">
       <div class="row">
         <div
-          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center my-2  top-50"
+          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center my-2 top-50"
         >
           <div class="moviePoster">
             <img
@@ -127,7 +176,7 @@ export default {
                 </p>
               </div>
             </div>
-            <hr/>
+            <hr />
             <div id="genreMovies" class="d-flex flex-column my-2">
               <div>
                 <p class="fs-6 movieLabel">Genres :</p>
@@ -147,10 +196,25 @@ export default {
       </div>
     </div>
   </section>
+
+  <section id="chartMovie" class="my-5">
+    <div class="container">
+      <div class="row my-2">
+        <div class="col-12">
+          <p class="fs-2 text-uppercase titleSeparation">Graphique</p>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 my-2 cardConnectedChoose">
+          <div id="forChartMovie"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-
 .valueMovie {
   font-size: 1rem;
 }

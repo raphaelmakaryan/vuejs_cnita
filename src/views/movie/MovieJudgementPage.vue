@@ -5,12 +5,10 @@ import MovieInfos from '@/components/movie/MovieInfos.vue'
 import MovieCollections from '@/components/movie/MovieCollections.vue'
 import MovieRating from '@/components/movie/MovieRating.vue'
 import MovieReview from '@/components/movie/MovieReview.vue'
-import MovieChart from '@/components/movie/MovieChart.vue'
 
 export default {
   name: 'MovieJudgement',
   components: {
-    MovieChart,
     MovieReview,
     MovieRating,
     MovieCollections,
@@ -32,14 +30,6 @@ export default {
 
 <template>
   <MovieInfos :idMovie="valueIdMovie" />
-
-  <section class="my-5" id="chartMovie">
-    <div class="container">
-      <div class="row">
-        <MovieChart :idMovie="valueIdMovie" />
-      </div>
-    </div>
-  </section>
 
   <MovieConnectedJudgement
     :idMovie="valueIdMovie"
