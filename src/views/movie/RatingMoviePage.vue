@@ -15,7 +15,7 @@ export default {
       valueNotification: null,
       textNotification: null,
       newBody: {
-        movie: null,
+        movie: '/api/movies/' + this.valueIdMovie,
         user: '/api/users/' + VueCookies.get('idUser'),
         note: null,
       },
@@ -42,13 +42,13 @@ export default {
       if (this.newBody.note >= 1) {
         this.valueNotification = null
         this.textNotification = null
-        this.newBody.movie = '/api/movies/' + this.valueIdMovie
         let data = await api.post(`ratings`, {
           data: this.newBody,
           headers: {
             Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
           }
         })
+        document.getElementById("buttonRating").setAttribute("disabled", "disabled")
         await this.forNotification(data.data)
         setTimeout(() => {
           router.push({name: 'HomeJudgement'})
@@ -117,7 +117,7 @@ export default {
                 </svg>
               </div>
               <div class="mb-1 mt-5">
-                <button type="submit" class="btn btn-primary w-100">Mettre a jour</button>
+                <button type="submit" class="btn btn-primary w-100" id="buttonRating">Mettre a jour</button>
               </div>
             </form>
           </div>

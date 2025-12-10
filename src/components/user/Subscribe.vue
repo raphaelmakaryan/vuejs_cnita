@@ -38,8 +38,8 @@ export default {
               Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
             }
           })
-
           texte = 'Vous etes desormais abonne !'
+          document.getElementById("buttonSubscribe").setAttribute("disabled", "disabled")
           break
         case 'unfollow':
           requestFollow = await api.delete(`users/${VueCookies.get('idUser')}/follow/${this.idUser}`, {
@@ -48,6 +48,7 @@ export default {
             }
           })
           texte = 'Vous vous etes desabonnez !'
+          document.getElementById("buttonSubscribe").setAttribute("disabled", "disabled")
           break
       }
       await this.forNotification(requestFollow, texte)
@@ -92,13 +93,15 @@ export default {
   />
   <div class="col-12 my-2"
        v-if="this.userConnectedFollow && parseInt(VueCookies.get('idUser')) !== this.idUser">
-    <button type="button" @click="systemFollow('unfollow')" class="btn btn-danger">
+    <button type="button" @click="systemFollow('unfollow')" class="btn btn-danger"
+            id="buttonSubscribe">
       Se désabonner
     </button>
   </div>
   <div class="col-12"
        v-else-if="!this.userConnectedFollow && parseInt(VueCookies.get('idUser')) !== this.idUser">
-    <button type="button" @click="systemFollow('follow')" class="btn btn-success">
+    <button type="button" @click="systemFollow('follow')" class="btn btn-success"
+            id="buttonSubscribe">
       S'abonner
     </button>
   </div>

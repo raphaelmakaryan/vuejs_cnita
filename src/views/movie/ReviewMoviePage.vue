@@ -27,12 +27,15 @@ export default {
     },
     async createRating() {
       this.newBody.movie = '/api/movies/' + this.valueIdMovie
-      let data = await api.post('/reviews', {
+      let data = await api({
+        url: '/reviews',
+        method: 'POST',
         data: this.newBody,
         headers: {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
         }
       })
+      document.getElementById("buttonReview").setAttribute("disabled", "disabled")
       await this.forNotification(data.data)
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
@@ -98,7 +101,9 @@ export default {
                 />
               </div>
               <div class="mb-1 mt-5">
-                <button type="submit" class="btn btn-primary w-100">Crée la review</button>
+                <button type="submit" class="btn btn-primary w-100" id="buttonReview">Crée la
+                  review
+                </button>
               </div>
             </form>
           </div>

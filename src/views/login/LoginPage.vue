@@ -19,9 +19,12 @@ export default {
   methods: {
     async login() {
       if (this.newBody.email && this.newBody.password) {
-        let data = await api.post('/auth', {
+        let data = await api({
+          url: '/auth',
+          method: 'post',
           data: this.newBody
         })
+        document.getElementById("buttonLogin").setAttribute("disabled", "disabled")
         await this.forNotification(data.data)
         await this.save(data.data)
       }
@@ -89,7 +92,7 @@ export default {
         </div>
         <div class="row my-4">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+            <button type="submit" class="btn btn-primary w-100" id="buttonLogin">Se connecter</button>
           </div>
         </div>
       </form>

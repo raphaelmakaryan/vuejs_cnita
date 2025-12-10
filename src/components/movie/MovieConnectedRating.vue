@@ -82,12 +82,4 @@ export default {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
-
-.btn:disabled,
-.btn.disabled,
-fieldset:disabled .btn {
-  color: white;
-  background-color: var(--color-yellow-primary);
-  border-color: var(--color-yellow-hover);
-}
 </style>

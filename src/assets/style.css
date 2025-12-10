@@ -65,3 +65,11 @@ body {
 hr {
   color: gray !important;
 }
+
+.btn:disabled,
+.btn.disabled,
+fieldset:disabled .btn {
+  color: white;
+  background-color: var(--color-yellow-primary);
+  border-color: var(--color-yellow-hover);
+}

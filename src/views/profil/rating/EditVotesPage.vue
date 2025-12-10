@@ -52,6 +52,7 @@ export default {
         },
         data: this.newBody
       })
+      document.getElementById("buttonRating").setAttribute("disabled", "disabled")
       await this.forNotification(data.data)
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
@@ -111,7 +112,7 @@ export default {
                 </svg>
               </div>
               <div class="mb-1 mt-5">
-                <button type="submit" class="btn btn-primary w-100">Mettre a jour</button>
+                <button type="submit" class="btn btn-primary w-100" id="buttonRating">Mettre a jour</button>
               </div>
             </form>
           </div>

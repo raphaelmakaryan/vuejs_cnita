@@ -7,9 +7,6 @@ export default {
     displayResult() {
       return document.getElementById('resultData')
     },
-    chooseFilter(value) {
-      this.filter = value
-    },
     searchBar() {
       if (this.filter != null && this.searchBarValue !== '') {
         clearTimeout(this.debounceTimer)
@@ -111,7 +108,7 @@ export default {
       peoplesSearchBar: [],
       moviesSearchBar: [],
       userSearchBar: [],
-      filter: null,
+      filter: "movies"
     }
   },
 }
@@ -119,98 +116,92 @@ export default {
 
 <template>
   <div class="d-flex flex-column position-relative search-wrapper w-100 m-1 p-1" role="search">
-    <div>
-      <div class="input-group">
-        <button
-          class="btn btn-outline-secondary dropdown-toggle text-white"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Filtre
-        </button>
-        <ul class="dropdown-menu" style="z-index: 3000">
-          <li><a class="dropdown-item" href="#" @click="this.chooseFilter('movies')">Films</a></li>
-          <li>
-            <a class="dropdown-item" href="#" @click="this.chooseFilter('peoples')">Personnalité</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#" @click="this.chooseFilter('users')">Utilisateur</a>
-          </li>
-        </ul>
-        <input
-          type="search"
-          class="form-control"
-          placeholder="Rechercher un film, un acteur, un utilisateur..."
-          id="searchBar"
-          aria-label="Search"
-          v-model="searchBarValue"
-          @keyup="searchBar"
-        />
-      </div>
-      <div id="resultData" class="border rounded rounded-top-0 flex-column w-100">
-        <div
-          v-if="Object.keys(this.peoplesSearchBar).length > 0"
-          id="resultPeople"
-          class="my-2 d-flex flex-column w-100"
-        >
-          <div class="my-2">
-            <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">PERSONNALITÉ</p>
-            <hr class="w-100"/>
+    <div class="d-flex justify-content-center">
+      <div class="w-100">
+        <div class="input-group">
+          <div>
+            <select class="form-select rounded-start border-end-0"
+                    aria-label="Default select example"
+                    v-model="this.filter">
+              <option selected value="movies">Films</option>
+              <option value="peoples">Personnalités</option>
+              <option value="users">Utilisateurs</option>
+            </select>
           </div>
-          <ul v-if="this.peoplesSearchBar.totalItems > 0">
-            <li v-for="people in this.peoplesSearchBar.member">
-              <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2 colorSearch"
-              >{{ people.fullName }}
-              </router-link>
-            </li>
-          </ul>
-          <div v-else>
-            <p class="fs-6 mx-1 fw-bold">Aucune personnalité.</p>
-          </div>
+          <input
+            type="search"
+            class="form-control border-start-0"
+            placeholder="Rechercher un film, un acteur, un utilisateur..."
+            id="searchBar"
+            aria-label="Search"
+            v-model="searchBarValue"
+            @keyup="searchBar"
+          />
         </div>
-        <div
-          v-if="Object.keys(this.moviesSearchBar).length > 0"
-          id="resultMovies"
-          class="my-2 d-flex flex-column w-100"
-        >
-          <div class="my-2">
-            <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">FILMS</p>
-            <hr class="w-100"/>
-          </div>
-          <div v-if="this.moviesSearchBar.totalItems > 0">
-            <ul>
-              <li v-for="movie in this.moviesSearchBar.member">
-                <router-link :to="{ path: '/movie/' + movie.id }" class="fs-6 m-2 colorSearch"
-                >{{ movie.title }}
+        <div id="resultData" class="border rounded rounded-top-0 flex-column w-100">
+          <div
+            v-if="Object.keys(this.peoplesSearchBar).length > 0"
+            id="resultPeople"
+            class="my-2 d-flex flex-column w-100"
+          >
+            <div class="my-2">
+              <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">PERSONNALITÉ</p>
+              <hr class="w-100"/>
+            </div>
+            <ul v-if="this.peoplesSearchBar.totalItems > 0">
+              <li v-for="people in this.peoplesSearchBar.member">
+                <router-link :to="{ path: '/cast/' + people.id }" class="fs-6 m-2 colorSearch"
+                >{{ people.fullName }}
                 </router-link>
               </li>
             </ul>
+            <div v-else>
+              <p class="fs-6 mx-1 fw-bold">Aucune personnalité.</p>
+            </div>
           </div>
-          <div v-else>
-            <p class="fs-6 mx-1 fw-bold">Aucun films.</p>
+          <div
+            v-if="Object.keys(this.moviesSearchBar).length > 0"
+            id="resultMovies"
+            class="my-2 d-flex flex-column w-100"
+          >
+            <div class="my-2">
+              <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">FILMS</p>
+              <hr class="w-100"/>
+            </div>
+            <div v-if="this.moviesSearchBar.totalItems > 0">
+              <ul>
+                <li v-for="movie in this.moviesSearchBar.member">
+                  <router-link :to="{ path: '/movie/' + movie.id }" class="fs-6 m-2 colorSearch"
+                  >{{ movie.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+            <div v-else>
+              <p class="fs-6 mx-1 fw-bold">Aucun films.</p>
+            </div>
           </div>
-        </div>
-        <div
-          v-if="Object.keys(this.userSearchBar).length > 0"
-          id="resultUsers"
-          class="my-2 d-flex flex-column w-100"
-        >
-          <div class="my-2">
-            <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">UTILISATEURS</p>
-            <hr class="w-100"/>
-          </div>
-          <div v-if="this.userSearchBar.totalItems > 0">
-            <ul>
-              <li v-for="user in this.userSearchBar.member">
-                <router-link :to="{ path: '/user/' + user.id }" class="fs-6 m-2 colorSearch"
-                >{{ user.username }}
-                </router-link>
-              </li>
-            </ul>
-          </div>
-          <div v-else>
-            <p class="fs-6 mx-1 fw-bold">Aucun utilisateur.</p>
+          <div
+            v-if="Object.keys(this.userSearchBar).length > 0"
+            id="resultUsers"
+            class="my-2 d-flex flex-column w-100"
+          >
+            <div class="my-2">
+              <p class="fs-5 mx-1 text-decoration-underline m-0 colorSearch">UTILISATEURS</p>
+              <hr class="w-100"/>
+            </div>
+            <div v-if="this.userSearchBar.totalItems > 0">
+              <ul>
+                <li v-for="user in this.userSearchBar.member">
+                  <router-link :to="{ path: '/user/' + user.id }" class="fs-6 m-2 colorSearch"
+                  >{{ user.username }}
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+            <div v-else>
+              <p class="fs-6 mx-1 fw-bold">Aucun utilisateur.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -236,7 +227,7 @@ export default {
 
 #searchBar {
   background: var(--color-bg-primary) !important;
-  border: 1px solid var(--color-border) !important;
+  border: 1px solid var(--color-border);
   color: #ffffff !important;
   transition: all 0.3s ease;
 }
@@ -250,17 +241,17 @@ export default {
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
-.dropdown-menu {
+.form-select {
   background-color: var(--color-bg-primary) !important;
-  border: 1px solid var(--color-yellow-primary) !important;
-}
-
-.dropdown-menu > li > a:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent) !important;
-}
-
-.dropdown-menu > li > a {
+  border: 1px solid var(--color-border);
   color: white;
+  border-radius: unset;
+  --bs-form-select-bg-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='white' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>");
+}
+
+.form-select:focus {
+  border-color: var(--color-yellow-primary) !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 .colorSearch {

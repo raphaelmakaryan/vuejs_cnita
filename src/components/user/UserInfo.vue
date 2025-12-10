@@ -1,7 +1,7 @@
 <script>
 import {format} from 'timeago.js'
 import api from "@/assets/api.js"
-import Suscribe from "@/components/user/Suscribe.vue";
+import Subscribe from "@/components/user/Subscribe.vue";
 import VueCookies from "vue-cookies";
 
 export default {
@@ -11,7 +11,7 @@ export default {
       return VueCookies
     }
   },
-  components: {Suscribe},
+  components: {Suscribe: Subscribe},
   props: {
     idUser: Number,
   },

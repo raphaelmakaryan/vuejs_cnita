@@ -1,5 +1,4 @@
-- si event (genre creée un vote et tout) rendre le bouton disabled
-- slecdt pour la barre de recherche
+- tenter de centraliser tout les css
 - drag and dropavec les cartes
 - comaprer les 3 notes (imdb tomatoes moene -> apex chart)
 - scrapping

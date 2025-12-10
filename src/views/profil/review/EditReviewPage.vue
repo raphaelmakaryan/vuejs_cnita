@@ -45,6 +45,7 @@ export default {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
         }
       })
+      document.getElementById("buttonReview").setAttribute("disabled", "disabled")
       await this.forNotification(data.data)
       setTimeout(() => {
         router.push({name: 'ProfilJudgement'})
@@ -106,7 +107,9 @@ export default {
                 />
               </div>
               <div class="mb-1 mt-5">
-                <button type="submit" class="btn btn-primary w-100">Mettre a jour</button>
+                <button type="submit" class="btn btn-primary w-100" id="buttonReview">Mettre a
+                  jour
+                </button>
               </div>
             </form>
           </div>
