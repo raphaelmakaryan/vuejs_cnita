@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import VueCookies from 'vue-cookies'
 import HomeJudgement from '@/views/home/HomeJudgement.vue'
 import GenreMoviesJudgementPage from '@/views/genre/GenreMoviesJudgementPage.vue'
@@ -16,24 +16,24 @@ import EditVotesPageJudgement from '@/views/profil/rating/EditVotesPage.vue'
 import EditReviewPageJudgement from '@/views/profil/review/EditReviewPage.vue'
 import RatingMoviePageJudgement from '@/views/movie/RatingMoviePage.vue'
 import ReviewMoviePageJudgement from '@/views/movie/ReviewMoviePage.vue'
-import NotFound from "@/views/NotFound.vue";
+import NotFound from '@/views/NotFound.vue'
 
 function isAuthenticate() {
   if (!VueCookies.get('tokenUser') && !VueCookies.get('idUser')) {
-    return {name: "LoginJudgement"}
+    return { name: 'LoginJudgement' }
   }
 }
 
 function isAuthenticatedButCantCome() {
   if (VueCookies.get('tokenUser') && VueCookies.get('idUser')) {
-    return {name: "HomeJudgement"}
+    return { name: 'HomeJudgement' }
   }
 }
 
 const routes = [
   {
     path: '/:pathMatch(.*)',
-    component: NotFound
+    component: NotFound,
   },
   {
     path: '/',
@@ -71,56 +71,56 @@ const routes = [
     path: '/movie/:id/rating',
     name: 'RatingMovieJudgement',
     component: RatingMoviePageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/movie/:id/review',
     name: 'ReviewMovieJudgement',
     component: ReviewMoviePageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/login',
     name: 'LoginJudgement',
     component: LoginPageJudgement,
-    beforeEnter: [isAuthenticatedButCantCome]
+    beforeEnter: [isAuthenticatedButCantCome],
   },
   {
     path: '/profil',
     name: 'ProfilJudgement',
     component: ProfilPageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/profil/edit',
     name: 'EditProfilJudgement',
     component: EditProfilPageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/profil/list/:id/edit',
     name: 'EditCollectionJudgement',
     component: EditCollectionPageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/profil/list/create',
     name: 'CreateCollectionJudgement',
     component: CreateCollectionPageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/profil/rating/:id/edit',
     name: 'EditVotesJudgement',
     component: EditVotesPageJudgement,
-    beforeEnter: [isAuthenticate]
+    beforeEnter: [isAuthenticate],
   },
   {
     path: '/profil/review/:id/edit',
     name: 'EditReviewJudgement',
     component: EditReviewPageJudgement,
-    beforeEnter: [isAuthenticate]
-  }
+    beforeEnter: [isAuthenticate],
+  },
 ]
 
 const router = createRouter({

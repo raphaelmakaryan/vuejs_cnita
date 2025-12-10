@@ -1,3 +1,2 @@
-- crée un remote pour mettre le projet en public et pas eb fork (en gros tu crée un nouveau repo, tu remote a celui la, tu push, et u delete le fork)
 - comaprer les 3 notes (imdb tomatoes moene -> apex chart)
 - scrapping
