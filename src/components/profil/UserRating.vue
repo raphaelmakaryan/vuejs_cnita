@@ -74,7 +74,7 @@ export default {
                 {{ rating.movie.title }}
               </p>
             </router-link>
-            <p>
+            <p class="text-white">
               <svg
                 width="24"
                 height="24"

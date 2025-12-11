@@ -18,7 +18,7 @@ export default {
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <p class="fs-2 mt-3">
+          <p class="fs-2 mt-3 text-white">
             MODIFIER LA COLLECTION :
             <span class="fw-bold fst-italic">{{ nameCollection }}</span>
           </p>

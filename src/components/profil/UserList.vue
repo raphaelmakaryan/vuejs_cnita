@@ -1,6 +1,5 @@
 <script>
 import {format} from 'timeago.js'
-import {toRaw} from 'vue'
 import api from "@/assets/api.js"
 import VueCookies from 'vue-cookies'
 import Notification from '@/components/Notification.vue'

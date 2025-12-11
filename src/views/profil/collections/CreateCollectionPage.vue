@@ -59,14 +59,14 @@ export default {
         />
         <div class="row">
           <div class="col-12">
-            <p class="fs-2 mt-3">CREER UNE COLLECTION</p>
+            <p class="fs-2 mt-3 text-white">CREER UNE COLLECTION</p>
             <hr/>
           </div>
         </div>
 
         <div class="row my-2">
           <div class="col-12">
-            <label for="newName" class="form-label">Nom de la collection</label>
+            <label for="newName" class="form-label text-white">Nom de la collection</label>
             <input
               type="text"
               class="form-control"

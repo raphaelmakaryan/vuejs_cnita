@@ -42,7 +42,7 @@ export default {
           </svg>
         </div>
         <div class="col-12 col-lg-8 d-flex align-items-lg-start align-items-center flex-column mt-3">
-          <p class="fs-2 mb-1" id="username">
+          <p class="fs-2 mb-1 text-white" id="username">
             {{ user.username }}
           </p>
         </div>

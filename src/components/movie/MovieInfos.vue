@@ -31,7 +31,7 @@ export default {
         },
         series: [
           {
-            name: 'Chart',
+            name: 'Votes',
             data: [
               parseFloat(this.chartData[0]) * 10,
               parseInt(this.chartData[1]),
@@ -81,7 +81,7 @@ export default {
     <div class="container">
       <div class="row">
         <div
-          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center my-2 top-50"
+          class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-items-center my-2"
         >
           <div class="moviePoster">
             <img
@@ -102,7 +102,7 @@ export default {
                 <p class="fs-6 movieLabel">Sortie en :</p>
               </div>
               <div>
-                <p class="fs-6 valueMovie">{{ movie.year }}</p>
+                <p class="fs-6 valueMovie text-white">{{ movie.year }}</p>
               </div>
             </div>
             <div id="directorsMovie" class="d-flex flex-column my-2">

@@ -1,16 +1,16 @@
 <template>
-  <Header />
+  <HeaderJudgement />
   <router-view />
   <FooterJudgement />
 </template>
 
 <script>
-import Header from '@/components/header/HeaderJudgement.vue'
 import FooterJudgement from '@/components/Footer.vue'
+import HeaderJudgement from '@/components/header/HeaderJudgement.vue'
 
 export default {
   name: 'App',
-  components: { FooterJudgement, Header },
+  components: { FooterJudgement, HeaderJudgement },
 }
 </script>
 

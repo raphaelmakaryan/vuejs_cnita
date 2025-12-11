@@ -1,11 +1,11 @@
 <script>
-import api from "@/assets/api.js"
+import api from '@/assets/api.js'
 import Notification from '@/components/Notification.vue'
 import router from '@/router/index.js'
 
 export default {
   name: 'LoginJudgement',
-  components: {Notification},
+  components: { Notification },
   data() {
     return {
       valueNotification: null,
@@ -22,9 +22,9 @@ export default {
         let data = await api({
           url: '/auth',
           method: 'post',
-          data: this.newBody
+          data: this.newBody,
         })
-        document.getElementById("buttonLogin").setAttribute("disabled", "disabled")
+        document.getElementById('buttonLogin').setAttribute('disabled', 'disabled')
         await this.forNotification(data.data)
         await this.save(data.data)
       }
@@ -34,7 +34,7 @@ export default {
         this.$cookies.set('tokenUser', data.token, data.ttl)
         this.$cookies.set('idUser', data.user.id, data.ttl)
         window.dispatchEvent(new Event('auth-change'))
-        router.push({name: 'ProfilJudgement'})
+        router.push({ name: 'ProfilJudgement' })
       }, 1000)
     },
     async forNotification(data) {
@@ -56,7 +56,7 @@ export default {
       <div class="row my-2">
         <div class="col-12">
           <p class="fs-1 text-start titleSeparation">Se connecter</p>
-          <hr>
+          <hr />
         </div>
       </div>
       <Notification
@@ -67,7 +67,7 @@ export default {
       <form method="post" @submit.prevent="login">
         <div class="row my-2">
           <div class="col-12">
-            <label for="emailInput" class="form-label">Email address</label>
+            <label for="emailInput" class="form-label text-white">Email address</label>
             <input
               type="email"
               class="form-control"
@@ -80,7 +80,7 @@ export default {
         </div>
         <div class="row my-2">
           <div class="col-12">
-            <label for="passwordInput" class="form-label">Password</label>
+            <label for="passwordInput" class="form-label text-white">Password</label>
             <input
               type="passwordInput"
               class="form-control"
@@ -92,7 +92,9 @@ export default {
         </div>
         <div class="row my-4">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary w-100" id="buttonLogin">Se connecter</button>
+            <button type="submit" class="btn btn-primary w-100" id="buttonLogin">
+              Se connecter
+            </button>
           </div>
         </div>
       </form>

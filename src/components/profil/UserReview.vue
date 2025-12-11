@@ -74,7 +74,7 @@ export default {
                 {{ review.movie.title }}
               </p>
             </router-link>
-            <p class="font-monospace">{{ review.content }}</p>
+            <p class="font-monospace text-white">{{ review.content }}</p>
           </div>
           <div>
             <router-link

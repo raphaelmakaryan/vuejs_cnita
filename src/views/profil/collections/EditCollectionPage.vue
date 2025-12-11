@@ -1,5 +1,4 @@
 <script>
-import { toRaw } from 'vue'
 import api from '@/assets/api.js'
 import CollectionName from '@/components/collections/CollectionName.vue'
 import CollectionMovie from '@/components/collections/CollectionMovie.vue'
@@ -41,7 +40,9 @@ export default {
       if (this.newBody.title === null) {
         this.newBody.title = this.list.title
       }
-      let data = await api.patch(`custom_lists/${this.valueIdList}`, {
+      let data = await api({
+        url: `custom_lists/${this.valueIdList}`,
+        method: 'patch',
         data: this.newBody,
         headers: {
           Authorization: 'Bearer ' + VueCookies.get('tokenUser'),
@@ -79,11 +80,11 @@ export default {
     </div>
   </section>
   <form @submit.prevent="updateCollection">
-    <CollectionName :nameCollection="list.title" @updateName="newBody.title = $event" />
+    <CollectionName :nameCollection="list.title" @updateName="this.newBody.title = $event" />
     <CollectionMovie
       :oldList="this.list"
       :oldListRequest="this.listRequest"
-      @updateList="newBody.entries = $event"
+      @updateList="this.newBody.entries = $event"
     />
     <section class="my-5">
       <div class="container">

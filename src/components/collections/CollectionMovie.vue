@@ -6,13 +6,18 @@ export default {
   components: { Container, Draggable },
   data() {
     return {
-      list: [],
-      position: 0,
-      chooseMovie: null,
-      dragAnDropValue: '',
-      localListRequest: [],
       localMovies: [],
+      localListRequest: [],
+      urlNoPoster: 'https://placehold.co/150x237',
     }
+  },
+  computed: {
+    newListRequest() {
+      return this.oldListRequest
+    },
+    newList() {
+      return this.oldList
+    },
   },
   props: {
     oldListRequest: {
@@ -24,25 +29,34 @@ export default {
       required: true,
     },
   },
-  mounted() {
-    this.localMovies = this.oldList
-    this.localListRequest = JSON.parse(JSON.stringify(this.oldListRequest))
+  async mounted() {
+    setTimeout(() => {
+      this.localMovies = this.newList
+      this.localListRequest = this.newListRequest
+    }, 2000)
   },
   methods: {
-    tidyingforDrag(index) {
+    tidyingForDrag(index) {
       return document.querySelectorAll('.cardInfos')[index].children[0].alt
     },
+    verificationValueDrop(data) {
+      if (data.removedIndex === 0 && data.addedIndex === 0) {
+        return false
+      } else {
+        return true
+      }
+    },
     async onDrop(dropResult) {
-      if (dropResult.removedIndex !== 0 && dropResult.addedIndex !== 0) {
+      if (this.verificationValueDrop(dropResult)) {
         let changeValueUser = [
           await dropResult.removedIndex,
-          parseInt(this.tidyingforDrag(await dropResult.removedIndex)),
+          parseInt(this.tidyingForDrag(await dropResult.removedIndex)),
         ]
         let changeValueNotUser = [
           await dropResult.addedIndex,
-          parseInt(this.tidyingforDrag(await dropResult.addedIndex)),
+          parseInt(this.tidyingForDrag(await dropResult.addedIndex)),
         ]
-        this.changePositionFront(changeValueUser, changeValueNotUser)
+        await this.changePositionFront(changeValueUser, changeValueNotUser)
         this.changePositionRequest(changeValueUser, changeValueNotUser)
       }
     },
@@ -86,6 +100,21 @@ export default {
       }
       this.localMovies = newFrontMovies
     },
+    tidyingUpRequest() {
+      for (let i = 0; i < this.localListRequest.length; i++) {
+        this.localListRequest[i].position = i + 1
+      }
+      this.$emit('updateList', this.localListRequest)
+    },
+    removeFromList(id) {
+      this.localMovies.entries.forEach((item) => {
+        if (id === item.id) {
+          this.localMovies.entries.splice(item.position - 1, 1)
+          this.localListRequest.splice(item.position - 1, 1)
+          this.tidyingUpRequest()
+        }
+      })
+    },
   },
 }
 </script>
@@ -95,7 +124,7 @@ export default {
     <div class="container">
       <div class="row my-2">
         <div class="col-12">
-          <p class="fs-2 fw-bold mt-3">FILMS</p>
+          <p class="fs-2 fw-bold mt-3 text-white">FILMS</p>
           <hr />
         </div>
       </div>
@@ -110,7 +139,11 @@ export default {
           >
             <div class="draggable-item-horizontal">
               <div class="card cardInfos my-2" style="width: 18rem">
-                <img :src="movie.movie.poster" class="card-img-top" :alt="movie.movie.id" />
+                <img
+                  :src="movie.movie ? movie.movie.poster : this.urlNoPoster"
+                  class="card-img-top"
+                  :alt="movie.movie.id"
+                />
                 <div class="card-body">
                   <router-link
                     :to="{ path: '/movie/' + movie.movie.id }"
@@ -140,5 +173,11 @@ export default {
 <style scoped>
 .dndrop-container.horizontal {
   display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+section {
+  color: white;
 }
 </style>
